@@ -1,65 +1,65 @@
 import Image from "next/image";
+import Logos from "./components/Logos";
+import Container from "./components/Container";
+import Services from "./components/Services";
+import Individual from "./components/Individual";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <div className="bg-gradient-to-b from-transparent to-sky-300 min-h-screen text-black flex flex-col lg:flex-row 
+      items-center gap-12 lg:justify-around p-5 lg:p-20">
+        
+        {/* Text Section */}
+        <div className="text-center lg:text-left p-5 lg:p-0">
+          <h6 className="font-light text-lg lg:text-xl mb-3">Welcome To HealthyBase</h6>
+          <h2 className="font-bold text-4xl md:text-5xl lg:text-7xl mb-5 leading-tight">
+            Destination <br />
+            For Relief <br />
+            & Wellness
+          </h2>
+          <p className="text-base md:text-lg lg:text-2xl font-light mb-5">
+            Now we are welcoming you to our healthy place and cheap drugs
           </p>
+          <button className="bg-green-300 rounded-full px-6 py-3 text-base md:text-lg hover:bg-green-400 transition">
+            Click this
+          </button>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Image Section */}
+        <div className="flex items-center justify-center my-10 lg:my-0">
+          <Image
+            className="rounded-full"
+            src="/images/female.jpg"
+            width={450} // smaller on mobile
+            height={450}
+            alt="Female"
+          />
         </div>
-      </main>
-    </div>
+
+        {/* Stats Section */}
+        <div className="flex flex-col sm:flex-row gap-5 mt-10 lg:mt-0">
+          <div className="border border-green-600 rounded-2xl w-40 sm:w-48 px-4 py-4 font-light text-center">
+            <h1 className="text-2xl font-semibold">48+</h1>
+            <p className="text-sm">Professional Staff</p>
+          </div>
+          <div className="border border-green-600 rounded-2xl w-40 sm:w-48 px-4 py-4 font-light text-center">
+            <h1 className="text-2xl font-semibold">27+</h1>
+            <p className="text-sm">Years Of Experience</p>
+          </div>
+          <div className="border border-green-600 rounded-2xl w-40 sm:w-48 px-4 py-4 font-light text-center">
+            <h1 className="text-2xl font-semibold">3,578</h1>
+            <p className="text-sm">Support Clients</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Other Sections */}
+
+      <Logos />
+      <Container />
+      <Services />
+      <Individual />
+    </>
   );
 }

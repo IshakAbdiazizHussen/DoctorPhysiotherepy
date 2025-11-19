@@ -12,7 +12,7 @@ export default function Home() {
         
         {/* Text Section */}
         <div className="text-center lg:text-left p-5 lg:p-0">
-          <h6 className="font-light text-lg lg:text-xl mb-3">Welcome To HealthyBase</h6>
+          <h6 className="font-light text-lg lg:text-xl mb-3">Welcome To HealthyBase therpy</h6>
           <h2 className="font-bold text-4xl md:text-5xl lg:text-7xl mb-5 leading-tight">
             Destination <br />
             For Relief <br />

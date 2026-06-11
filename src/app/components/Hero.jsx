@@ -30,23 +30,6 @@ export default function Hero() {
     <>
       <header className="sticky top-0 z-40 border-b border-slate-100 bg-white/95 backdrop-blur">
         <Container className="py-4">
-          <div className="mb-4 flex flex-col gap-2 rounded-[1.25rem] border border-[#dbeafe] bg-[#EFF6FF] px-4 py-3 text-sm text-[#1e3a8a] sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-2 font-medium">
-              <PhoneCall className="h-4 w-4" />
-              Emergency support line:
-              <a
-                href="tel:+18005550147"
-                className="rounded-full px-1 font-semibold underline-offset-4 hover:underline"
-              >
-                +1 (800) 555-0147
-              </a>
-            </div>
-            <div className="flex items-center gap-2 text-[#64748B]">
-              <Clock3 className="h-4 w-4 text-[#2563EB]" />
-              Same-day consultations available Monday to Saturday
-            </div>
-          </div>
-
           <nav className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-3">

@@ -5,12 +5,16 @@ import { useState } from "react";
 import {
   ArrowRight,
   CalendarDays,
-  Clock3,
+  ChevronRight,
+  CircleCheckBig,
+  Dumbbell,
   Menu,
   Phone,
-  PhoneCall,
   Plus,
+  ShieldCheck,
   Sparkles,
+  Stethoscope,
+  UserRound,
   X,
 } from "lucide-react";
 import Container from "./Container";
@@ -23,17 +27,37 @@ const navItems = [
   { label: "Contact", href: "#trust" },
 ];
 
+const features = [
+  { icon: UserRound, label: "Experienced Specialists" },
+  { icon: CircleCheckBig, label: "Personalized Treatment" },
+  { icon: Stethoscope, label: "Advanced Therapy" },
+  { icon: ShieldCheck, label: "Proven Results" },
+];
+
+const serviceMiniList = [
+  "Pain Relief",
+  "Injury Recovery",
+  "Mobility Improvement",
+  "Strength & Conditioning",
+];
+
+const patientAvatars = [
+  "/images/female.jpg",
+  "/images/physio1.jpg",
+  "/images/portM.jpg",
+];
+
 export default function Hero() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-slate-100 bg-white/95 backdrop-blur">
+      <header className="sticky top-0 z-40 border-b border-white/70 bg-white/90 backdrop-blur-xl">
         <Container className="py-4">
           <nav className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#EEF4FF] text-[#2563EB]">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#E8F4FF] text-[#2563EB]">
                   <Sparkles className="h-5 w-5" />
                 </div>
                 <div>
@@ -81,7 +105,7 @@ export default function Hero() {
                 Appointment
               </a>
               <a
-                href="tel:+18005550147"
+                href="#services"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-[#2563EB] hover:text-[#2563EB]"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -93,73 +117,220 @@ export default function Hero() {
         </Container>
       </header>
 
-      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_18%_18%,rgba(22,163,74,0.12),transparent_24%),radial-gradient(circle_at_78%_22%,rgba(37,99,235,0.14),transparent_24%),linear-gradient(135deg,#F0FDF4_0%,#F8FAFC_48%,#E0F2FE_100%)] py-14 sm:py-16 lg:py-20">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_52%_36%,rgba(255,255,255,0.9),rgba(255,255,255,0)_34%)]" />
-        <Container className="relative">
-          <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
-            <div className="relative max-w-xl">
-              <div className="absolute left-40 top-8 hidden text-[#93C5FD] lg:block">
-                <Plus className="h-4 w-4" />
-              </div>
-              <div className="absolute left-[17rem] top-32 hidden text-[#86EFAC] lg:block">
-                <Plus className="h-5 w-5" />
-              </div>
+      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_18%_18%,rgba(16,185,129,0.12),transparent_24%),radial-gradient(circle_at_78%_18%,rgba(37,99,235,0.14),transparent_24%),linear-gradient(135deg,#F0FDFA_0%,#F6FBFF_52%,#E0F2FE_100%)] py-16 sm:py-20 lg:py-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_36%,rgba(255,255,255,0.92),rgba(255,255,255,0)_35%)]" />
+        <div className="absolute left-[5%] top-[14%] h-56 w-56 rounded-full bg-[#D1FAE5]/50 blur-3xl" />
+        <div className="absolute right-[9%] top-[18%] h-64 w-64 rounded-full bg-[#BFDBFE]/45 blur-3xl" />
 
-              <span className="inline-flex items-center rounded-full border border-[#d9eefc] bg-white/85 px-4 py-2 text-sm font-semibold text-[#2563EB] shadow-sm">
+        <Container className="relative">
+          <div className="grid items-center gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10">
+            <div className="max-w-2xl animate-fade-up">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#b7ead7] bg-white/75 px-5 py-2.5 text-sm font-semibold text-[#0F766E] shadow-sm backdrop-blur">
+                <ShieldCheck className="h-4 w-4" />
                 Trusted Health Clinic
               </span>
 
-              <h1 className="mt-6 max-w-lg text-4xl font-semibold leading-tight tracking-tight text-[#0F172A] sm:text-5xl lg:text-[4rem]">
-                Your health is our priority
+              <h1 className="mt-7 max-w-xl text-5xl font-semibold leading-[0.98] tracking-tight text-[#0F172A] sm:text-6xl lg:text-[5.2rem]">
+                Your health is
+                <br />
+                our{" "}
+                <span className="relative inline-block text-[#0F9B8E]">
+                  priority
+                  <svg
+                    className="absolute -bottom-4 left-2 h-4 w-[92%] text-[#34D399]"
+                    viewBox="0 0 240 30"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M6 22C55 12 107 10 171 17C197 20 216 23 234 20"
+                      stroke="currentColor"
+                      strokeWidth="6"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </span>
               </h1>
 
-              <p className="mt-5 max-w-xl text-base leading-8 text-[#64748B] sm:text-lg">
-                Premium physiotherapy, rehabilitation, mobility recovery, and
-                pain relief programs designed to help you heal comfortably and
-                return to daily life with confidence.
+              <p className="mt-8 max-w-xl text-lg leading-9 text-[#64748B]">
+                Expert physiotherapy, rehabilitation, and pain relief programs
+                tailored to your unique needs. Let us help you move better,
+                feel stronger, and live a pain-free life.
               </p>
 
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <div className="mt-9 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                {features.map(({ icon: Icon, label }, index) => (
+                  <div
+                    key={label}
+                    className="group rounded-[1.5rem] border border-white/60 bg-white/55 px-4 py-4 shadow-[0_18px_35px_-24px_rgba(15,118,110,0.32)] backdrop-blur transition hover:-translate-y-1 hover:bg-white/80"
+                    style={{ animationDelay: `${index * 120}ms` }}
+                  >
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#DFF8EE] text-[#0F9B8E] transition group-hover:bg-[#C8F2E0]">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <p className="mt-3 text-base font-medium leading-7 text-[#0F172A]">
+                      {label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <a
                   href="#appointment"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#2563EB] px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#2563EB]/20 transition hover:-translate-y-0.5 hover:bg-[#1d4ed8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563EB]"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[linear-gradient(135deg,#0F766E_0%,#10B981_100%)] px-7 py-4 text-sm font-semibold text-white shadow-[0_22px_40px_-18px_rgba(15,118,110,0.58)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_45px_-18px_rgba(15,118,110,0.7)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F766E]"
                 >
                   <CalendarDays className="h-4 w-4" />
                   Book Appointment
                 </a>
                 <a
-                  href="#rehabilitation"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-[#2563EB] hover:text-[#2563EB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563EB]"
+                  href="#services"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white/80 px-7 py-4 text-sm font-semibold text-slate-700 shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:border-[#2563EB] hover:text-[#2563EB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563EB]"
                 >
-                  Discover More
+                  Explore Services
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </div>
+
+              <div className="mt-10 rounded-[1.8rem] border border-white/65 bg-white/55 p-3 shadow-[0_28px_55px_-26px_rgba(37,99,235,0.28)] backdrop-blur">
+                <div className="grid gap-3 sm:grid-cols-3">
+                  <div className="flex items-center gap-4 rounded-[1.25rem] bg-white/65 px-4 py-4">
+                    <div className="flex -space-x-3">
+                      {patientAvatars.map((avatar, index) => (
+                        <div
+                          key={avatar}
+                          className="relative h-11 w-11 overflow-hidden rounded-full border-2 border-white"
+                          style={{ zIndex: patientAvatars.length - index }}
+                        >
+                          <Image
+                            src={avatar}
+                            alt=""
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    <div>
+                      <p className="text-2xl font-semibold text-[#0F172A]">3,500+</p>
+                      <p className="text-sm text-[#64748B]">Happy Patients</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4 rounded-[1.25rem] bg-white/65 px-4 py-4">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#E0F2FE] text-[#2563EB]">
+                      <Sparkles className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="text-2xl font-semibold text-[#0F172A]">4.9/5</p>
+                      <p className="text-sm text-[#64748B]">Patient Rating</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4 rounded-[1.25rem] bg-white/65 px-4 py-4">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#DFF8EE] text-[#0F766E]">
+                      <ShieldCheck className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="text-2xl font-semibold text-[#0F172A]">27+</p>
+                      <p className="text-sm text-[#64748B]">Years Experience</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="relative mx-auto w-full max-w-[500px]">
-              <div className="absolute inset-x-12 top-10 -z-10 h-[85%] rounded-full bg-[#2563EB]/12 blur-3xl" />
-              <div className="absolute -right-2 top-14 -z-10 h-44 w-44 rounded-full bg-[#93C5FD]/50 blur-3xl" />
-              <div className="absolute left-0 top-40 text-[#93C5FD]/60">
+            <div className="relative mx-auto mt-6 w-full max-w-[720px] lg:mt-0 lg:justify-self-end">
+              <div className="hero-float absolute left-[8%] top-[8%] hidden h-[78%] w-[78%] rounded-full border border-white/40 md:block" />
+              <div className="hero-float absolute left-[14%] top-[13%] hidden h-[68%] w-[68%] rounded-full border border-white/30 [animation-delay:300ms] md:block" />
+              <div className="absolute right-4 top-4 hidden grid-cols-4 gap-3 text-[#10B981]/60 md:grid">
+                {Array.from({ length: 12 }).map((_, index) => (
+                  <span key={index} className="h-1.5 w-1.5 rounded-full bg-current" />
+                ))}
+              </div>
+              <div className="absolute bottom-10 right-3 hidden grid-cols-4 gap-3 text-[#93C5FD]/70 md:grid">
+                {Array.from({ length: 12 }).map((_, index) => (
+                  <span key={index} className="h-1.5 w-1.5 rounded-full bg-current" />
+                ))}
+              </div>
+              <div className="absolute left-[4%] top-[13%] hidden text-[#34D399] md:block">
+                <Plus className="h-12 w-12" />
+              </div>
+              <div className="absolute right-[19%] top-[16%] hidden text-[#A7F3D0] md:block">
                 <Plus className="h-5 w-5" />
               </div>
-              <div className="absolute right-6 top-6 rounded-full bg-white/90 px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm">
-                10+ Years Experience
-              </div>
-              <div className="absolute bottom-5 left-5 rounded-full bg-white/92 px-4 py-2 text-xs font-semibold text-[#16A34A] shadow-sm">
-                Trusted by 3,500+ patients
+
+              <div className="absolute left-[9%] top-[8%] -z-10 h-[76%] w-[78%] rounded-[38%_62%_58%_42%/40%_34%_66%_60%] bg-[linear-gradient(180deg,#3DC9BE_0%,#0F766E_100%)] md:left-[14%] md:top-[11%] md:h-[72%] md:w-[72%]" />
+              <div className="absolute left-[4%] top-[5%] -z-20 h-[88%] w-[88%] rounded-[44%_56%_60%_40%/32%_38%_62%_68%] bg-[#DCEEFF]/70 blur-2xl md:left-[9%] md:top-[7%] md:h-[86%] md:w-[83%]" />
+
+              <div className="hero-float relative overflow-hidden rounded-[36%_64%_54%_46%/16%_14%_42%_38%] border border-white/75 bg-white/55 p-5 shadow-[0_38px_80px_-36px_rgba(37,99,235,0.38)] backdrop-blur-xl">
+                <div className="relative overflow-hidden rounded-[3rem] bg-[#F1F8FF]">
+                  <Image
+                    src="/images/therepy.png"
+                    alt="Physiotherapy treatment session focused on guided recovery and movement support"
+                    width={1040}
+                    height={1200}
+                    priority
+                    className="h-[480px] w-full object-cover sm:h-[620px]"
+                  />
+                </div>
               </div>
 
-              <div className="overflow-hidden rounded-[2rem] border border-white/80 bg-white/80 p-4 shadow-[0_28px_60px_-30px_rgba(37,99,235,0.28)] backdrop-blur">
-                <div className="relative overflow-hidden rounded-[1.6rem] bg-[#EEF6FF]">
-                  <Image
-                    src="/images/physio.jpg"
-                    alt="Physiotherapy specialist in a modern rehabilitation clinic"
-                    width={920}
-                    height={980}
-                    priority
-                    className="h-[420px] w-full object-cover sm:h-[520px]"
-                  />
+              <div className="hero-float absolute right-0 top-16 w-32 rounded-full bg-white/92 p-4 text-center shadow-[0_25px_40px_-24px_rgba(15,118,110,0.45)] backdrop-blur [animation-delay:200ms] sm:w-36 sm:p-5 lg:top-24 lg:w-40">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#DFF8EE] text-[#0F766E]">
+                  <Dumbbell className="h-7 w-7" />
+                </div>
+                <p className="mt-3 text-base font-semibold leading-5 text-[#0F766E] sm:text-lg sm:leading-6">
+                  Move Better
+                </p>
+                <p className="mt-1 text-base font-semibold leading-5 text-[#0F766E] sm:text-lg sm:leading-6">
+                  Live Better
+                </p>
+              </div>
+
+              <div className="hero-float absolute bottom-24 left-[8%] w-[62%] rounded-[1.75rem] bg-[linear-gradient(180deg,#0FA4A5_0%,#0F766E_100%)] p-5 text-white shadow-[0_28px_55px_-20px_rgba(15,118,110,0.56)] [animation-delay:350ms] sm:bottom-20 sm:left-[16%] sm:w-[52%] sm:p-6 lg:bottom-3 lg:left-[26%] lg:w-[42%] lg:p-7">
+                <p className="text-[1.4rem] font-semibold leading-tight sm:text-[1.7rem] lg:text-[2rem]">
+                  We help you
+                  <br />
+                  recover, rebuild
+                  <br />
+                  and regain your
+                </p>
+                <p className="mt-2 text-[1.8rem] italic leading-none text-[#E8FFFA] sm:text-[2rem] lg:text-[2.25rem]">
+                  best life.
+                </p>
+              </div>
+
+              <div className="hero-float absolute bottom-3 right-0 w-[58%] rounded-[1.75rem] border border-white/70 bg-white/92 p-4 shadow-[0_28px_55px_-28px_rgba(37,99,235,0.35)] backdrop-blur [animation-delay:500ms] sm:w-[46%] sm:p-5 lg:bottom-2 lg:w-[40%]">
+                <div className="space-y-2">
+                  {serviceMiniList.map((item) => (
+                    <div
+                      key={item}
+                      className="flex items-center gap-3 rounded-[1rem] px-2 py-2 transition hover:bg-[#F8FAFC]"
+                    >
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#ECFDF5] text-[#0F766E]">
+                        <CircleCheckBig className="h-4 w-4" />
+                      </div>
+                      <span className="flex-1 text-sm font-medium text-[#0F172A]">
+                        {item}
+                      </span>
+                      <ChevronRight className="h-4 w-4 text-[#64748B]" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="hero-float absolute bottom-4 left-[4%] rounded-[1.4rem] bg-white/92 px-4 py-3 shadow-[0_24px_45px_-24px_rgba(37,99,235,0.35)] backdrop-blur [animation-delay:650ms] sm:bottom-2 sm:left-[8%] sm:px-5 sm:py-4 sm:rounded-[1.6rem]">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#DFF8EE] text-[#10B981]">
+                    <CalendarDays className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-[#64748B]">Next Available</p>
+                    <p className="text-base font-semibold text-[#0F766E]">
+                      Today, 10:30 AM
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

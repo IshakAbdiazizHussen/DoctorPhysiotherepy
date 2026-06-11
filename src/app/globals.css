@@ -49,3 +49,34 @@ div {
     box-shadow 180ms ease,
     transform 180ms ease;
 }
+
+.animate-fade-up {
+  animation: fade-up 0.8s ease-out both;
+}
+
+.hero-float {
+  animation: hero-float 5.4s ease-in-out infinite;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}

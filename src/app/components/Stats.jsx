@@ -60,7 +60,7 @@ export default function Stats({
     cards.find((card) => card.title === selectedService) ?? visibleCards[0] ?? cards[0];
 
   return (
-    <section className="bg-white py-16 sm:py-20">
+    <section id="services" className="bg-white py-16 sm:py-20">
       <Container>
         <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div className="max-w-xl">

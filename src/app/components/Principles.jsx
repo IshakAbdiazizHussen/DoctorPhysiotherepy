@@ -1,28 +1,83 @@
-import React from "react";
-import { Battery, CheckCircle2, Heart, Shield, User } from "lucide-react";
+import {
+  BrainCircuit,
+  HandHeart,
+  ShieldCheck,
+  Target,
+  UserRound,
+} from "lucide-react";
+import Container from "./Container";
 
 const principles = [
-  { icons: Battery, title: "Short & Powerful", text: "Keep it short, focused, and impactful." },
-  { icons: CheckCircle2, title: "Clear Benefit", text: "Make the benefit obvious at a glance." },
-  { icons: Heart, title: "Emotional Connection", text: "Use a strong emotional hook that resonates." },
-  { icons: Shield, title: "Safe & Trusted", text: "Reassure patients with safety and trust." },
-  { icons: User, title: "Patient-Centered", text: "Decisions made with you, not for you." },
+  {
+    icon: UserRound,
+    title: "Personalized Care",
+    text: "Every treatment plan is tailored to your condition, movement goals, and recovery pace.",
+  },
+  {
+    icon: BrainCircuit,
+    title: "Clinical Expertise",
+    text: "Our approach combines assessment, hands-on therapy, and progressive rehabilitation.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Safe Recovery",
+    text: "We prioritize controlled movement, proper technique, and long-term physical resilience.",
+  },
+  {
+    icon: HandHeart,
+    title: "Compassionate Support",
+    text: "We guide each patient with clarity, encouragement, and consistent follow-up care.",
+  },
+  {
+    icon: Target,
+    title: "Outcome Focused",
+    text: "Pain reduction, improved mobility, and functional independence remain our core goals.",
+  },
 ];
 
 export default function Principles() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6">
-      {principles.map(({ icons: Icon, title, text }) => (
-        <div key={title} className="flex items-start gap-3 rounded-lg border border-slate-200 bg-white/70 p-4 shadow-sm">
-          <div className="mt-1 rounded-full bg-green-300 p-2">
-            <Icon className="w-5 h-5 text-white" />
+    <section
+      aria-labelledby="principles-heading"
+      className="bg-[linear-gradient(180deg,_rgba(240,253,250,0.75)_0%,_rgba(248,250,252,1)_100%)] py-16"
+    >
+      <Container>
+        <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+          <div className="max-w-2xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#0F766E]">
+              Care Principles
+            </p>
+            <h2
+              id="principles-heading"
+              className="mt-3 text-3xl font-semibold text-slate-950 sm:text-4xl"
+            >
+              A patient-first philosophy built around recovery, movement, and confidence.
+            </h2>
+            <p className="mt-5 text-base leading-8 text-slate-600">
+              Our physiotherapy model is designed to treat the source of pain,
+              improve mobility, and help every patient return to everyday life
+              with better strength and control.
+            </p>
           </div>
-          <div>
-            <h3 className="font-semibold text-slate-900">{title}</h3>
-            <p className="text-sm text-slate-600">{text}</p>
+
+          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            {principles.map(({ icon: Icon, title, text }) => (
+              <article
+                key={title}
+                className="rounded-3xl border border-white/80 bg-white p-6 shadow-sm shadow-slate-900/5"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-50 text-[#0F766E]">
+                  <Icon className="h-6 w-6" />
+                </div>
+                <h3 className="mt-5 text-lg font-semibold text-slate-950">
+                  {title}
+                </h3>
+                <p className="mt-2 text-sm leading-7 text-slate-600">{text}</p>
+              </article>
+            ))}
           </div>
         </div>
-      ))}
-    </div>
+      </Container>
+    </section>
   );
 }

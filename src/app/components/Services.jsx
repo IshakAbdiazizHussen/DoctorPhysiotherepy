@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Container from "./Container";
 
@@ -29,15 +31,21 @@ const doctors = [
   },
 ];
 
-export default function Services() {
+export default function Services({ selectedDoctor, onDoctorSelect }) {
   return (
     <section id="doctor-row" className="bg-white py-8 sm:py-10">
       <Container>
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
           {doctors.map(({ name, specialty, image }) => (
-            <article
+            <button
               key={name}
-              className="flex items-center gap-4 rounded-[1.5rem] border border-slate-200 bg-white px-4 py-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+              type="button"
+              onClick={() => onDoctorSelect(name)}
+              className={`flex items-center gap-4 rounded-[1.5rem] border bg-white px-4 py-4 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563EB] ${
+                selectedDoctor === name
+                  ? "border-[#16A34A] shadow-[0_18px_35px_-24px_rgba(22,163,74,0.4)]"
+                  : "border-slate-200"
+              }`}
             >
               <div className="relative h-14 w-14 overflow-hidden rounded-full bg-slate-100">
                 <Image
@@ -56,7 +64,7 @@ export default function Services() {
                   Available
                 </span>
               </div>
-            </article>
+            </button>
           ))}
         </div>
       </Container>

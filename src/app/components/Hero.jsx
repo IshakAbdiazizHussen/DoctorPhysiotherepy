@@ -1,10 +1,17 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import {
   ArrowRight,
   CalendarDays,
+  Clock3,
+  Menu,
+  Phone,
   PhoneCall,
   Plus,
   Sparkles,
+  X,
 } from "lucide-react";
 import Container from "./Container";
 
@@ -17,47 +24,85 @@ const navItems = [
 ];
 
 export default function Hero() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-slate-100 bg-white/95 backdrop-blur">
         <Container className="py-4">
+          <div className="mb-4 flex flex-col gap-2 rounded-[1.25rem] border border-[#dbeafe] bg-[#EFF6FF] px-4 py-3 text-sm text-[#1e3a8a] sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-2 font-medium">
+              <PhoneCall className="h-4 w-4" />
+              Emergency support line:
+              <a
+                href="tel:+18005550147"
+                className="rounded-full px-1 font-semibold underline-offset-4 hover:underline"
+              >
+                +1 (800) 555-0147
+              </a>
+            </div>
+            <div className="flex items-center gap-2 text-[#64748B]">
+              <Clock3 className="h-4 w-4 text-[#2563EB]" />
+              Same-day consultations available Monday to Saturday
+            </div>
+          </div>
+
           <nav className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#EEF4FF] text-[#2563EB]">
-                <Sparkles className="h-5 w-5" />
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#EEF4FF] text-[#2563EB]">
+                  <Sparkles className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold tracking-[0.2em] text-[#0F172A]">
+                    DOCTORPHYSIO
+                  </p>
+                  <p className="text-xs text-[#64748B]">Modern rehabilitation clinic</p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm font-semibold tracking-[0.2em] text-[#0F172A]">
-                  DOCTORPHYSIO
-                </p>
-                <p className="text-xs text-[#64748B]">Modern rehabilitation clinic</p>
-              </div>
+
+              <button
+                type="button"
+                aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                aria-expanded={isMenuOpen}
+                onClick={() => setIsMenuOpen((current) => !current)}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 text-slate-700 transition hover:border-[#2563EB] hover:text-[#2563EB] lg:hidden"
+              >
+                {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </button>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-2 text-sm text-[#64748B]">
+            <div
+              className={`${
+                isMenuOpen ? "flex" : "hidden"
+              } flex-col gap-2 rounded-[1.25rem] border border-slate-100 bg-slate-50 p-3 text-sm text-[#64748B] lg:flex lg:flex-row lg:flex-wrap lg:items-center lg:justify-center lg:gap-2 lg:border-0 lg:bg-transparent lg:p-0`}
+            >
               {navItems.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
-                  className="rounded-full px-4 py-2 transition hover:bg-slate-50 hover:text-[#0F172A]"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="rounded-full px-4 py-2 transition hover:bg-white hover:text-[#0F172A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563EB]"
                 >
                   {item.label}
                 </a>
               ))}
             </div>
 
-            <div className="flex flex-col gap-3 sm:flex-row">
+            <div className={`${isMenuOpen ? "flex" : "hidden"} flex-col gap-3 sm:flex-row lg:flex`}>
               <a
                 href="#appointment"
                 className="inline-flex items-center justify-center rounded-full bg-[#0F172A] px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Appointment
               </a>
               <a
-                href="#trust"
+                href="tel:+18005550147"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-[#2563EB] hover:text-[#2563EB]"
+                onClick={() => setIsMenuOpen(false)}
               >
-                <PhoneCall className="h-4 w-4" />
+                <Phone className="h-4 w-4" />
                 Call Now
               </a>
             </div>
@@ -94,14 +139,14 @@ export default function Hero() {
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <a
                   href="#appointment"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#2563EB] px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#2563EB]/20 transition hover:-translate-y-0.5 hover:bg-[#1d4ed8]"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#2563EB] px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#2563EB]/20 transition hover:-translate-y-0.5 hover:bg-[#1d4ed8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563EB]"
                 >
                   <CalendarDays className="h-4 w-4" />
                   Book Appointment
                 </a>
                 <a
                   href="#rehabilitation"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-[#2563EB] hover:text-[#2563EB]"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-[#2563EB] hover:text-[#2563EB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563EB]"
                 >
                   Discover More
                   <ArrowRight className="h-4 w-4" />
@@ -117,6 +162,9 @@ export default function Hero() {
               </div>
               <div className="absolute right-6 top-6 rounded-full bg-white/90 px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm">
                 10+ Years Experience
+              </div>
+              <div className="absolute bottom-5 left-5 rounded-full bg-white/92 px-4 py-2 text-xs font-semibold text-[#16A34A] shadow-sm">
+                Trusted by 3,500+ patients
               </div>
 
               <div className="overflow-hidden rounded-[2rem] border border-white/80 bg-white/80 p-4 shadow-[0_28px_60px_-30px_rgba(37,99,235,0.28)] backdrop-blur">

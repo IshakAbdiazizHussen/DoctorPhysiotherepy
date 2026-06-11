@@ -7,7 +7,10 @@ import Logos from "./components/Logos";
 
 export default function HomePage() {
   return (
-    <main className="bg-slate-50 text-slate-900">
+    <main
+      id="top"
+      className="min-h-screen bg-white text-slate-900"
+    >
       <Hero />
       <Stats />
       <Services />

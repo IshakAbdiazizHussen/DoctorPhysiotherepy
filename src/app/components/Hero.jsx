@@ -11,13 +11,16 @@ const highlights = [
 export default function Hero() {
   return (
     <section className="relative overflow-hidden py-16 sm:py-20 lg:min-h-screen lg:py-24">
-      <div className="absolute inset-0 -z-20 bg-[linear-gradient(180deg,_#f8fafc_0%,_#eef8f7_100%)]" />
-      <div className="absolute left-0 top-0 -z-10 h-72 w-72 rounded-full bg-teal-100/70 blur-3xl" />
-      <div className="absolute bottom-8 right-0 -z-10 h-80 w-80 rounded-full bg-green-100/60 blur-3xl" />
+      <div className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_70%_25%,rgba(20,184,166,0.18),transparent_35%),linear-gradient(135deg,#F0FDFA_0%,#F8FAFC_45%,#E0F7FA_100%)]" />
+      <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_50%_38%,rgba(255,255,255,0.95),rgba(255,255,255,0)_34%)]" />
+      <div className="absolute left-[8%] top-[18%] -z-10 h-72 w-72 rounded-full bg-[#22C55E]/10 blur-3xl" />
+      <div className="absolute left-[18%] top-[28%] -z-10 h-40 w-40 rounded-[2.5rem] bg-white/70 blur-2xl" />
+      <div className="absolute right-[10%] top-[22%] -z-10 h-96 w-96 rounded-full bg-[#14B8A6]/16 blur-3xl" />
 
       <Container>
         <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-          <div className="max-w-2xl">
+          <div className="relative max-w-2xl">
+            <div className="absolute -left-12 top-8 -z-10 h-48 w-48 rounded-full bg-[#22C55E]/10 blur-3xl" />
             <span className="inline-flex items-center rounded-full border border-teal-200 bg-white/90 px-4 py-2 text-sm font-semibold text-[#0F766E] shadow-sm">
               Trusted Physiotherapy Center
             </span>
@@ -63,8 +66,9 @@ export default function Hero() {
           </div>
 
           <div className="relative mx-auto w-full max-w-xl">
-            <div className="absolute -left-5 top-10 h-28 w-28 rounded-[2rem] bg-teal-100 blur-2xl" />
-            <div className="absolute -right-8 bottom-10 h-32 w-32 rounded-full bg-green-100 blur-2xl" />
+            <div className="absolute -left-6 top-12 h-32 w-32 rounded-[2rem] bg-white/60 blur-2xl" />
+            <div className="absolute -right-10 top-16 h-72 w-72 rounded-full bg-[#14B8A6]/20 blur-3xl" />
+            <div className="absolute -right-4 bottom-10 h-36 w-36 rounded-full bg-[#22C55E]/12 blur-3xl" />
 
             <div className="relative overflow-hidden rounded-[2rem] border border-white/80 bg-white/90 p-4 shadow-[0_30px_80px_-36px_rgba(15,118,110,0.45)] backdrop-blur sm:p-5">
               <div className="relative overflow-hidden rounded-[1.5rem] bg-slate-100">

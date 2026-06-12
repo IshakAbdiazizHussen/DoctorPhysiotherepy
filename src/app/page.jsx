@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Hero from "./components/Hero";
 import Stats from "./components/Stats";
+import Services from "./components/Services";
 import Principles from "./components/Principles";
 import Individual from "./components/Individual";
 import Logos from "./components/Logos";
@@ -90,6 +91,8 @@ export default function HomePage() {
         onCategoryChange={setSelectedCategory}
         selectedService={selectedService}
         onServiceSelect={setSelectedService}
+      />
+      <Services
         selectedDoctor={selectedDoctor}
         onDoctorSelect={setSelectedDoctor}
       />

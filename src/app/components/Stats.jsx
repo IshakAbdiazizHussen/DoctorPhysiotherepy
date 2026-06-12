@@ -1,18 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
 import {
   Activity,
+  ArrowLeft,
   ArrowRight,
   BrainCircuit,
-  CalendarPlus2,
   Check,
+  ChevronRight,
   HeartPulse,
   ShieldCheck,
-  Sparkles,
-  Stethoscope,
-  TimerReset,
 } from "lucide-react";
 import Container from "./Container";
 
@@ -27,12 +24,6 @@ const cards = [
     detail:
       "Ideal for posture correction, restoring stability, and strength rebuilding to improve movement and flexibility.",
     image: "/images/therepy.png",
-    benefits: [
-      "Improve mobility",
-      "Reduce pain",
-      "Faster recovery",
-      "Better movement control",
-    ],
   },
   {
     icon: ShieldCheck,
@@ -40,14 +31,8 @@ const cards = [
     text: "Safe rehabilitation pathways after surgery and sports injuries.",
     category: "Sports Injury",
     detail:
-      "Structured recovery sessions that improve confidence after strains, tears, and post-surgical restrictions.",
+      "Focused support for post-injury rehabilitation with structured care that restores confidence and movement safely.",
     image: "/images/physio1.jpg",
-    benefits: [
-      "Restore confidence",
-      "Reduce re-injury risk",
-      "Safe guided progress",
-      "Rebuild strength faster",
-    ],
   },
   {
     icon: HeartPulse,
@@ -55,14 +40,8 @@ const cards = [
     text: "Manual therapy and guided care to reduce pain and inflammation.",
     category: "Pain Relief",
     detail:
-      "Focused hands-on therapy combined with corrective exercise for recurring discomfort, inflammation, and reduced mobility.",
+      "Personalized treatment sessions designed to relieve inflammation, reduce pain, and support comfortable daily movement.",
     image: "/images/physio2.jpg",
-    benefits: [
-      "Ease recurring pain",
-      "Improve daily comfort",
-      "Reduce inflammation",
-      "Restore flexibility",
-    ],
   },
   {
     icon: BrainCircuit,
@@ -70,324 +49,289 @@ const cards = [
     text: "Restoring movement, stability, and muscle control effectively.",
     category: "Rehabilitation",
     detail:
-      "Designed to restore balance, control, and functional movement after injury or prolonged pain.",
-    image: "/images/therepy.png",
-    benefits: [
-      "Better balance",
-      "Improve coordination",
-      "Support long-term recovery",
-      "Rebuild movement patterns",
-    ],
+      "Restorative therapy that improves balance, control, and movement patterns for lasting physical recovery.",
+    image: "/images/physio.jpg",
   },
 ];
 
-const recoverySteps = [
-  { icon: Stethoscope, label: "Assessment" },
-  { icon: Activity, label: "Treatment" },
-  { icon: TimerReset, label: "Progress Tracking" },
-  { icon: Sparkles, label: "Recovery" },
+const doctors = [
+  {
+    name: "Dr. Sarah Wilson",
+    specialty: "Physiotherapist",
+    image: "/images/female.jpg",
+  },
+  {
+    name: "Dr. James Carter",
+    specialty: "Rehabilitation Expert",
+    image: "/images/physio1.jpg",
+  },
+  {
+    name: "Dr. Emily Brown",
+    specialty: "Sports Therapist",
+    image: "/images/physio2.jpg",
+  },
+  {
+    name: "Dr. Michael Lee",
+    specialty: "Movement Specialist",
+    image: "/images/portM.jpg",
+  },
+  {
+    name: "Dr. Olivia Harris",
+    specialty: "Pain Management",
+    image: "/images/physio.jpg",
+  },
 ];
-
-const fadeInUp = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.55, ease: "easeOut" },
-};
 
 export default function Stats({
   selectedCategory,
   onCategoryChange,
   selectedService,
   onServiceSelect,
+  selectedDoctor,
+  onDoctorSelect,
 }) {
   const visibleCards =
     selectedCategory === "All"
       ? cards
       : cards.filter((card) => card.category === selectedCategory);
 
+  const activeCards = visibleCards.length > 0 ? visibleCards : cards;
   const activeService =
-    cards.find((card) => card.title === selectedService) ?? visibleCards[0] ?? cards[0];
-
+    cards.find((card) => card.title === selectedService) ?? activeCards[0] ?? cards[0];
   const ActiveIcon = activeService.icon;
 
   return (
-    <section id="services" className="bg-white py-16 sm:py-20">
-      <Container>
-        <div className="grid gap-12 xl:grid-cols-[0.92fr_1.08fr] xl:items-start">
-          <motion.div className="max-w-2xl" {...fadeInUp}>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#2563EB]">
-              Doctor <span className="text-[#10B981]">+</span>
-            </p>
+    <section id="services" className="bg-white py-16 sm:py-24 lg:py-28">
+      <Container className="max-w-[1120px]">
+        <div className="grid gap-10 xl:grid-cols-[0.92fr_1fr] xl:gap-12">
+          <div className="space-y-7">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.34em] text-[#3366F5]">
+                Doctor <span className="text-[#14B8A6]">+</span>
+              </p>
 
-            <h2 className="mt-5 max-w-[14ch] text-4xl font-semibold leading-[1.02] tracking-tight text-[#0F172A] sm:text-5xl lg:text-[4.2rem]">
-              Personalized physiotherapy and rehabilitation care built around{" "}
-              <span className="relative inline-block text-[#0F766E]">
-                your recovery
-                <svg
-                  className="absolute -bottom-3 left-1 h-4 w-[96%] text-[#34D399]"
-                  viewBox="0 0 240 30"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M8 21C59 12 114 9 173 16C198 19 216 21 233 19"
-                    stroke="currentColor"
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </span>
-              .
-            </h2>
+              <h2 className="mt-5 max-w-[8ch] text-[3.2rem] font-bold leading-[0.93] tracking-[-0.05em] text-[#18233d] sm:text-[4.4rem] lg:text-[5.2rem]">
+                Personalized physiotherapy and rehabilitation care built around{" "}
+                <span className="text-[#147c7a]">your recovery.</span>
+              </h2>
 
-            <p className="mt-8 max-w-xl text-lg leading-9 text-[#64748B]">
-              Our clinic combines evidence-based treatment, mobility
-              restoration, and one-to-one recovery planning so every patient
-              receives focused support for pain relief and long-term wellness.
-            </p>
-
-            <div className="mt-8 flex items-center gap-3 text-[#64748B]">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#DCFCE7] text-[#16A34A]">
-                <Check className="h-4 w-4" />
-              </div>
-              <p className="text-lg">
-                More than <span className="font-semibold text-[#2563EB]">3,500</span>{" "}
-                patients supported
+              <p className="mt-5 max-w-[34rem] text-[15px] leading-8 text-[#73839f]">
+                Our clinic combines evidence-based treatment, mobility restoration,
+                and one-to-one recovery planning so every patient receives focused
+                support for pain relief and long-term wellness.
               </p>
             </div>
 
-            <div className="mt-9 flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="flex items-center gap-3 text-[15px] text-[#73839f]">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#dff9eb] text-[#22c55e]">
+                <Check className="h-4 w-4" />
+              </span>
+              <span>
+                More than <span className="font-semibold text-[#3366F5]">3,500</span>{" "}
+                patients supported
+              </span>
+            </div>
+
+            <div className="flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {categories.map((category) => (
-                <motion.button
+                <button
                   key={category}
                   type="button"
                   onClick={() => onCategoryChange(category)}
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={`shrink-0 rounded-full px-6 py-3 text-base font-medium transition ${
+                  className={`shrink-0 rounded-full border px-5 py-3 text-[13px] font-medium ${
                     selectedCategory === category
-                      ? "bg-[#2563EB] text-white shadow-[0_18px_35px_-20px_rgba(37,99,235,0.55)]"
-                      : "border border-slate-200 bg-white text-[#64748B] hover:border-[#2563EB] hover:text-[#2563EB]"
+                      ? "border-[#3366F5] bg-[#3366F5] text-white shadow-[0_16px_28px_-18px_rgba(51,102,245,0.7)]"
+                      : "border-[#d9e2f2] bg-white text-[#73839f]"
                   }`}
                 >
                   {category}
-                </motion.button>
+                </button>
               ))}
             </div>
-          </motion.div>
 
-          <motion.div className="space-y-6" {...fadeInUp}>
-            <div className="grid gap-5 md:grid-cols-2">
-              {visibleCards.map(({ icon: Icon, title, text }) => {
-                const isActive = selectedService === title;
+            <div className="relative overflow-hidden rounded-[30px] border border-[#d5e4ff] bg-[linear-gradient(135deg,#f5f9ff_0%,#edf4ff_58%,#e8f7f6_100%)] p-6 shadow-[0_30px_70px_-48px_rgba(51,102,245,0.45)] sm:p-8">
+              <div className="pointer-events-none absolute right-10 top-10 h-32 w-32 rounded-full border border-[#dbe8ff]" />
+              <div className="pointer-events-none absolute right-4 top-4 h-44 w-44 rounded-full border border-[#edf4ff]" />
+
+              <div className="relative grid gap-7 lg:grid-cols-[1fr_220px] lg:items-center">
+                <div>
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/80 text-[#3366F5] shadow-sm">
+                    <ActiveIcon className="h-5 w-5" />
+                  </div>
+
+                  <p className="mt-5 text-[10px] font-semibold uppercase tracking-[0.34em] text-[#3366F5]">
+                    Featured Treatment Experience
+                  </p>
+                  <h3 className="mt-3 max-w-[11ch] text-[2rem] font-bold leading-[1.04] tracking-[-0.03em] text-[#18233d] sm:text-[2.35rem]">
+                    {activeService.title}
+                  </h3>
+                  <p className="mt-4 max-w-[27rem] text-[15px] leading-8 text-[#73839f]">
+                    {activeService.detail}
+                  </p>
+
+                  <button
+                    type="button"
+                    onClick={() => onServiceSelect(activeService.title)}
+                    className="mt-7 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-[14px] font-medium text-[#3366F5] shadow-[0_18px_30px_-24px_rgba(51,102,245,0.55)]"
+                  >
+                    Learn More
+                    <ChevronRight className="h-4 w-4" />
+                  </button>
+                </div>
+
+                <div className="relative mx-auto flex h-[220px] w-[180px] items-center justify-center sm:h-[250px] sm:w-[200px]">
+                  <div className="absolute inset-2 rounded-full border border-[#dbe8ff]" />
+                  <div className="absolute inset-7 rounded-full border border-[#ebf3ff]" />
+                  <div className="relative overflow-hidden rounded-[28px] border border-white/70 bg-white/75 p-3 shadow-[0_26px_48px_-32px_rgba(51,102,245,0.38)]">
+                    <Image
+                      src={activeService.image}
+                      alt={`${activeService.title} treatment illustration`}
+                      width={180}
+                      height={220}
+                      className="h-[190px] w-[150px] rounded-[20px] object-cover sm:h-[220px] sm:w-[170px]"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-6">
+            <div className="grid gap-5 sm:grid-cols-2">
+              {activeCards.slice(0, 4).map(({ icon: Icon, title, text }) => {
+                const isActive = title === activeService.title;
 
                 return (
-                  <motion.button
+                  <button
                     key={title}
                     type="button"
                     onClick={() => onServiceSelect(title)}
-                    whileHover={{ y: -6, scale: isActive ? 1.01 : 1.015 }}
-                    whileTap={{ scale: 0.99 }}
-                    className={`group relative rounded-[2rem] border bg-white p-8 text-left transition duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563EB] ${
+                    className={`relative rounded-[24px] border bg-white p-6 text-left ${
                       isActive
-                        ? "scale-[1.015] border-[#2563EB] shadow-[0_30px_80px_-30px_rgba(37,99,235,0.3)]"
-                        : "border-slate-200 shadow-[0_24px_50px_-34px_rgba(15,23,42,0.22)] hover:border-[#BFDBFE] hover:shadow-[0_28px_60px_-30px_rgba(37,99,235,0.18)]"
+                        ? "border-[#7da5ff] shadow-[0_24px_48px_-38px_rgba(51,102,245,0.5)]"
+                        : "border-[#e5ebf5] shadow-[0_22px_40px_-38px_rgba(15,23,42,0.28)]"
                     }`}
                   >
                     {isActive ? (
-                      <span className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center rounded-full bg-[#2563EB] text-white shadow-[0_18px_30px_-20px_rgba(37,99,235,0.8)]">
+                      <span className="absolute right-5 top-5 flex h-8 w-8 items-center justify-center rounded-full bg-[#3366F5] text-white">
                         <Check className="h-4 w-4" />
                       </span>
                     ) : null}
 
-                    <div
-                      className={`flex h-14 w-14 items-center justify-center rounded-full transition ${
-                        isActive
-                          ? "bg-[#EAF1FF] text-[#2563EB]"
-                          : "bg-[#EEF4FF] text-[#2563EB] group-hover:bg-[#E6F0FF]"
-                      }`}
-                    >
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <h3 className="mt-7 text-[1.75rem] font-semibold leading-tight text-[#0F172A]">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#eef4ff] text-[#3366F5]">
+                      <Icon className="h-5 w-5" />
+                    </span>
+                    <h3 className="mt-5 max-w-[10ch] text-[1.08rem] font-bold leading-[1.2] text-[#18233d] sm:text-[1.22rem]">
                       {title}
                     </h3>
-                    <p className="mt-4 text-lg leading-8 text-[#64748B]">{text}</p>
-                  </motion.button>
+                    <p className="mt-3 text-[14px] leading-8 text-[#73839f]">{text}</p>
+                  </button>
                 );
               })}
             </div>
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeService.title}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
-                className="overflow-hidden rounded-[2rem] border border-[#CFE0FF] bg-[linear-gradient(135deg,#F8FBFF_0%,#F2F8FF_55%,#EEF6FF_100%)] p-6 shadow-[0_32px_80px_-40px_rgba(37,99,235,0.25)] backdrop-blur-sm md:p-7"
+            <div className="flex flex-col gap-5 rounded-[28px] border border-[#cbeee7] bg-[linear-gradient(135deg,#effcf6_0%,#f3fbf8_100%)] px-5 py-5 shadow-[0_24px_50px_-42px_rgba(20,184,166,0.45)] sm:flex-row sm:items-center sm:justify-between sm:px-6">
+              <div className="flex items-center gap-4">
+                <div className="relative h-12 w-12 overflow-hidden rounded-full">
+                  <Image
+                    src="/images/female.jpg"
+                    alt="Physiotherapy specialist"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+
+                <div>
+                  <h3 className="max-w-[15ch] text-[1.12rem] font-bold leading-[1.25] text-[#18233d]">
+                    Not sure which treatment is right for you?
+                  </h3>
+                  <p className="mt-1 text-[14px] leading-7 text-[#73839f]">
+                    Our physiotherapy specialists can recommend a recovery plan in
+                    under 2 minutes.
+                  </p>
+                </div>
+              </div>
+
+              <a
+                href="#appointment"
+                className="inline-flex h-12 shrink-0 items-center justify-center rounded-full bg-[#0f8a78] px-6 text-[14px] font-semibold text-white shadow-[0_18px_28px_-20px_rgba(15,138,120,0.7)]"
               >
-                <div className="relative grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-                  <div className="absolute -left-12 top-10 h-32 w-32 rounded-full bg-[#DCEBFF]/55 blur-2xl" />
-                  <div className="absolute bottom-0 right-0 h-40 w-40 rounded-full bg-[#E4FFF2]/55 blur-3xl" />
-                  <div className="absolute right-[22%] top-7 hidden h-3 w-3 rounded-full bg-[#BFDBFE] lg:block" />
-                  <div className="absolute right-[28%] top-16 hidden text-[#A7C5FF] lg:block">
-                    <Sparkles className="h-5 w-5" />
-                  </div>
-
-                  <div className="relative z-10">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-[1.4rem] border border-white/70 bg-white/75 text-[#2563EB] shadow-[0_18px_35px_-24px_rgba(37,99,235,0.35)] backdrop-blur">
-                      <ActiveIcon className="h-7 w-7" />
-                    </div>
-
-                    <p className="mt-6 text-xs font-semibold uppercase tracking-[0.24em] text-[#2563EB]">
-                      Featured Treatment Experience
-                    </p>
-                    <h3 className="mt-3 text-[2rem] font-semibold leading-tight text-[#0F172A] sm:text-[2.25rem]">
-                      {activeService.title}
-                    </h3>
-                    <p className="mt-4 max-w-xl text-[1.05rem] leading-8 text-[#64748B]">
-                      {activeService.detail}
-                    </p>
-
-                    <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                      {activeService.benefits.map((benefit) => (
-                        <div
-                          key={benefit}
-                          className="flex items-center gap-3 rounded-2xl border border-white/60 bg-white/55 px-4 py-3 text-sm font-medium text-[#334155] backdrop-blur"
-                        >
-                          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCFCE7] text-[#16A34A]">
-                            <Check className="h-4 w-4" />
-                          </span>
-                          {benefit}
-                        </div>
-                      ))}
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={() => onServiceSelect(activeService.title)}
-                      className="mt-7 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-base font-semibold text-[#2563EB] shadow-[0_18px_35px_-24px_rgba(37,99,235,0.28)] transition hover:-translate-y-0.5 hover:gap-3"
-                    >
-                      Learn More
-                      <ArrowRight className="h-4 w-4" />
-                    </button>
-                  </div>
-
-                  <div className="relative z-10 mx-auto flex min-h-[320px] w-full max-w-[320px] items-center justify-center lg:max-w-none">
-                    <div className="absolute inset-4 rounded-full border border-[#D4E4FF]" />
-                    <div className="absolute inset-10 rounded-full border border-[#E6F0FF]" />
-                    <div className="absolute inset-0 rounded-[2.25rem] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.85)_0%,rgba(238,246,255,0.48)_55%,transparent_100%)]" />
-                    <div className="absolute right-6 top-7 flex h-11 w-11 items-center justify-center rounded-full border border-white/70 bg-white/80 text-[#10B981] shadow-sm">
-                      <Sparkles className="h-5 w-5" />
-                    </div>
-                    <div className="absolute bottom-7 left-6 flex h-10 w-10 items-center justify-center rounded-full border border-white/70 bg-white/80 text-[#2563EB] shadow-sm">
-                      <Activity className="h-5 w-5" />
-                    </div>
-                    <motion.div
-                      animate={{ y: [0, -6, 0] }}
-                      transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-                      className="relative flex h-[250px] w-[220px] items-center justify-center rounded-[2.1rem] border border-white/60 bg-white/42 p-4 shadow-[0_25px_60px_-30px_rgba(37,99,235,0.25)] backdrop-blur md:h-[270px] md:w-[235px]"
-                    >
-                      <Image
-                        src={activeService.image}
-                        alt={`${activeService.title} treatment preview`}
-                        width={210}
-                        height={250}
-                        className="h-full w-full rounded-[1.5rem] object-contain object-center"
-                      />
-                    </motion.div>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-            <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-              <motion.div
-                whileHover={{ y: -4 }}
-                className="rounded-[2rem] border border-[#B7E8D5] bg-[linear-gradient(135deg,#ECFDF5_0%,#F3FFFB_52%,#F8FAFC_100%)] p-6 shadow-[0_24px_50px_-36px_rgba(15,118,110,0.28)]"
-              >
-                <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="flex items-start gap-4">
-                    <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full ring-4 ring-white/70">
-                      <Image
-                        src="/images/female.jpg"
-                        alt="Doctor available for consultation"
-                        fill
-                        className="object-cover"
-                      />
-                      <span className="absolute bottom-1 right-1 h-3.5 w-3.5 rounded-full border-2 border-white bg-[#10B981]" />
-                    </div>
-                    <div>
-                      <h3 className="text-[1.45rem] font-semibold leading-tight text-[#0F172A]">
-                        Not sure which treatment is right for you?
-                      </h3>
-                      <p className="mt-2 max-w-[34rem] text-base leading-7 text-[#64748B]">
-                        Our physiotherapy specialists can recommend a
-                        personalized recovery plan in under 2 minutes.
-                      </p>
-                      <div className="mt-4 flex flex-wrap gap-3 text-sm font-medium text-[#0F766E]">
-                        {[
-                          "Free consultation",
-                          "Expert assessment",
-                          "Personalized treatment plan",
-                        ].map((item) => (
-                          <span
-                            key={item}
-                            className="rounded-full border border-[#B7E8D5] bg-white/70 px-4 py-2"
-                          >
-                            {item}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <a
-                    href="#appointment"
-                    className="inline-flex min-h-[58px] shrink-0 items-center justify-center rounded-full bg-[linear-gradient(135deg,#0F766E_0%,#10B981_100%)] px-8 text-base font-semibold text-white shadow-[0_20px_40px_-20px_rgba(15,118,110,0.58)] transition hover:-translate-y-0.5"
-                  >
-                    Talk to a Specialist
-                  </a>
-                </div>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ y: -4 }}
-                className="rounded-[2rem] border border-[#D8E4FF] bg-white p-6 shadow-[0_24px_60px_-38px_rgba(15,23,42,0.22)]"
-              >
-                <h3 className="text-xl font-semibold text-[#0F172A]">
-                  Typical Recovery Journey
-                </h3>
-                <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
-                  {recoverySteps.map(({ icon: Icon, label }, index) => (
-                    <div key={label} className="relative flex items-center gap-4">
-                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#EEF4FF] text-[#2563EB]">
-                        <Icon className="h-5 w-5" />
-                      </div>
-                      <div className="text-sm font-medium text-[#334155]">{label}</div>
-                      {index < recoverySteps.length - 1 ? (
-                        <div className="absolute left-[21px] top-11 h-8 w-px bg-gradient-to-b from-[#93C5FD] to-[#DCEBFF] sm:hidden lg:block" />
-                      ) : null}
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-6 hidden items-center gap-3 lg:flex">
-                  {recoverySteps.map(({ label }, index) => (
-                    <div key={label} className="flex flex-1 items-center gap-3">
-                      <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#2563EB]" />
-                      {index < recoverySteps.length - 1 ? (
-                        <span className="h-px flex-1 bg-gradient-to-r from-[#93C5FD] to-[#DCEBFF]" />
-                      ) : (
-                        <span className="flex-1" />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
+                Talk to a Specialist
+              </a>
             </div>
-          </motion.div>
+          </div>
+        </div>
+
+        <div className="mt-14">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                aria-label="Scroll doctors left"
+                className="hidden h-10 w-10 items-center justify-center rounded-full border border-[#e5ebf5] bg-white text-[#73839f] md:inline-flex"
+              >
+                <ArrowLeft className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                aria-label="Scroll doctors right"
+                className="hidden h-10 w-10 items-center justify-center rounded-full border border-[#e5ebf5] bg-white text-[#73839f] md:inline-flex"
+              >
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-5 flex gap-4 overflow-x-auto pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {doctors.map(({ name, specialty, image }) => {
+              const isSelected = selectedDoctor === name;
+
+              return (
+                <button
+                  key={name}
+                  type="button"
+                  onClick={() => onDoctorSelect(name)}
+                  className={`shrink-0 overflow-hidden rounded-[24px] border bg-white text-left shadow-[0_24px_44px_-40px_rgba(15,23,42,0.32)] ${
+                    isSelected ? "border-[#bde8d8]" : "border-[#e5ebf5]"
+                  } w-[200px]`}
+                >
+                  <div className="relative h-[116px] bg-[#f4f7fb]">
+                    <Image
+                      src={image}
+                      alt={`${name} portrait`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+
+                  <div className="space-y-3 px-4 py-4">
+                    <div>
+                      <h3 className="text-[1.02rem] font-bold leading-tight text-[#18233d]">
+                        {name}
+                      </h3>
+                      <p className="mt-1 text-[13px] text-[#8a97af]">{specialty}</p>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <span
+                        className={`inline-flex items-center rounded-full px-3 py-1.5 text-[11px] font-semibold ${
+                          isSelected
+                            ? "bg-[#e5fbf1] text-[#158f63]"
+                            : "bg-[#eef4ff] text-[#3366F5]"
+                        }`}
+                      >
+                        Available
+                      </span>
+
+                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f5f8fc] text-[#3366F5]">
+                        <ChevronRight className="h-4 w-4" />
+                      </span>
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </Container>
     </section>

@@ -2,7 +2,15 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight, Check, ChevronRight } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  ArrowLeft,
+  ArrowRight,
+  CalendarClock,
+  Check,
+  ChevronRight,
+  Star,
+} from "lucide-react";
 import Container from "./Container";
 
 const doctors = [
@@ -10,26 +18,36 @@ const doctors = [
     name: "Dr. Sarah Wilson",
     specialty: "Physiotherapist",
     image: "/images/female.jpg",
+    experience: "9 Years",
+    rating: "4.9",
   },
   {
     name: "Dr. James Carter",
     specialty: "Rehabilitation Expert",
     image: "/images/physio1.jpg",
+    experience: "11 Years",
+    rating: "4.9",
   },
   {
     name: "Dr. Emily Brown",
     specialty: "Sports Therapist",
     image: "/images/physio2.jpg",
+    experience: "8 Years",
+    rating: "4.9",
   },
   {
     name: "Dr. Michael Lee",
     specialty: "Movement Specialist",
     image: "/images/portM.jpg",
+    experience: "10 Years",
+    rating: "4.9",
   },
   {
     name: "Dr. Olivia Harris",
     specialty: "Pain Management",
     image: "/images/physio.jpg",
+    experience: "12 Years",
+    rating: "4.9",
   },
 ];
 
@@ -102,44 +120,88 @@ export default function Services({ selectedDoctor, onDoctorSelect }) {
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
-            {visibleDoctors.map(({ name, specialty, image }) => (
-              <button
-                key={name}
-                type="button"
-                onClick={() => onDoctorSelect(name)}
-                className={`group flex items-center gap-4 rounded-[1.75rem] border bg-white px-4 py-4 text-left shadow-[0_22px_45px_-32px_rgba(15,23,42,0.18)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-30px_rgba(37,99,235,0.16)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563EB] ${
-                  selectedDoctor === name
-                    ? "border-[#16A34A] shadow-[0_24px_48px_-30px_rgba(22,163,74,0.25)]"
-                    : "border-slate-200 hover:border-[#BFDBFE]"
-                }`}
-              >
-                <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full bg-slate-100">
-                  <Image
-                    src={image}
-                    alt={`${name} profile portrait`}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <h3 className="truncate text-lg font-semibold text-[#0F172A]">
-                    {name}
-                  </h3>
-                  <p className="truncate text-sm text-[#64748B]">{specialty}</p>
-                  <div className="mt-3 flex items-center justify-between gap-3">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[#DCFCE7] px-3 py-1 text-xs font-semibold text-[#166534]">
-                      <Check className="h-3.5 w-3.5" />
-                      Available
-                    </span>
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition group-hover:border-[#2563EB] group-hover:text-[#2563EB]">
-                      <ChevronRight className="h-4 w-4" />
-                    </span>
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`${page}-${cardsPerPage}`}
+              initial={{ opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -24 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="grid gap-5 md:grid-cols-2 xl:grid-cols-5"
+            >
+              {visibleDoctors.map(
+                ({ name, specialty, image, experience, rating }, index) => (
+                  <motion.button
+                    key={name}
+                    type="button"
+                    onClick={() => onDoctorSelect(name)}
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, delay: index * 0.05 }}
+                    whileHover={{ y: -7 }}
+                    whileTap={{ scale: 0.99 }}
+                    className={`group overflow-hidden rounded-[2rem] border bg-white text-left transition duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563EB] ${
+                      selectedDoctor === name
+                        ? "border-[#16A34A] shadow-[0_28px_70px_-34px_rgba(22,163,74,0.28)]"
+                        : "border-slate-200 shadow-[0_24px_50px_-34px_rgba(15,23,42,0.18)] hover:border-[#BFDBFE] hover:shadow-[0_26px_55px_-32px_rgba(37,99,235,0.18)]"
+                    }`}
+                  >
+                    <div className="relative h-52 overflow-hidden bg-[#F8FAFC]">
+                      <Image
+                        src={image}
+                        alt={`${name} profile portrait`}
+                        fill
+                        className="object-cover transition duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute left-4 top-4 inline-flex items-center gap-1 rounded-full bg-white/88 px-3 py-1.5 text-xs font-semibold text-[#0F172A] shadow-sm backdrop-blur">
+                        <Star className="h-3.5 w-3.5 fill-[#FBBF24] text-[#FBBF24]" />
+                        {rating}
+                      </div>
+                      <div className="absolute right-4 top-4 inline-flex items-center gap-1 rounded-full bg-[#DCFCE7]/95 px-3 py-1.5 text-xs font-semibold text-[#166534] shadow-sm">
+                        <Check className="h-3.5 w-3.5" />
+                        Available
+                      </div>
+                    </div>
+
+                    <div className="p-5">
+                      <h3 className="text-xl font-semibold text-[#0F172A]">{name}</h3>
+                      <p className="mt-1 text-sm text-[#64748B]">{specialty}</p>
+
+                      <div className="mt-4 flex items-center justify-between rounded-2xl bg-[#F8FAFC] px-4 py-3">
+                        <div>
+                          <p className="text-xs uppercase tracking-[0.18em] text-[#94A3B8]">
+                            Experience
+                          </p>
+                          <p className="mt-1 text-sm font-semibold text-[#0F172A]">
+                            {experience}
+                          </p>
+                        </div>
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#2563EB] shadow-sm">
+                          <CalendarClock className="h-4 w-4" />
+                        </div>
+                      </div>
+
+                      <div className="mt-4 flex items-center justify-between gap-3">
+                        <span
+                          className={`inline-flex rounded-full px-3 py-1.5 text-xs font-semibold ${
+                            selectedDoctor === name
+                              ? "bg-[#DCFCE7] text-[#166534]"
+                              : "bg-[#EEF4FF] text-[#2563EB]"
+                          }`}
+                        >
+                          {selectedDoctor === name ? "Selected Specialist" : "Open Today"}
+                        </span>
+                        <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#2563EB]">
+                          View Profile
+                          <ChevronRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+                        </span>
+                      </div>
+                    </div>
+                  </motion.button>
+                )
+              )}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         <div className="mt-10 flex items-center justify-center gap-8">

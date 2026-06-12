@@ -54,13 +54,13 @@ export default function Stats({
   return (
     <section id="services" className="bg-white py-16 sm:py-20 lg:py-24">
       <Container className="max-w-[1400px] px-6 sm:px-8 xl:px-10">
-        <div className="grid gap-12 xl:grid-cols-[48%_52%] xl:items-start xl:gap-10">
-          <div className="max-w-[650px]">
+        <div className="grid gap-12 xl:grid-cols-[48%_52%] xl:items-start xl:gap-8">
+          <div className="w-full max-w-[650px]">
             <p className="text-[13px] font-bold uppercase tracking-[0.34em] text-[#2563EB]">
               DOCTOR <span className="text-[#10B981]">+</span>
             </p>
 
-            <h2 className="mt-7 max-w-[650px] text-[3.65rem] font-extrabold leading-[0.95] tracking-[-0.04em] text-[#0F172A] sm:text-[4.4rem] lg:text-[72px]">
+            <h2 className="mt-7 w-full max-w-[650px] text-[3.65rem] font-[800] leading-[0.95] tracking-[-0.04em] text-[#0F172A] sm:text-[4.4rem] lg:text-[72px]">
               Personalized
               <br />
               physiotherapy and
@@ -102,7 +102,7 @@ export default function Stats({
               </span>
             </div>
 
-            <div className="mt-12 flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="mt-10 flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {categories.map((category) => (
                 <button
                   key={category}
@@ -120,7 +120,7 @@ export default function Stats({
             </div>
           </div>
 
-          <div className="grid justify-center gap-6 sm:grid-cols-2 xl:justify-start">
+          <div className="grid w-full justify-center gap-6 sm:grid-cols-2 xl:max-w-[664px] xl:justify-self-end">
             {visibleCards.map(({ icon: Icon, title, text }) => {
               const isActive = selectedService === title;
 

@@ -16,7 +16,7 @@ const initialForm = {
 
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedService, setSelectedService] = useState("Advanced mobility therapy");
+  const [selectedService, setSelectedService] = useState("Neuromuscular re-education");
   const [selectedDoctor, setSelectedDoctor] = useState("Dr. Sarah Wilson");
   const [selectedDate, setSelectedDate] = useState("2");
   const [formValues, setFormValues] = useState(initialForm);

@@ -8,7 +8,14 @@ body {
   min-height: 100vh;
   color: #111827;
   background: #ffffff;
-  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-family:
+    Inter,
+    "SF Pro Display",
+    "SF Pro Text",
+    "Segoe UI",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

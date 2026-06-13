@@ -54,9 +54,9 @@ export default function Individual({
 }) {
   return (
     <section id="appointment" className="bg-[#F8FAFC] py-16 sm:py-20 lg:py-24 dark:bg-[#020617]">
-      <Container className="max-w-[1400px] px-6 sm:px-8 xl:px-10">
-        <div className="grid gap-8 lg:grid-cols-[45%_55%]">
-          <article className="relative overflow-hidden rounded-[32px] border border-[rgba(37,99,235,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.92)_0%,rgba(248,250,252,0.88)_100%)] p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur-sm dark:border-[rgba(255,255,255,0.08)] dark:bg-[linear-gradient(180deg,rgba(15,23,42,0.94)_0%,rgba(17,24,39,0.94)_100%)] dark:shadow-[0_24px_60px_-24px_rgba(2,6,23,0.82)] sm:p-10 xl:p-12">
+      <Container className="max-w-[1600px] px-6 lg:px-10 xl:px-12">
+        <div className="grid gap-8 xl:gap-10 lg:grid-cols-[45%_55%]">
+          <article className="relative overflow-hidden rounded-[32px] border border-[rgba(37,99,235,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.92)_0%,rgba(248,250,252,0.88)_100%)] p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur-sm dark:border-[rgba(255,255,255,0.08)] dark:bg-[linear-gradient(180deg,rgba(15,23,42,0.94)_0%,rgba(17,24,39,0.94)_100%)] dark:shadow-[0_24px_60px_-24px_rgba(2,6,23,0.82)] sm:p-10 xl:p-12 2xl:p-14">
             <div className="pointer-events-none absolute right-6 top-10 h-28 w-28 rounded-full bg-[rgba(37,99,235,0.06)] blur-3xl dark:bg-[rgba(96,165,250,0.08)]" />
 
             <span className="inline-flex items-center gap-3 rounded-full bg-white px-5 py-3 text-[14px] font-bold uppercase tracking-[0.16em] text-[#2563EB] shadow-[0_18px_38px_-28px_rgba(37,99,235,0.18)] dark:bg-[#111827] dark:text-[#60A5FA]">
@@ -101,7 +101,7 @@ export default function Individual({
               </div>
             </div>
 
-            <div className="mt-10 grid gap-4 sm:grid-cols-3 sm:gap-3">
+            <div className="mt-10 grid gap-4 sm:grid-cols-3 sm:gap-4">
               {highlights.map(({ icon: Icon, title }) => (
                 <div
                   key={title}
@@ -118,7 +118,7 @@ export default function Individual({
             </div>
           </article>
 
-          <article className="rounded-[32px] border border-[rgba(37,99,235,0.08)] bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.08)] dark:bg-[#0F172A] dark:shadow-[0_24px_60px_-24px_rgba(2,6,23,0.82)] sm:p-10 xl:p-12">
+          <article className="rounded-[32px] border border-[rgba(37,99,235,0.08)] bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.08)] dark:bg-[#0F172A] dark:shadow-[0_24px_60px_-24px_rgba(2,6,23,0.82)] sm:p-10 xl:p-12 2xl:p-14">
             <span className="inline-flex items-center gap-3 rounded-full bg-[#F8FBFF] px-5 py-3 text-[14px] font-bold uppercase tracking-[0.16em] text-[#2563EB] shadow-[0_18px_38px_-28px_rgba(37,99,235,0.16)] dark:bg-[#111827] dark:text-[#60A5FA]">
               <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[rgba(37,99,235,0.08)] text-[#2563EB] dark:bg-[rgba(96,165,250,0.14)] dark:text-[#60A5FA]">
                 <CalendarDays className="h-5 w-5" />
@@ -130,7 +130,7 @@ export default function Individual({
               Book Your Appointment
             </h2>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap gap-3 xl:gap-4">
               {schedule.map((item) => (
                 <button
                   key={item}
@@ -151,7 +151,7 @@ export default function Individual({
               <p className="mt-3 text-sm text-red-600">{formErrors.date}</p>
             ) : null}
 
-            <form className="mt-8 space-y-4" onSubmit={onSubmit} noValidate>
+            <form className="mt-8 w-full space-y-4" onSubmit={onSubmit} noValidate>
               <label className="flex h-16 items-center gap-4 rounded-[16px] border border-slate-200 px-5 text-[18px] text-[#64748B] transition hover:border-[#CBD5E1] dark:border-[#1E293B] dark:bg-[#111827] dark:text-[#94A3B8] dark:hover:border-[#334155]">
                 <CalendarClock className="h-5 w-5 shrink-0 text-[#2563EB] dark:text-[#60A5FA]" />
                 <span className="w-full text-[#0F172A] dark:text-white">

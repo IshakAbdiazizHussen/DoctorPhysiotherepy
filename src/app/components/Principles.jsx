@@ -76,15 +76,15 @@ export default function Principles() {
                 </a>
               </div>
 
-              <div className="relative z-10 flex justify-center xl:justify-end">
+              <div className="relative z-10 flex items-end justify-center pt-6 xl:justify-end xl:pt-12">
                 <div className="absolute -left-10 top-1/2 hidden h-[290px] w-[260px] -translate-y-1/2 rounded-full bg-[rgba(20,184,166,0.08)] blur-2xl xl:block dark:bg-[rgba(52,211,153,0.08)]" />
-                <div className="relative w-full max-w-[520px] overflow-hidden rounded-[28px] shadow-[0_22px_48px_rgba(15,23,42,0.12)] dark:shadow-[0_22px_48px_-20px_rgba(2,6,23,0.82)] xl:ml-auto">
+                <div className="relative w-full max-w-[580px] overflow-hidden rounded-[28px] shadow-[0_22px_48px_rgba(15,23,42,0.12)] dark:shadow-[0_22px_48px_-20px_rgba(2,6,23,0.82)] xl:ml-auto">
                   <Image
                     src="/images/female.jpg"
                     alt="Doctor smiling during a patient consultation"
                     width={720}
                     height={980}
-                    className="h-[420px] w-full object-cover object-top sm:h-[500px] xl:h-[560px] 2xl:h-[580px]"
+                    className="h-[460px] w-full object-cover object-top sm:h-[540px] xl:h-[620px] 2xl:h-[640px]"
                   />
                 </div>
               </div>

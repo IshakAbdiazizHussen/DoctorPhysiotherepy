@@ -211,12 +211,12 @@ export default function Hero() {
         <Container className="!max-w-[1480px] !px-6 lg:!px-10">
           <div className="grid min-h-[760px] items-center gap-16 lg:grid-cols-[52%_48%] xl:gap-20">
             <div className="w-full max-w-[720px]">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#BFE9DA] bg-white px-5 py-2.5 text-sm font-semibold text-[#0F766E] shadow-[0_12px_28px_-22px_rgba(15,118,110,0.26)] dark:border-[rgba(52,211,153,0.2)] dark:bg-[#0F172A] dark:text-[#34D399]">
-                <ShieldCheck className="h-4 w-4" />
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#7DD3C4] bg-[linear-gradient(135deg,#14B8A6_0%,#10B981_100%)] px-5 py-2.5 text-sm font-bold text-white shadow-[0_18px_34px_-22px_rgba(16,185,129,0.42)] dark:border-[rgba(52,211,153,0.28)] dark:text-white">
+                <ShieldCheck className="h-4 w-4 stroke-[2.4]" />
                 Trusted Health Clinic
               </span>
 
-              <h1 className="mt-8 max-w-[650px] text-[3.8rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-[#0F172A] dark:text-[#F8FAFC] sm:text-[4.4rem] lg:text-[72px]">
+              <h1 className="mb-10 max-w-[650px] text-[3.8rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-[#0F172A] dark:text-[#F8FAFC] sm:text-[4.4rem] lg:text-[72px]">
                 Your health is
                 <br />
                 our{" "}

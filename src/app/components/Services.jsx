@@ -35,6 +35,7 @@ const doctors = [
 
 export default function Services({ selectedDoctor, onDoctorSelect, embedded = false }) {
   const trackRef = useRef(null);
+  const scrollTimeoutRef = useRef(null);
   const [cardsPerPage, setCardsPerPage] = useState(4);
   const [activePage, setActivePage] = useState(0);
 
@@ -59,17 +60,43 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
 
   const totalPages = Math.max(1, Math.ceil(doctors.length / cardsPerPage));
 
+  const getStepSize = () => {
+    const track = trackRef.current;
+    if (!track) return 0;
+
+    const firstCard = track.querySelector("[data-doctor-card]");
+    if (!firstCard) return 0;
+
+    const cardWidth = firstCard.getBoundingClientRect().width;
+    const gap = 40;
+    return cardWidth + gap;
+  };
+
+  const snapToNearestCard = (behavior = "smooth") => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const step = getStepSize();
+    if (!step) return;
+
+    const nearestIndex = Math.round(track.scrollLeft / step);
+    track.scrollTo({
+      left: nearestIndex * step,
+      behavior,
+    });
+
+    const nextPage = Math.round(nearestIndex / cardsPerPage);
+    setActivePage(Math.max(0, Math.min(totalPages - 1, nextPage)));
+  };
+
   const scrollToPage = (page) => {
     const track = trackRef.current;
     if (!track) return;
 
     const nextPage = ((page % totalPages) + totalPages) % totalPages;
-    const firstCard = track.querySelector("[data-doctor-card]");
-    if (!firstCard) return;
-
-    const cardWidth = firstCard.getBoundingClientRect().width;
-    const gap = 40;
-    const offset = nextPage * (cardWidth + gap) * cardsPerPage;
+    const step = getStepSize();
+    if (!step) return;
+    const offset = nextPage * step * cardsPerPage;
 
     track.scrollTo({
       left: offset,
@@ -80,11 +107,33 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
   };
 
   const handleNext = () => {
-    scrollToPage(activePage + 1);
+    const track = trackRef.current;
+    if (!track) return;
+    const step = getStepSize();
+    if (!step) return;
+
+    const maxOffset = Math.max(0, track.scrollWidth - track.clientWidth);
+    const nextOffset = track.scrollLeft + step;
+
+    track.scrollTo({
+      left: nextOffset >= maxOffset ? 0 : nextOffset,
+      behavior: "smooth",
+    });
   };
 
   const handlePrev = () => {
-    scrollToPage(activePage - 1);
+    const track = trackRef.current;
+    if (!track) return;
+    const step = getStepSize();
+    if (!step) return;
+
+    const maxOffset = Math.max(0, track.scrollWidth - track.clientWidth);
+    const nextOffset = track.scrollLeft - step;
+
+    track.scrollTo({
+      left: nextOffset <= 0 ? maxOffset : nextOffset,
+      behavior: "smooth",
+    });
   };
 
   const handleWheel = (event) => {
@@ -93,10 +142,18 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
 
     if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
       event.preventDefault();
+      const step = getStepSize();
+      if (!step) return;
+
       track.scrollBy({
-        left: event.deltaY,
+        left: event.deltaY > 0 ? step : -step,
         behavior: "smooth",
       });
+
+      window.clearTimeout(scrollTimeoutRef.current);
+      scrollTimeoutRef.current = window.setTimeout(() => {
+        snapToNearestCard();
+      }, 140);
     }
   };
 
@@ -104,14 +161,17 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
     const track = trackRef.current;
     if (!track) return;
 
-    const firstCard = track.querySelector("[data-doctor-card]");
-    if (!firstCard) return;
+    const step = getStepSize();
+    if (!step) return;
 
-    const cardWidth = firstCard.getBoundingClientRect().width;
-    const gap = 40;
-    const pageWidth = (cardWidth + gap) * cardsPerPage;
+    const pageWidth = step * cardsPerPage;
     const page = Math.round(track.scrollLeft / pageWidth);
     setActivePage(Math.max(0, Math.min(totalPages - 1, page)));
+
+    window.clearTimeout(scrollTimeoutRef.current);
+    scrollTimeoutRef.current = window.setTimeout(() => {
+      snapToNearestCard();
+    }, 120);
   };
 
   const content = (
@@ -134,7 +194,7 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
                 data-doctor-card
                 type="button"
                 onClick={() => onDoctorSelect(name)}
-                className={`flex min-h-[160px] w-[88vw] shrink-0 snap-start items-center gap-5 rounded-[24px] border bg-white px-5 py-5 text-left transition sm:w-[360px] lg:w-[340px] xl:w-[360px] ${
+                className={`flex min-h-[160px] w-[88vw] shrink-0 snap-start items-center gap-5 rounded-[24px] border bg-white px-5 py-5 text-left transition dark:!bg-[#111827] sm:w-[360px] lg:w-[340px] xl:w-[360px] ${
                   isActive
                     ? "border-[#22C55E] shadow-[0_20px_40px_-34px_rgba(34,197,94,0.35)] dark:border-[#34D399] dark:shadow-[0_20px_40px_-34px_rgba(52,211,153,0.22)]"
                     : "border-[#E5E7EB] shadow-[0_18px_36px_-34px_rgba(15,23,42,0.18)] hover:-translate-y-1 hover:shadow-[0_22px_40px_-34px_rgba(15,23,42,0.22)] dark:border-[#1E293B] dark:bg-[#111827] dark:shadow-[0_18px_36px_-34px_rgba(2,6,23,0.85)] dark:hover:shadow-[0_22px_40px_-34px_rgba(2,6,23,0.95)]"
@@ -163,7 +223,7 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
                   </span>
                 </div>
 
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#E5E7EB] bg-white text-[#0F172A] transition hover:border-[#2563EB] hover:text-[#2563EB] dark:border-[#1E293B] dark:bg-[#0F172A] dark:text-[#F8FAFC] dark:hover:border-[#60A5FA] dark:hover:text-[#60A5FA]">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#E5E7EB] bg-white text-[#0F172A] transition hover:border-[#2563EB] hover:text-[#2563EB] dark:border-[#1E293B] dark:!bg-[#0F172A] dark:text-[#F8FAFC] dark:hover:border-[#60A5FA] dark:hover:text-[#60A5FA]">
                   <ChevronRight className="h-5 w-5" />
                 </span>
               </button>

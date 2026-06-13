@@ -36,7 +36,7 @@ export default function Principles() {
 
             <div className="grid items-center gap-10 xl:grid-cols-[54%_46%]">
               <div className="relative z-10 flex h-full flex-col">
-                <span className="inline-flex w-fit items-center gap-4 rounded-full bg-white px-6 py-4 text-[14px] font-medium uppercase tracking-[0.16em] text-[#14B8A6] shadow-[0_18px_38px_-28px_rgba(15,118,110,0.18)] dark:bg-[#111827] dark:text-[#34D399]">
+                <span className="inline-flex w-fit items-center gap-4 rounded-full bg-white px-6 py-4 text-[13px] font-normal uppercase tracking-[0.16em] text-[#14B8A6] shadow-[0_18px_38px_-28px_rgba(15,118,110,0.18)] dark:bg-[#111827] dark:text-[#34D399]">
                   <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[rgba(20,184,166,0.1)] text-[#14B8A6] dark:bg-[rgba(52,211,153,0.12)] dark:text-[#34D399]">
                     <ShieldCheck className="h-5 w-5" />
                   </span>
@@ -94,7 +94,7 @@ export default function Principles() {
           <article className="group relative overflow-hidden rounded-[32px] border border-[#EEF2F7] bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 dark:border-[#1E293B] dark:bg-[#111827] dark:shadow-[0_24px_60px_-24px_rgba(2,6,23,0.82)] sm:p-10 xl:p-10">
             <div className="pointer-events-none absolute right-0 top-0 h-44 w-44 rounded-full bg-[rgba(96,165,250,0.05)] blur-3xl dark:bg-[rgba(96,165,250,0.08)]" />
 
-            <span className="inline-flex items-center gap-3 rounded-full bg-[#F8FBFF] px-5 py-3 text-[14px] font-medium uppercase tracking-[0.16em] text-[#2563EB] shadow-[0_18px_38px_-28px_rgba(37,99,235,0.14)] dark:bg-[#0F172A] dark:text-[#60A5FA]">
+            <span className="inline-flex items-center gap-3 rounded-full bg-[#F8FBFF] px-5 py-3 text-[13px] font-normal uppercase tracking-[0.16em] text-[#2563EB] shadow-[0_18px_38px_-28px_rgba(37,99,235,0.14)] dark:bg-[#0F172A] dark:text-[#60A5FA]">
               <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(37,99,235,0.08)] text-[#2563EB] dark:bg-[rgba(96,165,250,0.14)] dark:text-[#60A5FA]">
                 <Crosshair className="h-5 w-5" />
               </span>

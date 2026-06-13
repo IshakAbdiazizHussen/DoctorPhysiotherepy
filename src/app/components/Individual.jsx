@@ -59,7 +59,7 @@ export default function Individual({
           <article className="relative overflow-hidden rounded-[32px] border border-[rgba(37,99,235,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.92)_0%,rgba(248,250,252,0.88)_100%)] p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur-sm dark:border-[rgba(255,255,255,0.08)] dark:bg-[linear-gradient(180deg,rgba(15,23,42,0.94)_0%,rgba(17,24,39,0.94)_100%)] dark:shadow-[0_24px_60px_-24px_rgba(2,6,23,0.82)] sm:p-10 xl:p-12 2xl:p-14">
             <div className="pointer-events-none absolute right-6 top-10 h-28 w-28 rounded-full bg-[rgba(37,99,235,0.06)] blur-3xl dark:bg-[rgba(96,165,250,0.08)]" />
 
-            <span className="inline-flex items-center gap-3 rounded-full bg-white px-5 py-3 text-[14px] font-medium uppercase tracking-[0.16em] text-[#2563EB] shadow-[0_18px_38px_-28px_rgba(37,99,235,0.18)] dark:bg-[#111827] dark:text-[#60A5FA]">
+            <span className="inline-flex items-center gap-3 rounded-full bg-white px-5 py-3 text-[13px] font-normal uppercase tracking-[0.16em] text-[#2563EB] shadow-[0_18px_38px_-28px_rgba(37,99,235,0.18)] dark:bg-[#111827] dark:text-[#60A5FA]">
               <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[rgba(37,99,235,0.08)] text-[#2563EB] dark:bg-[rgba(96,165,250,0.14)] dark:text-[#60A5FA]">
                 <UserRoundCheck className="h-5 w-5" />
               </span>
@@ -78,7 +78,7 @@ export default function Individual({
             </p>
 
             <div className="mt-10 rounded-[28px] border border-[rgba(37,99,235,0.08)] bg-white/92 p-6 shadow-[0_20px_44px_-28px_rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.08)] dark:bg-[#111827]">
-              <div className="flex items-center gap-3 text-[20px] font-medium text-[#0F172A] dark:text-white">
+              <div className="flex items-center gap-3 text-[19px] font-normal text-[#0F172A] dark:text-white">
                 <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[rgba(37,99,235,0.08)] text-[#2563EB] dark:bg-[rgba(96,165,250,0.14)] dark:text-[#60A5FA]">
                   <Clock3 className="h-5 w-5" />
                 </span>
@@ -88,15 +88,15 @@ export default function Individual({
               <div className="mt-6 divide-y divide-slate-200 text-[18px] text-[#64748B] dark:divide-[#1E293B] dark:text-[#94A3B8]">
                 <div className="flex items-center justify-between py-4 first:pt-0">
                   <span>Mon - Fri</span>
-                  <span className="font-medium text-[#0F172A] dark:text-white">8:00 AM - 7:00 PM</span>
+                  <span className="font-normal text-[#0F172A] dark:text-white">8:00 AM - 7:00 PM</span>
                 </div>
                 <div className="flex items-center justify-between py-4">
                   <span>Saturday</span>
-                  <span className="font-medium text-[#0F172A] dark:text-white">9:00 AM - 4:00 PM</span>
+                  <span className="font-normal text-[#0F172A] dark:text-white">9:00 AM - 4:00 PM</span>
                 </div>
                 <div className="flex items-center justify-between py-4 pb-0">
                   <span>Sunday</span>
-                  <span className="font-medium text-[#2563EB] dark:text-[#60A5FA]">Emergency only</span>
+                  <span className="font-normal text-[#2563EB] dark:text-[#60A5FA]">Emergency only</span>
                 </div>
               </div>
             </div>
@@ -119,7 +119,7 @@ export default function Individual({
           </article>
 
           <article className="rounded-[32px] border border-[rgba(37,99,235,0.08)] bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.08)] dark:bg-[#0F172A] dark:shadow-[0_24px_60px_-24px_rgba(2,6,23,0.82)] sm:p-10 xl:p-12 2xl:p-14">
-            <span className="inline-flex items-center gap-3 rounded-full bg-[#F8FBFF] px-5 py-3 text-[14px] font-medium uppercase tracking-[0.16em] text-[#2563EB] shadow-[0_18px_38px_-28px_rgba(37,99,235,0.16)] dark:bg-[#111827] dark:text-[#60A5FA]">
+            <span className="inline-flex items-center gap-3 rounded-full bg-[#F8FBFF] px-5 py-3 text-[13px] font-normal uppercase tracking-[0.16em] text-[#2563EB] shadow-[0_18px_38px_-28px_rgba(37,99,235,0.16)] dark:bg-[#111827] dark:text-[#60A5FA]">
               <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[rgba(37,99,235,0.08)] text-[#2563EB] dark:bg-[rgba(96,165,250,0.14)] dark:text-[#60A5FA]">
                 <CalendarDays className="h-5 w-5" />
               </span>
@@ -136,7 +136,7 @@ export default function Individual({
                   key={item}
                   type="button"
                   onClick={() => onDateSelect(item)}
-                  className={`flex h-16 w-16 flex-col items-center justify-center rounded-full border text-[13px] font-medium transition ${
+                  className={`flex h-16 w-16 flex-col items-center justify-center rounded-full border text-[12px] font-normal transition ${
                     item === selectedDate
                       ? "border-transparent bg-[#2563EB] text-white shadow-[0_20px_34px_-20px_rgba(37,99,235,0.5)] dark:bg-[#60A5FA] dark:text-[#020617]"
                       : "border-slate-200 bg-white text-[#64748B] hover:border-[#2563EB] hover:text-[#2563EB] dark:border-[#1E293B] dark:bg-[#111827] dark:text-[#94A3B8] dark:hover:border-[#60A5FA] dark:hover:text-[#60A5FA]"
@@ -240,7 +240,7 @@ export default function Individual({
             ) : null}
 
             <div className="mt-8 rounded-[24px] bg-[#F8FAFC] p-5 dark:bg-[#111827]">
-              <div className="flex items-center gap-3 text-[18px] font-medium text-[#0F172A] dark:text-white">
+              <div className="flex items-center gap-3 text-[17px] font-normal text-[#0F172A] dark:text-white">
                 <CreditCard className="h-5 w-5 text-[#14B8A6] dark:text-[#34D399]" />
                 Insurance Accepted
               </div>
@@ -248,7 +248,7 @@ export default function Individual({
                 {["Aetna", "Cigna", "BlueCross", "Medicare"].map((item) => (
                   <span
                     key={item}
-                    className="rounded-full bg-white px-4 py-2 text-sm font-medium text-[#64748B] shadow-[0_12px_24px_-20px_rgba(15,23,42,0.16)] dark:bg-[#0F172A] dark:text-[#94A3B8]"
+                    className="rounded-full bg-white px-4 py-2 text-sm font-normal text-[#64748B] shadow-[0_12px_24px_-20px_rgba(15,23,42,0.16)] dark:bg-[#0F172A] dark:text-[#94A3B8]"
                   >
                     {item}
                   </span>

@@ -62,7 +62,7 @@ export default function Logos() {
   );
 
   return (
-    <section id="trust" className="bg-[#F8FAFC] py-16 sm:py-20 dark:bg-[#0F172A]">
+    <section id="trust" className="bg-[var(--bg-muted)] py-16 pb-10 sm:py-20 sm:pb-12 dark:bg-[#020617]">
       <Container>
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {items.map(({ icon: Icon, title, text }) => (

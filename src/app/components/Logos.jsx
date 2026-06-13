@@ -104,9 +104,9 @@ export default function Logos() {
   return (
     <section
       id="trust"
-      className="relative overflow-hidden bg-[#030B23] py-20 text-white sm:py-24"
+      className="relative overflow-hidden bg-[linear-gradient(180deg,#F8FBFF_0%,#EEF6FF_100%)] py-20 text-[#0F172A] sm:py-24 dark:bg-[#030B23] dark:text-white"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(37,99,235,0.16),transparent_34%),radial-gradient(circle_at_80%_75%,rgba(56,189,248,0.12),transparent_30%),linear-gradient(180deg,rgba(7,16,42,0.94)_0%,rgba(3,11,35,1)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.92)_0%,rgba(238,246,255,0.94)_100%)] dark:bg-[linear-gradient(180deg,rgba(3,11,35,0.96)_0%,rgba(6,18,46,1)_100%)]" />
 
       <Container className="relative max-w-[1400px] px-6 sm:px-8 xl:px-10">
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
@@ -115,15 +115,15 @@ export default function Logos() {
               key={title}
               whileHover={{ y: -4 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="rounded-[30px] border border-[rgba(148,163,184,0.18)] bg-[linear-gradient(180deg,rgba(15,23,42,0.74)_0%,rgba(15,23,42,0.58)_100%)] px-7 py-7 shadow-[0_28px_56px_-34px_rgba(2,6,23,0.9)] backdrop-blur-xl"
+              className="rounded-[30px] border border-[rgba(226,232,240,0.92)] bg-[linear-gradient(180deg,rgba(255,255,255,0.9)_0%,rgba(248,250,252,0.96)_100%)] px-7 py-7 shadow-[0_28px_56px_-34px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-[rgba(148,163,184,0.14)] dark:bg-[linear-gradient(180deg,rgba(15,23,42,0.82)_0%,rgba(15,23,42,0.72)_100%)] dark:shadow-[0_28px_56px_-34px_rgba(2,6,23,0.82)]"
             >
               <div className={`flex h-16 w-16 items-center justify-center rounded-full ${bg} ${color}`}>
                 <Icon className="h-7 w-7" />
               </div>
-              <h3 className="mt-6 text-[32px] font-bold leading-[1.12] tracking-[-0.03em] text-white">
+              <h3 className="mt-6 text-[24px] font-medium leading-[1.24] tracking-[-0.02em] text-[#0F172A] dark:text-[#F8FAFC]">
                 {title}
               </h3>
-              <p className="mt-4 text-[18px] leading-[1.75] text-[#A8B3C9]">
+              <p className="mt-4 text-[16px] leading-[1.8] text-[#64748B] dark:text-[#A8B3C9]">
                 {text}
               </p>
             </motion.article>
@@ -134,7 +134,7 @@ export default function Logos() {
           <motion.article
             whileHover={{ y: -4 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="flex h-full flex-col rounded-[32px] border border-[rgba(96,165,250,0.16)] bg-[linear-gradient(180deg,rgba(15,23,42,0.82)_0%,rgba(12,22,48,0.74)_100%)] p-8 shadow-[0_34px_70px_-40px_rgba(2,6,23,0.92)] backdrop-blur-xl sm:p-10"
+            className="flex h-full flex-col rounded-[32px] border border-[rgba(226,232,240,0.9)] bg-[linear-gradient(180deg,rgba(255,255,255,0.9)_0%,rgba(248,250,252,0.96)_100%)] p-8 shadow-[0_34px_70px_-40px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-[rgba(96,165,250,0.12)] dark:bg-[linear-gradient(180deg,rgba(15,23,42,0.82)_0%,rgba(15,23,42,0.72)_100%)] dark:shadow-[0_34px_70px_-40px_rgba(2,6,23,0.86)] sm:p-10"
           >
             <div className="flex items-start justify-between gap-4">
               <p className="text-[15px] font-semibold uppercase tracking-[0.24em] text-[#60A5FA]">
@@ -148,7 +148,7 @@ export default function Logos() {
                       current === 0 ? testimonials.length - 1 : current - 1
                     )
                   }
-                  className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[rgba(148,163,184,0.18)] bg-[rgba(15,23,42,0.66)] text-[#D8E1F2] transition hover:border-[#60A5FA] hover:text-white"
+                  className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[rgba(226,232,240,0.92)] bg-white text-[#64748B] transition hover:border-[#2563EB] hover:text-[#2563EB] dark:border-[rgba(148,163,184,0.18)] dark:bg-[rgba(15,23,42,0.66)] dark:text-[#D8E1F2] dark:hover:border-[#60A5FA] dark:hover:text-white"
                 >
                   <ChevronLeft className="h-5 w-5" />
                 </button>
@@ -159,14 +159,14 @@ export default function Logos() {
                       current === testimonials.length - 1 ? 0 : current + 1
                     )
                   }
-                  className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[rgba(148,163,184,0.18)] bg-[rgba(15,23,42,0.66)] text-[#D8E1F2] transition hover:border-[#60A5FA] hover:text-white"
+                  className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[rgba(226,232,240,0.92)] bg-white text-[#64748B] transition hover:border-[#2563EB] hover:text-[#2563EB] dark:border-[rgba(148,163,184,0.18)] dark:bg-[rgba(15,23,42,0.66)] dark:text-[#D8E1F2] dark:hover:border-[#60A5FA] dark:hover:text-white"
                 >
                   <ChevronRight className="h-5 w-5" />
                 </button>
               </div>
             </div>
 
-            <div className="mt-8 flex h-full flex-col rounded-[30px] border border-[rgba(96,165,250,0.14)] bg-[linear-gradient(180deg,rgba(15,23,42,0.72)_0%,rgba(10,19,41,0.72)_100%)] p-7 shadow-[0_26px_54px_-34px_rgba(59,130,246,0.18)] transition duration-300 hover:shadow-[0_30px_58px_-34px_rgba(59,130,246,0.28)] sm:p-8">
+            <div className="mt-8 flex h-full flex-col rounded-[30px] border border-[rgba(226,232,240,0.82)] bg-[rgba(255,255,255,0.58)] p-7 shadow-none transition duration-300 dark:border-[rgba(96,165,250,0.12)] dark:bg-[rgba(9,18,40,0.42)] dark:shadow-none sm:p-8">
               <div className="flex items-center gap-4">
                 <MessageSquareQuote className="h-12 w-12 text-[#60A5FA]" />
                 <div className="flex gap-1 text-[#FBBF24]">
@@ -176,11 +176,11 @@ export default function Logos() {
                 </div>
               </div>
 
-              <p className="mt-8 text-[24px] leading-[1.7] tracking-[-0.02em] text-[#F8FAFC]">
+              <p className="mt-8 text-[18px] font-normal leading-[1.9] tracking-[-0.01em] text-[#1E293B] dark:text-[#D8E1F2] sm:text-[19px]">
                 “{visibleTestimonial.text}”
               </p>
 
-              <div className="mt-8 border-t border-[rgba(148,163,184,0.14)] pt-6">
+              <div className="mt-8 border-t border-[rgba(226,232,240,0.92)] pt-6 dark:border-[rgba(148,163,184,0.14)]">
                 <div className="flex items-center gap-4">
                   <div className="relative h-16 w-16 overflow-hidden rounded-full border border-[rgba(255,255,255,0.12)]">
                     <Image
@@ -191,10 +191,10 @@ export default function Logos() {
                     />
                   </div>
                   <div>
-                    <p className="text-[28px] font-semibold tracking-[-0.03em] text-white">
+                    <p className="text-[21px] font-medium tracking-[-0.02em] text-[#0F172A] dark:text-[#F8FAFC]">
                       {visibleTestimonial.name}
                     </p>
-                    <p className="mt-1 text-[18px] text-[#A8B3C9]">
+                    <p className="mt-1 text-[16px] text-[#64748B] dark:text-[#A8B3C9]">
                       {visibleTestimonial.category}
                     </p>
                   </div>
@@ -210,8 +210,8 @@ export default function Logos() {
                       onClick={() => setTestimonialIndex(index)}
                       className={`h-3 rounded-full transition ${
                         index === testimonialIndex
-                          ? "w-8 bg-[#60A5FA]"
-                          : "w-3 bg-[rgba(148,163,184,0.38)]"
+                          ? "w-8 bg-[#2563EB] dark:bg-[#60A5FA]"
+                          : "w-3 bg-[rgba(148,163,184,0.38)] dark:bg-[rgba(148,163,184,0.38)]"
                       }`}
                     />
                   ))}
@@ -223,7 +223,7 @@ export default function Logos() {
           <motion.article
             whileHover={{ y: -4 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="flex h-full flex-col rounded-[32px] border border-[rgba(96,165,250,0.14)] bg-[linear-gradient(180deg,rgba(15,23,42,0.82)_0%,rgba(12,22,48,0.74)_100%)] p-8 shadow-[0_34px_70px_-40px_rgba(2,6,23,0.92)] backdrop-blur-xl sm:p-10"
+            className="flex h-full flex-col rounded-[32px] border border-[rgba(226,232,240,0.9)] bg-[linear-gradient(180deg,rgba(255,255,255,0.9)_0%,rgba(248,250,252,0.96)_100%)] p-8 shadow-[0_34px_70px_-40px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-[rgba(96,165,250,0.12)] dark:bg-[linear-gradient(180deg,rgba(15,23,42,0.82)_0%,rgba(15,23,42,0.72)_100%)] dark:shadow-[0_34px_70px_-40px_rgba(2,6,23,0.86)] sm:p-10"
           >
             <p className="text-[15px] font-semibold uppercase tracking-[0.24em] text-[#60A5FA]">
               Frequently Asked Questions
@@ -240,17 +240,17 @@ export default function Logos() {
                     onClick={() => setActiveFaq((current) => (current === index ? -1 : index))}
                     className={`w-full rounded-[28px] border px-7 py-6 text-left transition duration-300 ${
                       isActive
-                        ? "border-[#3B82F6] bg-[rgba(22,36,72,0.82)] shadow-[0_20px_48px_-30px_rgba(59,130,246,0.35)]"
-                        : "border-[rgba(148,163,184,0.14)] bg-[rgba(15,23,42,0.54)] hover:border-[rgba(96,165,250,0.34)]"
+                        ? "border-[#2563EB] bg-[rgba(255,255,255,0.45)] shadow-none dark:border-[#3B82F6] dark:bg-[rgba(9,18,40,0.42)] dark:shadow-none"
+                        : "border-[rgba(226,232,240,0.82)] bg-[rgba(255,255,255,0.28)] hover:border-[rgba(37,99,235,0.24)] dark:border-[rgba(148,163,184,0.12)] dark:bg-[rgba(9,18,40,0.24)] dark:hover:border-[rgba(96,165,250,0.26)]"
                     }`}
                   >
                     <div className="flex items-center justify-between gap-5">
-                      <p className="text-[28px] font-semibold leading-[1.28] tracking-[-0.02em] text-white">
+                      <p className="text-[20px] font-medium leading-[1.42] tracking-[-0.01em] text-[#0F172A] dark:text-[#F8FAFC] sm:text-[21px]">
                         {faq.question}
                       </p>
                       <ChevronDown
-                        className={`h-6 w-6 shrink-0 text-[#A8B3C9] transition-transform duration-300 ${
-                          isActive ? "rotate-180 text-[#60A5FA]" : ""
+                        className={`h-6 w-6 shrink-0 text-[#64748B] transition-transform duration-300 dark:text-[#A8B3C9] ${
+                          isActive ? "rotate-180 text-[#2563EB] dark:text-[#60A5FA]" : ""
                         }`}
                       />
                     </div>
@@ -261,7 +261,7 @@ export default function Logos() {
                       }`}
                     >
                       <div className="min-h-0">
-                        <p className="max-w-[760px] text-[19px] leading-[1.85] text-[#A8B3C9]">
+                        <p className="max-w-[760px] text-[17px] leading-[1.9] text-[#64748B] dark:text-[#A8B3C9]">
                           {faq.answer}
                         </p>
                       </div>

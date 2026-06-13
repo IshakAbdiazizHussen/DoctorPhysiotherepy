@@ -1,15 +1,6 @@
 "use client";
 
-import {
-  Activity,
-  ArrowRight,
-  BrainCircuit,
-  CalendarDays,
-  Check,
-  HeartPulse,
-  MessageCircleMore,
-  ShieldCheck,
-} from "lucide-react";
+import { Activity, ArrowRight, BrainCircuit, CalendarDays, Check, HeartPulse, MessageCircleMore, ShieldCheck } from "lucide-react";
 import Container from "./Container";
 import Services from "./Services";
 

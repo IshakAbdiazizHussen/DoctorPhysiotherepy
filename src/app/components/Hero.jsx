@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
   CalendarDays,
@@ -54,43 +54,19 @@ export default function Hero() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("#top");
 
-  const sectionIds = useMemo(
-    () => navItems.map((item) => item.href.replace("#", "")),
-    []
-  );
-
   useEffect(() => {
-    const updateActiveSection = () => {
-      const viewportAnchor = window.innerHeight * 0.32;
-      let currentSection = "#top";
-      let closestSection = "#top";
-      let closestDistance = Number.POSITIVE_INFINITY;
+    const allowedTabs = new Set(navItems.map((item) => item.href));
 
-      for (const sectionId of sectionIds) {
-        const section = document.getElementById(sectionId);
-        if (!section) continue;
-
-        const rect = section.getBoundingClientRect();
-        const distance = Math.abs(rect.top - viewportAnchor);
-
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestSection = `#${sectionId}`;
-        }
-
-        if (rect.top <= viewportAnchor && rect.bottom >= viewportAnchor) {
-          currentSection = `#${sectionId}`;
-        }
-      }
-
-      setActiveSection(currentSection === "#top" ? closestSection : currentSection);
+    const syncFromHash = () => {
+      const nextHash = window.location.hash || "#top";
+      setActiveSection(allowedTabs.has(nextHash) ? nextHash : "#top");
     };
 
-    updateActiveSection();
-    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    syncFromHash();
+    window.addEventListener("hashchange", syncFromHash);
 
-    return () => window.removeEventListener("scroll", updateActiveSection);
-  }, [sectionIds]);
+    return () => window.removeEventListener("hashchange", syncFromHash);
+  }, []);
 
   return (
     <>

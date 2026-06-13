@@ -119,10 +119,10 @@ export default function Hero() {
         </Container>
       </header>
 
-      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_18%_18%,rgba(16,185,129,0.12),transparent_24%),radial-gradient(circle_at_78%_18%,rgba(37,99,235,0.14),transparent_24%),linear-gradient(135deg,#F0FDFA_0%,#F6FBFF_52%,#E0F2FE_100%)] py-16 sm:py-20 lg:py-24 dark:bg-[radial-gradient(circle_at_18%_18%,rgba(52,211,153,0.12),transparent_24%),radial-gradient(circle_at_78%_18%,rgba(96,165,250,0.12),transparent_24%),linear-gradient(135deg,#020617_0%,#0F172A_52%,#111827_100%)]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_36%,rgba(255,255,255,0.92),rgba(255,255,255,0)_35%)] dark:bg-[radial-gradient(circle_at_50%_32%,rgba(15,23,42,0.74),rgba(2,6,23,0)_40%)]" />
-        <div className="absolute left-[5%] top-[14%] h-56 w-56 rounded-full bg-[#D1FAE5]/50 blur-3xl" />
-        <div className="absolute right-[9%] top-[18%] h-64 w-64 rounded-full bg-[#BFDBFE]/45 blur-3xl" />
+      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_18%_18%,rgba(16,185,129,0.12),transparent_24%),radial-gradient(circle_at_78%_18%,rgba(37,99,235,0.14),transparent_24%),linear-gradient(135deg,#F0FDFA_0%,#F6FBFF_52%,#E0F2FE_100%)] py-16 sm:py-20 lg:py-24 dark:bg-[linear-gradient(180deg,#020617_0%,#0F172A_50%,#020617_100%)]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_36%,rgba(255,255,255,0.92),rgba(255,255,255,0)_35%)] dark:bg-[linear-gradient(180deg,rgba(15,23,42,0.12),rgba(15,23,42,0.04))]" />
+        <div className="absolute left-[5%] top-[14%] h-56 w-56 rounded-full bg-[#D1FAE5]/50 blur-3xl dark:hidden" />
+        <div className="absolute right-[9%] top-[18%] h-64 w-64 rounded-full bg-[#BFDBFE]/45 blur-3xl dark:hidden" />
 
         <Container className="relative">
           <div className="grid items-center gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10">
@@ -245,12 +245,12 @@ export default function Hero() {
             <div className="relative mx-auto mt-6 w-full max-w-[720px] lg:mt-0 lg:justify-self-end">
               <div className="hero-float absolute left-[8%] top-[8%] hidden h-[78%] w-[78%] rounded-full border border-white/40 md:block" />
               <div className="hero-float absolute left-[14%] top-[13%] hidden h-[68%] w-[68%] rounded-full border border-white/30 [animation-delay:300ms] md:block" />
-              <div className="absolute right-4 top-4 hidden grid-cols-4 gap-3 text-[#10B981]/60 md:grid">
+              <div className="absolute right-4 top-4 hidden grid-cols-4 gap-3 text-[#10B981]/60 dark:hidden md:grid">
                 {Array.from({ length: 12 }).map((_, index) => (
                   <span key={index} className="h-1.5 w-1.5 rounded-full bg-current" />
                 ))}
               </div>
-              <div className="absolute bottom-10 right-3 hidden grid-cols-4 gap-3 text-[#93C5FD]/70 md:grid">
+              <div className="absolute bottom-10 right-3 hidden grid-cols-4 gap-3 text-[#93C5FD]/70 dark:hidden md:grid">
                 {Array.from({ length: 12 }).map((_, index) => (
                   <span key={index} className="h-1.5 w-1.5 rounded-full bg-current" />
                 ))}
@@ -262,8 +262,8 @@ export default function Hero() {
                 <Plus className="h-5 w-5" />
               </div>
 
-              <div className="absolute left-[9%] top-[8%] -z-10 h-[76%] w-[78%] rounded-[38%_62%_58%_42%/40%_34%_66%_60%] bg-[linear-gradient(180deg,#3DC9BE_0%,#0F766E_100%)] md:left-[14%] md:top-[11%] md:h-[72%] md:w-[72%] dark:bg-[linear-gradient(180deg,#34D399_0%,#0F766E_100%)]" />
-              <div className="absolute left-[4%] top-[5%] -z-20 h-[88%] w-[88%] rounded-[44%_56%_60%_40%/32%_38%_62%_68%] bg-[#DCEEFF]/70 blur-2xl md:left-[9%] md:top-[7%] md:h-[86%] md:w-[83%] dark:bg-[rgba(30,41,59,0.85)]" />
+              <div className="absolute left-[9%] top-[8%] -z-10 h-[76%] w-[78%] rounded-[38%_62%_58%_42%/40%_34%_66%_60%] bg-[linear-gradient(180deg,#3DC9BE_0%,#0F766E_100%)] md:left-[14%] md:top-[11%] md:h-[72%] md:w-[72%] dark:bg-[linear-gradient(180deg,rgba(52,211,153,0.18)_0%,rgba(15,118,110,0.10)_100%)]" />
+              <div className="absolute left-[4%] top-[5%] -z-20 h-[88%] w-[88%] rounded-[44%_56%_60%_40%/32%_38%_62%_68%] bg-[#DCEEFF]/70 blur-2xl dark:hidden md:left-[9%] md:top-[7%] md:h-[86%] md:w-[83%]" />
 
               <div className="hero-float relative overflow-hidden rounded-[36%_64%_54%_46%/16%_14%_42%_38%] border border-white/75 bg-white/55 p-5 shadow-[0_38px_80px_-36px_rgba(37,99,235,0.38)] backdrop-blur-xl dark:border-[rgba(30,41,59,0.9)] dark:bg-[rgba(17,24,39,0.78)] dark:shadow-[0_38px_80px_-40px_rgba(2,6,23,0.9)]">
                 <div className="relative overflow-hidden rounded-[3rem] bg-[#F1F8FF] dark:bg-[#0F172A]">

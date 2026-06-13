@@ -38,7 +38,7 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[linear-gradient(180deg,#F8FAFC_0%,#EEF6FF_100%)] pb-16 pt-12 dark:bg-[linear-gradient(180deg,#0F172A_0%,#020617_100%)]">
+    <footer className="mt-12 bg-[linear-gradient(180deg,#F8FAFC_0%,#EEF6FF_100%)] pb-16 pt-20 dark:bg-[linear-gradient(180deg,#0F172A_0%,#020617_100%)] sm:mt-16 sm:pt-24">
       <Container className="max-w-7xl px-6 sm:px-8 xl:px-6">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.9fr_1fr]">
           <div className="max-w-[28rem]">

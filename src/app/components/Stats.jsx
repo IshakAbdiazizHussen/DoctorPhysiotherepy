@@ -225,7 +225,7 @@ export default function Stats({
           </div>
         </div>
 
-        <div className="mt-10">
+        <div className="mt-24 xl:mx-[-28px] 2xl:mx-[-56px]">
           <Services
             selectedDoctor={selectedDoctor}
             onDoctorSelect={onDoctorSelect}

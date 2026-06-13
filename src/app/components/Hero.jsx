@@ -124,18 +124,16 @@ export default function Hero() {
         <div className="absolute left-[5%] top-[14%] h-56 w-56 rounded-full bg-[#D1FAE5]/50 blur-3xl dark:hidden" />
         <div className="absolute right-[9%] top-[18%] h-64 w-64 rounded-full bg-[#BFDBFE]/45 blur-3xl dark:hidden" />
 
-        <Container className="relative">
-          <div className="grid items-center gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10">
-            <div className="max-w-2xl animate-fade-up">
+        <Container className="relative max-w-[1500px]">
+          <div className="grid items-center gap-16 lg:grid-cols-[52%_48%] lg:gap-16 xl:gap-20">
+            <div className="max-w-[680px] animate-fade-up">
               <span className="inline-flex items-center gap-2 rounded-full border border-[#b7ead7] bg-white/75 px-5 py-2.5 text-sm font-semibold text-[#0F766E] shadow-sm backdrop-blur dark:border-[rgba(52,211,153,0.22)] dark:bg-[rgba(15,23,42,0.8)] dark:text-[#34D399]">
                 <ShieldCheck className="h-4 w-4" />
                 Trusted Health Clinic
               </span>
 
-              <h1 className="mt-7 max-w-xl text-5xl font-semibold leading-[0.98] tracking-tight text-[#0F172A] dark:text-[#F8FAFC] sm:text-6xl lg:text-[5.2rem]">
-                Your health is
-                <br />
-                our{" "}
+              <h1 className="mt-7 max-w-[680px] text-5xl font-[800] leading-[0.98] tracking-[-0.04em] text-[#0F172A] dark:text-[#F8FAFC] sm:text-6xl lg:text-[72px] xl:text-[80px]">
+                Your health is our{" "}
                 <span className="relative inline-block text-[#0F9B8E] dark:text-[#34D399]">
                   priority
                   <svg
@@ -154,17 +152,17 @@ export default function Hero() {
                 </span>
               </h1>
 
-              <p className="mt-8 max-w-xl text-lg leading-9 text-[#64748B] dark:text-[#94A3B8]">
+              <p className="mt-9 max-w-[620px] text-lg leading-[1.95] text-[#64748B] dark:text-[#94A3B8]">
                 Expert physiotherapy, rehabilitation, and pain relief programs
                 tailored to your unique needs. Let us help you move better,
                 feel stronger, and live a pain-free life.
               </p>
 
-              <div className="mt-9 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+              <div className="mt-11 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
                 {features.map(({ icon: Icon, label }, index) => (
                   <div
                     key={label}
-                    className="group rounded-[1.5rem] border border-white/60 bg-white/55 px-4 py-4 shadow-[0_18px_35px_-24px_rgba(15,118,110,0.32)] backdrop-blur transition hover:-translate-y-1 hover:bg-white/80 dark:border-[rgba(30,41,59,0.9)] dark:bg-[rgba(17,24,39,0.82)] dark:shadow-[0_24px_50px_-30px_rgba(2,6,23,0.8)] dark:hover:bg-[rgba(17,24,39,0.95)]"
+                    className="group min-h-[132px] rounded-[1.5rem] border border-white/60 bg-white/55 px-5 py-5 shadow-[0_18px_35px_-24px_rgba(15,118,110,0.32)] backdrop-blur transition hover:-translate-y-1 hover:bg-white/80 dark:border-[rgba(30,41,59,0.9)] dark:bg-[rgba(17,24,39,0.82)] dark:shadow-[0_24px_50px_-30px_rgba(2,6,23,0.8)] dark:hover:bg-[rgba(17,24,39,0.95)]"
                     style={{ animationDelay: `${index * 120}ms` }}
                   >
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#DFF8EE] text-[#0F9B8E] transition group-hover:bg-[#C8F2E0] dark:bg-[rgba(52,211,153,0.16)] dark:text-[#34D399] dark:group-hover:bg-[rgba(52,211,153,0.22)]">
@@ -177,24 +175,24 @@ export default function Hero() {
                 ))}
               </div>
 
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+              <div className="mt-12 flex flex-col gap-4 sm:flex-row">
                 <a
                   href="#appointment"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[linear-gradient(135deg,#0F766E_0%,#10B981_100%)] px-7 py-4 text-sm font-semibold text-white shadow-[0_22px_40px_-18px_rgba(15,118,110,0.58)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_45px_-18px_rgba(15,118,110,0.7)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F766E]"
+                  className="inline-flex min-w-[188px] items-center justify-center gap-2 rounded-full bg-[linear-gradient(135deg,#0F766E_0%,#10B981_100%)] px-8 py-4 text-sm font-semibold text-white shadow-[0_22px_40px_-18px_rgba(15,118,110,0.58)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_45px_-18px_rgba(15,118,110,0.7)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F766E]"
                 >
                   <CalendarDays className="h-4 w-4" />
                   Book Appointment
                 </a>
                 <a
                   href="#services"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white/80 px-7 py-4 text-sm font-semibold text-slate-700 shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:border-[#2563EB] hover:text-[#2563EB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563EB] dark:border-[#1E293B] dark:bg-[rgba(17,24,39,0.88)] dark:text-[#F8FAFC] dark:hover:border-[#60A5FA] dark:hover:text-[#60A5FA] dark:focus-visible:outline-[#60A5FA]"
+                  className="inline-flex min-w-[176px] items-center justify-center gap-2 rounded-full border border-slate-200 bg-white/80 px-8 py-4 text-sm font-semibold text-slate-700 shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:border-[#2563EB] hover:text-[#2563EB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563EB] dark:border-[#1E293B] dark:bg-[rgba(17,24,39,0.88)] dark:text-[#F8FAFC] dark:hover:border-[#60A5FA] dark:hover:text-[#60A5FA] dark:focus-visible:outline-[#60A5FA]"
                 >
                   Explore Services
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </div>
 
-              <div className="mt-10 rounded-[1.8rem] border border-white/65 bg-white/55 p-3 shadow-[0_28px_55px_-26px_rgba(37,99,235,0.28)] backdrop-blur dark:border-[rgba(30,41,59,0.9)] dark:bg-[rgba(17,24,39,0.78)] dark:shadow-[0_28px_55px_-28px_rgba(2,6,23,0.85)]">
+              <div className="mt-12 rounded-[1.8rem] border border-white/65 bg-white/55 p-4 shadow-[0_28px_55px_-26px_rgba(37,99,235,0.28)] backdrop-blur dark:border-[rgba(30,41,59,0.9)] dark:bg-[rgba(17,24,39,0.78)] dark:shadow-[0_28px_55px_-28px_rgba(2,6,23,0.85)]">
                 <div className="grid gap-3 sm:grid-cols-3">
                   <div className="flex items-center gap-4 rounded-[1.25rem] bg-white/65 px-4 py-4 dark:bg-[rgba(15,23,42,0.82)]">
                     <div className="flex -space-x-3">
@@ -242,7 +240,7 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="relative mx-auto mt-6 w-full max-w-[720px] lg:mt-0 lg:justify-self-end">
+            <div className="relative mx-auto mt-8 w-full max-w-[840px] lg:mt-0 lg:justify-self-end">
               <div className="hero-float absolute left-[8%] top-[8%] hidden h-[78%] w-[78%] rounded-full border border-white/40 md:block" />
               <div className="hero-float absolute left-[14%] top-[13%] hidden h-[68%] w-[68%] rounded-full border border-white/30 [animation-delay:300ms] md:block" />
               <div className="absolute right-4 top-4 hidden grid-cols-4 gap-3 text-[#10B981]/60 dark:hidden md:grid">
@@ -262,23 +260,23 @@ export default function Hero() {
                 <Plus className="h-5 w-5" />
               </div>
 
-              <div className="absolute left-[9%] top-[8%] -z-10 h-[76%] w-[78%] rounded-[38%_62%_58%_42%/40%_34%_66%_60%] bg-[linear-gradient(180deg,#3DC9BE_0%,#0F766E_100%)] md:left-[14%] md:top-[11%] md:h-[72%] md:w-[72%] dark:bg-[linear-gradient(180deg,rgba(52,211,153,0.18)_0%,rgba(15,118,110,0.10)_100%)]" />
+              <div className="absolute left-[8%] top-[7%] -z-10 h-[80%] w-[80%] rounded-[34%_66%_58%_42%/18%_18%_42%_42%] bg-[linear-gradient(180deg,#3DC9BE_0%,#0F766E_100%)] md:left-[12%] md:top-[9%] md:h-[76%] md:w-[76%] dark:bg-[linear-gradient(180deg,rgba(52,211,153,0.18)_0%,rgba(15,118,110,0.10)_100%)]" />
               <div className="absolute left-[4%] top-[5%] -z-20 h-[88%] w-[88%] rounded-[44%_56%_60%_40%/32%_38%_62%_68%] bg-[#DCEEFF]/70 blur-2xl dark:hidden md:left-[9%] md:top-[7%] md:h-[86%] md:w-[83%]" />
 
-              <div className="hero-float relative overflow-hidden rounded-[36%_64%_54%_46%/16%_14%_42%_38%] border border-white/75 bg-white/55 p-5 shadow-[0_38px_80px_-36px_rgba(37,99,235,0.38)] backdrop-blur-xl dark:border-[rgba(30,41,59,0.9)] dark:bg-[rgba(17,24,39,0.78)] dark:shadow-[0_38px_80px_-40px_rgba(2,6,23,0.9)]">
-                <div className="relative overflow-hidden rounded-[3rem] bg-[#F1F8FF] dark:bg-[#0F172A]">
+              <div className="hero-float relative overflow-hidden rounded-[30%_70%_52%_48%/18%_18%_38%_38%] border border-white/75 bg-white/55 p-6 shadow-[0_38px_80px_-36px_rgba(37,99,235,0.38)] backdrop-blur-xl dark:border-[rgba(30,41,59,0.9)] dark:bg-[rgba(17,24,39,0.78)] dark:shadow-[0_38px_80px_-40px_rgba(2,6,23,0.9)]">
+                <div className="relative overflow-hidden rounded-[2.6rem] bg-[#F1F8FF] dark:bg-[#0F172A]">
                   <Image
                     src="/images/therepy.png"
                     alt="Physiotherapy treatment session focused on guided recovery and movement support"
                     width={1040}
                     height={1200}
                     priority
-                    className="h-[480px] w-full object-cover sm:h-[620px]"
+                    className="h-[540px] w-full object-cover sm:h-[700px]"
                   />
                 </div>
               </div>
 
-              <div className="hero-float absolute right-0 top-16 w-32 rounded-full bg-white/92 p-4 text-center shadow-[0_25px_40px_-24px_rgba(15,118,110,0.45)] backdrop-blur [animation-delay:200ms] sm:w-36 sm:p-5 lg:top-24 lg:w-40 dark:bg-[rgba(17,24,39,0.92)] dark:shadow-[0_25px_40px_-24px_rgba(2,6,23,0.85)]">
+              <div className="hero-float absolute -right-3 top-14 w-36 rounded-full bg-white/92 p-4 text-center shadow-[0_25px_40px_-24px_rgba(15,118,110,0.45)] backdrop-blur [animation-delay:200ms] sm:w-40 sm:p-5 lg:-right-4 lg:top-20 lg:w-44 dark:bg-[rgba(17,24,39,0.92)] dark:shadow-[0_25px_40px_-24px_rgba(2,6,23,0.85)]">
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#DFF8EE] text-[#0F766E] dark:bg-[rgba(52,211,153,0.16)] dark:text-[#34D399]">
                   <Dumbbell className="h-7 w-7" />
                 </div>
@@ -290,7 +288,7 @@ export default function Hero() {
                 </p>
               </div>
 
-              <div className="hero-float absolute bottom-24 left-[8%] w-[62%] rounded-[1.75rem] bg-[linear-gradient(180deg,#0FA4A5_0%,#0F766E_100%)] p-5 text-white shadow-[0_28px_55px_-20px_rgba(15,118,110,0.56)] [animation-delay:350ms] sm:bottom-20 sm:left-[16%] sm:w-[52%] sm:p-6 lg:bottom-3 lg:left-[26%] lg:w-[42%] lg:p-7 dark:bg-[linear-gradient(180deg,#0F172A_0%,#111827_100%)] dark:ring-1 dark:ring-[rgba(52,211,153,0.22)]">
+              <div className="hero-float absolute bottom-28 left-[10%] w-[60%] rounded-[1.75rem] bg-[linear-gradient(180deg,#0FA4A5_0%,#0F766E_100%)] p-6 text-white shadow-[0_28px_55px_-20px_rgba(15,118,110,0.56)] [animation-delay:350ms] sm:bottom-24 sm:left-[15%] sm:w-[50%] sm:p-7 lg:bottom-8 lg:left-[21%] lg:w-[38%] lg:p-8 dark:bg-[linear-gradient(180deg,#0F172A_0%,#111827_100%)] dark:ring-1 dark:ring-[rgba(52,211,153,0.22)]">
                 <p className="text-[1.4rem] font-semibold leading-tight sm:text-[1.7rem] lg:text-[2rem]">
                   We help you
                   <br />
@@ -303,12 +301,12 @@ export default function Hero() {
                 </p>
               </div>
 
-              <div className="hero-float absolute bottom-3 right-0 w-[58%] rounded-[1.75rem] border border-white/70 bg-white/92 p-4 shadow-[0_28px_55px_-28px_rgba(37,99,235,0.35)] backdrop-blur [animation-delay:500ms] sm:w-[46%] sm:p-5 lg:bottom-2 lg:w-[40%] dark:border-[rgba(30,41,59,0.9)] dark:bg-[rgba(17,24,39,0.94)] dark:shadow-[0_28px_55px_-28px_rgba(2,6,23,0.88)]">
-                <div className="space-y-2">
+              <div className="hero-float absolute bottom-8 right-[-1%] w-[60%] rounded-[1.75rem] border border-white/70 bg-white/92 p-5 shadow-[0_28px_55px_-28px_rgba(37,99,235,0.35)] backdrop-blur [animation-delay:500ms] sm:bottom-8 sm:w-[48%] sm:p-6 lg:bottom-8 lg:right-[-2%] lg:w-[42%] dark:border-[rgba(30,41,59,0.9)] dark:bg-[rgba(17,24,39,0.94)] dark:shadow-[0_28px_55px_-28px_rgba(2,6,23,0.88)]">
+                <div className="space-y-3">
                   {serviceMiniList.map((item) => (
                     <div
                       key={item}
-                      className="flex items-center gap-3 rounded-[1rem] px-2 py-2 transition hover:bg-[#F8FAFC] dark:hover:bg-[#0F172A]"
+                      className="flex items-center gap-3 rounded-[1rem] px-2 py-2.5 transition hover:bg-[#F8FAFC] dark:hover:bg-[#0F172A]"
                     >
                       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#ECFDF5] text-[#0F766E] dark:bg-[rgba(52,211,153,0.16)] dark:text-[#34D399]">
                         <CircleCheckBig className="h-4 w-4" />
@@ -322,7 +320,7 @@ export default function Hero() {
                 </div>
               </div>
 
-              <div className="hero-float absolute bottom-4 left-[4%] rounded-[1.4rem] bg-white/92 px-4 py-3 shadow-[0_24px_45px_-24px_rgba(37,99,235,0.35)] backdrop-blur [animation-delay:650ms] sm:bottom-2 sm:left-[8%] sm:px-5 sm:py-4 sm:rounded-[1.6rem] dark:bg-[rgba(17,24,39,0.94)] dark:shadow-[0_24px_45px_-24px_rgba(2,6,23,0.88)]">
+              <div className="hero-float absolute bottom-6 left-[6%] rounded-[1.4rem] bg-white/92 px-5 py-4 shadow-[0_24px_45px_-24px_rgba(37,99,235,0.35)] backdrop-blur [animation-delay:650ms] sm:bottom-5 sm:left-[10%] sm:px-5 sm:py-4 sm:rounded-[1.6rem] lg:left-[12%] dark:bg-[rgba(17,24,39,0.94)] dark:shadow-[0_24px_45px_-24px_rgba(2,6,23,0.88)]">
                 <div className="flex items-center gap-3">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#DFF8EE] text-[#10B981] dark:bg-[rgba(52,211,153,0.16)] dark:text-[#34D399]">
                     <CalendarDays className="h-5 w-5" />

@@ -7,6 +7,7 @@ import Services from "./components/Services";
 import Principles from "./components/Principles";
 import Individual from "./components/Individual";
 import Logos from "./components/Logos";
+import Footer from "./components/Footer";
 import { CalendarDays, MessageCircleMore } from "lucide-react";
 
 const initialForm = {
@@ -111,6 +112,7 @@ export default function HomePage() {
         successMessage={successMessage}
       />
       <Logos />
+      <Footer />
 
       <div className="fixed inset-x-4 bottom-4 z-40 sm:hidden">
         <a

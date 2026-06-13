@@ -47,7 +47,7 @@ export default function Footer() {
                 <Sparkles className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-sm font-semibold tracking-[0.2em] text-[var(--text)]">
+                <p className="text-sm font-medium tracking-[0.2em] text-[var(--text)]">
                   DOCTORPHYSIO
                 </p>
                 <p className="text-xs text-[var(--text-muted)]">
@@ -85,7 +85,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-[var(--text)]">Website Pages</h3>
+            <h3 className="text-lg font-medium text-[var(--text)]">Website Pages</h3>
             <div className="mt-5 space-y-3">
               {pageLinks.map((item) => (
                 <a
@@ -100,7 +100,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-[var(--text)]">Services</h3>
+            <h3 className="text-lg font-medium text-[var(--text)]">Services</h3>
             <div className="mt-5 space-y-3">
               {serviceLinks.map((service) => (
                 <a
@@ -115,7 +115,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-[var(--text)]">Contact</h3>
+            <h3 className="text-lg font-medium text-[var(--text)]">Contact</h3>
             <div className="mt-5 space-y-4">
               <a
                 href="tel:+18005550147"
@@ -150,7 +150,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col gap-3 border-t border-[var(--border)] pt-6 text-sm text-[var(--text-muted)] sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 DoctorPhysio. All rights reserved.</p>
-          <a href="#appointment" className="font-medium transition hover:text-[var(--accent)]">
+          <a href="#appointment" className="font-normal transition hover:text-[var(--accent)]">
             Book Appointment
           </a>
         </div>

@@ -286,7 +286,7 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
                   <div className="absolute inset-x-0 top-0 p-5 sm:p-6">
                     <div className="flex items-start justify-between gap-3">
                       <div className="max-w-[170px] text-white">
-                        <h3 className="text-[24px] font-bold leading-[1.05] tracking-[-0.03em] sm:text-[28px]">
+                        <h3 className="text-[24px] font-semibold leading-[1.05] tracking-[-0.03em] sm:text-[28px]">
                           {name}
                         </h3>
                         <p className="mt-2 text-[14px] leading-6 text-white/78 sm:text-[15px]">
@@ -294,7 +294,7 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
                         </p>
                       </div>
 
-                      <span className="inline-flex h-8 items-center gap-1.5 rounded-full bg-[rgba(220,252,231,0.88)] px-3 text-[12px] font-semibold text-[#16A34A] backdrop-blur-sm dark:bg-[rgba(52,211,153,0.18)] dark:text-[#6EE7B7]">
+                      <span className="inline-flex h-8 items-center gap-1.5 rounded-full bg-[rgba(220,252,231,0.88)] px-3 text-[12px] font-medium text-[#16A34A] backdrop-blur-sm dark:bg-[rgba(52,211,153,0.18)] dark:text-[#6EE7B7]">
                         <CheckCircle2 className="h-3.5 w-3.5 fill-current" />
                         Available
                       </span>

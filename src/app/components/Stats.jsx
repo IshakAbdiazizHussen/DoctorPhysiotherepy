@@ -56,7 +56,7 @@ export default function Stats({
       <Container className="max-w-[1500px] px-6 sm:px-8 xl:px-10">
         <div className="grid items-start gap-14 xl:grid-cols-[48%_52%] xl:gap-16">
           <div className="max-w-[690px]">
-            <p className="text-[13px] font-bold uppercase tracking-[0.34em] text-[#2563EB] dark:text-[#60A5FA]">
+            <p className="text-[13px] font-medium uppercase tracking-[0.34em] text-[#2563EB] dark:text-[#60A5FA]">
               DOCTOR <span className="text-[#10B981]">+</span>
             </p>
 
@@ -92,7 +92,7 @@ export default function Stats({
                 <Check className="h-4 w-4" />
               </span>
               <span>
-                More than <span className="font-semibold text-[#2563EB]">3,500</span>{" "}
+                More than <span className="font-medium text-[#2563EB]">3,500</span>{" "}
                 patients supported
               </span>
             </div>
@@ -140,7 +140,7 @@ export default function Stats({
                     <Icon className="h-6 w-6" />
                   </span>
 
-                  <h3 className="mt-10 max-w-[12ch] text-[24px] font-bold leading-[1.2] tracking-[-0.02em] text-[#0F172A] dark:text-[#F8FAFC]">
+                  <h3 className="mt-10 max-w-[12ch] text-[24px] font-semibold leading-[1.2] tracking-[-0.02em] text-[#0F172A] dark:text-[#F8FAFC]">
                     {title}
                   </h3>
 
@@ -161,10 +161,10 @@ export default function Stats({
               </span>
 
               <div>
-                <p className="text-[13px] font-bold uppercase tracking-[0.28em] text-[#2563EB] dark:text-[#60A5FA]">
+                <p className="text-[13px] font-medium uppercase tracking-[0.28em] text-[#2563EB] dark:text-[#60A5FA]">
                   Selected Treatment
                 </p>
-                <h3 className="mt-3 text-[20px] font-bold leading-[1.2] text-[#0F172A] dark:text-[#F8FAFC] sm:text-[22px]">
+                <h3 className="mt-3 text-[20px] font-semibold leading-[1.2] text-[#0F172A] dark:text-[#F8FAFC] sm:text-[22px]">
                   {activeService.title}
                 </h3>
                 <p className="mt-4 max-w-[460px] text-[17px] leading-[1.75] text-[#64748B] dark:text-[#94A3B8]">
@@ -174,7 +174,7 @@ export default function Stats({
 
                 <button
                   type="button"
-                  className="mt-8 inline-flex items-center gap-3 text-[18px] font-semibold text-[#2563EB] transition hover:gap-4 dark:text-[#60A5FA]"
+                  className="mt-8 inline-flex items-center gap-3 text-[18px] font-medium text-[#2563EB] transition hover:gap-4 dark:text-[#60A5FA]"
                 >
                   Learn more
                   <ArrowRight className="h-5 w-5" />
@@ -196,7 +196,7 @@ export default function Stats({
               </span>
 
               <div className="max-w-[440px]">
-                <h3 className="text-[20px] font-bold leading-[1.25] text-[#0F172A] dark:text-[#F8FAFC] sm:text-[22px]">
+                <h3 className="text-[20px] font-semibold leading-[1.25] text-[#0F172A] dark:text-[#F8FAFC] sm:text-[22px]">
                   Need help choosing the right treatment?
                 </h3>
                 <p className="mt-3 text-[17px] leading-[1.7] text-[#64748B] dark:text-[#94A3B8]">
@@ -208,7 +208,7 @@ export default function Stats({
 
             <a
               href="#appointment"
-              className="inline-flex h-14 shrink-0 items-center gap-3 rounded-full bg-[linear-gradient(135deg,#14B8A6_0%,#10B981_100%)] px-8 text-[18px] font-semibold text-white shadow-[0_18px_34px_-22px_rgba(16,185,129,0.55)] transition hover:translate-y-[-1px] dark:text-[#052e2b]"
+              className="inline-flex h-14 shrink-0 items-center gap-3 rounded-full bg-[linear-gradient(135deg,#14B8A6_0%,#10B981_100%)] px-8 text-[18px] font-medium text-white shadow-[0_18px_34px_-22px_rgba(16,185,129,0.55)] transition hover:translate-y-[-1px] dark:text-[#052e2b]"
             >
               <MessageCircleMore className="h-5 w-5" />
               Talk to Expert

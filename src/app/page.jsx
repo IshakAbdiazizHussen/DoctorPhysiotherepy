@@ -114,7 +114,7 @@ export default function HomePage() {
       <div className="fixed inset-x-4 bottom-4 z-40 sm:hidden">
         <a
           href="#appointment"
-          className="flex items-center justify-center gap-2 rounded-full bg-[#2563EB] px-6 py-4 text-sm font-semibold text-white shadow-[0_18px_35px_-18px_rgba(37,99,235,0.7)] dark:bg-[#60A5FA] dark:text-[#020617] dark:shadow-[0_18px_35px_-18px_rgba(96,165,250,0.5)]"
+          className="flex items-center justify-center gap-2 rounded-full bg-[#2563EB] px-6 py-4 text-sm font-medium text-white shadow-[0_18px_35px_-18px_rgba(37,99,235,0.7)] dark:bg-[#60A5FA] dark:text-[#020617] dark:shadow-[0_18px_35px_-18px_rgba(96,165,250,0.5)]"
         >
           <CalendarDays className="h-4 w-4" />
           Book Appointment

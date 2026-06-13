@@ -120,10 +120,10 @@ export default function Logos() {
               <div className={`flex h-16 w-16 items-center justify-center rounded-full ${bg} ${color}`}>
                 <Icon className="h-7 w-7" />
               </div>
-              <h3 className="mt-6 text-[24px] font-medium leading-[1.24] tracking-[-0.02em] text-[#0F172A] dark:text-[#F8FAFC]">
+              <h3 className="mt-6 text-[21px] font-normal leading-[1.3] tracking-[-0.01em] text-[#E2E8F0] dark:text-[#E2E8F0]">
                 {title}
               </h3>
-              <p className="mt-4 text-[16px] leading-[1.8] text-[#64748B] dark:text-[#A8B3C9]">
+              <p className="mt-4 text-[15px] leading-[1.85] text-[#94A3B8] dark:text-[#94A3B8]">
                 {text}
               </p>
             </motion.article>
@@ -137,7 +137,7 @@ export default function Logos() {
             className="flex h-full flex-col rounded-[32px] border border-[rgba(226,232,240,0.9)] bg-[linear-gradient(180deg,rgba(255,255,255,0.9)_0%,rgba(248,250,252,0.96)_100%)] p-8 shadow-[0_34px_70px_-40px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-[rgba(96,165,250,0.12)] dark:bg-[linear-gradient(180deg,rgba(15,23,42,0.82)_0%,rgba(15,23,42,0.72)_100%)] dark:shadow-[0_34px_70px_-40px_rgba(2,6,23,0.86)] sm:p-10"
           >
             <div className="flex items-start justify-between gap-4">
-              <p className="text-[15px] font-semibold uppercase tracking-[0.24em] text-[#60A5FA]">
+              <p className="text-[15px] font-medium uppercase tracking-[0.24em] text-[#60A5FA]">
                 Patient Testimonials
               </p>
               <div className="flex gap-3">
@@ -225,7 +225,7 @@ export default function Logos() {
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="flex h-full flex-col rounded-[32px] border border-[rgba(226,232,240,0.9)] bg-[linear-gradient(180deg,rgba(255,255,255,0.9)_0%,rgba(248,250,252,0.96)_100%)] p-8 shadow-[0_34px_70px_-40px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-[rgba(96,165,250,0.12)] dark:bg-[linear-gradient(180deg,rgba(15,23,42,0.82)_0%,rgba(15,23,42,0.72)_100%)] dark:shadow-[0_34px_70px_-40px_rgba(2,6,23,0.86)] sm:p-10"
           >
-            <p className="text-[15px] font-semibold uppercase tracking-[0.24em] text-[#60A5FA]">
+            <p className="text-[15px] font-medium uppercase tracking-[0.24em] text-[#60A5FA]">
               Frequently Asked Questions
             </p>
 

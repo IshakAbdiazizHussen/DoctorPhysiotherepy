@@ -1,15 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   ArrowRight,
   CalendarDays,
   ChevronRight,
   CircleCheckBig,
   Dumbbell,
+  HeartPulse,
   Menu,
   Phone,
+  PhoneCall,
+  ShieldPlus,
   ShieldCheck,
   Sparkles,
   Stethoscope,
@@ -20,11 +23,11 @@ import Container from "./Container";
 import ThemeToggle from "./ThemeToggle";
 
 const navItems = [
-  { label: "Healthcare", href: "#top" },
-  { label: "Doctors", href: "#doctor-row" },
-  { label: "Consulting", href: "#appointment" },
-  { label: "Rehabilitation", href: "#rehabilitation" },
-  { label: "Contact", href: "#trust" },
+  { label: "Healthcare", href: "#top", icon: HeartPulse },
+  { label: "Doctors", href: "#doctor-row", icon: UserRound },
+  { label: "Consulting", href: "#appointment", icon: Stethoscope },
+  { label: "Rehabilitation", href: "#rehabilitation", icon: ShieldPlus },
+  { label: "Contact", href: "#trust", icon: PhoneCall },
 ];
 
 const features = [
@@ -49,6 +52,35 @@ const patientAvatars = [
 
 export default function Hero() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("#top");
+
+  const sectionIds = useMemo(
+    () => navItems.map((item) => item.href.replace("#", "")),
+    []
+  );
+
+  useEffect(() => {
+    const updateActiveSection = () => {
+      const scrollPosition = window.scrollY + 180;
+      let currentSection = "#top";
+
+      for (const sectionId of sectionIds) {
+        const section = document.getElementById(sectionId);
+        if (!section) continue;
+
+        if (section.offsetTop <= scrollPosition) {
+          currentSection = `#${sectionId}`;
+        }
+      }
+
+      setActiveSection(currentSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+
+    return () => window.removeEventListener("scroll", updateActiveSection);
+  }, [sectionIds]);
 
   return (
     <>
@@ -84,18 +116,42 @@ export default function Hero() {
             <div
               className={`${
                 isMenuOpen ? "flex" : "hidden"
-              } flex-col gap-2 rounded-[1.25rem] border border-slate-100 bg-slate-50 p-3 text-sm text-[#64748B] dark:border-[#1E293B] dark:bg-[#111827] dark:text-[#94A3B8] lg:flex lg:flex-row lg:flex-wrap lg:items-center lg:justify-center lg:gap-2 lg:border-0 lg:bg-transparent lg:p-0`}
+              } flex-col gap-3 rounded-[1.75rem] border border-slate-200 bg-white/95 p-3 shadow-[0_24px_50px_-34px_rgba(15,23,42,0.16)] dark:border-[#1E293B] dark:bg-[#111827] lg:flex lg:flex-row lg:items-center lg:justify-center lg:gap-2 lg:border lg:px-3 lg:py-2`}
             >
-              {navItems.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="rounded-full px-4 py-2 transition hover:bg-white hover:text-[#0F172A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563EB] dark:hover:bg-[#0F172A] dark:hover:text-[#F8FAFC] dark:focus-visible:outline-[#60A5FA]"
-                >
-                  {item.label}
-                </a>
-              ))}
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = activeSection === item.href;
+
+                return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="group hidden rounded-[1.4rem] px-2 py-1.5 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563EB] dark:focus-visible:outline-[#60A5FA] lg:block"
+                  >
+                    <span className="flex min-w-[86px] flex-col items-center gap-2 text-center">
+                      <span
+                        className={`flex h-12 w-12 items-center justify-center rounded-full transition ${
+                          isActive
+                            ? "bg-[#2563EB] text-white shadow-[0_16px_28px_-18px_rgba(37,99,235,0.55)] dark:bg-[#60A5FA] dark:text-[#020617]"
+                            : "bg-[#F8FAFC] text-[#94A3B8] group-hover:bg-[#EFF6FF] group-hover:text-[#2563EB] dark:bg-[#0F172A] dark:text-[#64748B] dark:group-hover:bg-[#172554] dark:group-hover:text-[#60A5FA]"
+                        }`}
+                      >
+                        <Icon className="h-5 w-5" />
+                      </span>
+                      <span
+                        className={`text-[12px] font-medium leading-none transition ${
+                          isActive
+                            ? "text-[#2563EB] dark:text-[#60A5FA]"
+                            : "text-[#475569] group-hover:text-[#0F172A] dark:text-[#94A3B8] dark:group-hover:text-[#F8FAFC]"
+                        }`}
+                      >
+                        {item.label}
+                      </span>
+                    </span>
+                  </a>
+                );
+              })}
             </div>
 
             <div className={`${isMenuOpen ? "flex" : "hidden"} flex-col gap-3 sm:flex-row lg:flex lg:items-center`}>
@@ -119,6 +175,45 @@ export default function Hero() {
           </nav>
         </Container>
       </header>
+
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 shadow-[0_-18px_36px_-28px_rgba(15,23,42,0.18)] backdrop-blur-xl dark:border-[#1E293B] dark:bg-[rgba(2,6,23,0.96)] lg:hidden">
+        <div className="mx-auto flex max-w-md items-end justify-between rounded-[1.75rem] border border-slate-200 bg-white/95 px-3 py-2 dark:border-[#1E293B] dark:bg-[#111827]">
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeSection === item.href;
+
+            return (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={() => setIsMenuOpen(false)}
+                className="group flex min-w-0 flex-1 justify-center px-1"
+              >
+                <span className="flex flex-col items-center gap-1.5 text-center">
+                  <span
+                    className={`flex h-11 w-11 items-center justify-center rounded-full transition ${
+                      isActive
+                        ? "bg-[#2563EB] text-white shadow-[0_16px_28px_-18px_rgba(37,99,235,0.55)] dark:bg-[#60A5FA] dark:text-[#020617]"
+                        : "text-[#94A3B8] group-hover:bg-[#EFF6FF] group-hover:text-[#2563EB] dark:text-[#64748B] dark:group-hover:bg-[#172554] dark:group-hover:text-[#60A5FA]"
+                    }`}
+                  >
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <span
+                    className={`text-[11px] font-medium leading-none transition ${
+                      isActive
+                        ? "text-[#2563EB] dark:text-[#60A5FA]"
+                        : "text-[#475569] group-hover:text-[#0F172A] dark:text-[#94A3B8] dark:group-hover:text-[#F8FAFC]"
+                    }`}
+                  >
+                    {item.label}
+                  </span>
+                </span>
+              </a>
+            );
+          })}
+        </div>
+      </div>
 
       <section className="bg-[linear-gradient(135deg,#f8fbfc_0%,#f4faf9_50%,#f7fbff_100%)] py-16 sm:py-20 lg:py-24 dark:bg-[linear-gradient(180deg,#020617_0%,#0F172A_100%)]">
         <Container className="!max-w-[1480px] !px-6 lg:!px-10">

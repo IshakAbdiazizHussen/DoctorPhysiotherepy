@@ -20,8 +20,8 @@ const features = [
 export default function Principles() {
   return (
     <section id="rehabilitation" className="bg-white py-16 sm:py-20 lg:py-24 dark:bg-[#020617]">
-      <Container className="max-w-[1680px] px-8 sm:px-8 xl:px-10">
-        <div className="grid gap-8 lg:grid-cols-[49%_51%]">
+      <Container className="max-w-[1780px] px-6 sm:px-8 xl:px-10">
+        <div className="grid gap-8 lg:grid-cols-[52%_48%]">
           <article className="group relative overflow-hidden rounded-[32px] border border-[#EEF2F7] bg-[linear-gradient(180deg,#FBFEFE_0%,#F2FAF8_100%)] p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 dark:border-[#1E293B] dark:bg-[linear-gradient(180deg,#0F172A_0%,#111827_100%)] dark:shadow-[0_24px_60px_-24px_rgba(2,6,23,0.82)] sm:p-10 xl:p-14">
             <div className="pointer-events-none absolute right-14 top-20 h-24 w-24 rounded-full bg-[rgba(20,184,166,0.07)] blur-2xl dark:bg-[rgba(52,211,153,0.08)]" />
             <div className="pointer-events-none absolute bottom-14 left-[44%] h-52 w-52 rounded-full bg-[rgba(20,184,166,0.07)] blur-3xl dark:bg-[rgba(52,211,153,0.08)]" />
@@ -34,7 +34,7 @@ export default function Principles() {
               ))}
             </div>
 
-            <div className="grid items-center gap-10 xl:grid-cols-[50%_50%]">
+            <div className="grid items-center gap-10 xl:grid-cols-[54%_46%]">
               <div className="relative z-10 flex h-full flex-col">
                 <span className="inline-flex w-fit items-center gap-4 rounded-full bg-white px-6 py-4 text-[14px] font-bold uppercase tracking-[0.16em] text-[#14B8A6] shadow-[0_18px_38px_-28px_rgba(15,118,110,0.18)] dark:bg-[#111827] dark:text-[#34D399]">
                   <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[rgba(20,184,166,0.1)] text-[#14B8A6] dark:bg-[rgba(52,211,153,0.12)] dark:text-[#34D399]">
@@ -43,7 +43,7 @@ export default function Principles() {
                   Better Recovery
                 </span>
 
-                <h2 className="mt-10 max-w-[520px] text-[46px] font-extrabold leading-[1.05] tracking-[-0.04em] text-[#0F172A] dark:text-[#F8FAFC] sm:text-[58px] xl:text-[70px]">
+                <h2 className="mt-10 max-w-[560px] text-[46px] font-extrabold leading-[1.05] tracking-[-0.04em] text-[#0F172A] dark:text-[#F8FAFC] sm:text-[58px] xl:text-[70px]">
                   We help you
                   move <span className="bg-[linear-gradient(135deg,#14B8A6_0%,#0EA5E9_100%)] bg-clip-text text-transparent">better</span>
                   and live{" "}
@@ -54,7 +54,7 @@ export default function Principles() {
 
                 <div className="mt-8 h-[4px] w-20 rounded-full bg-[#14B8A6]" />
 
-                <p className="mt-8 max-w-[620px] text-[20px] font-normal leading-[1.8] text-[#64748B] dark:text-[#94A3B8]">
+                <p className="mt-8 max-w-[660px] text-[20px] font-normal leading-[1.8] text-[#64748B] dark:text-[#94A3B8]">
                   Our rehabilitation programs are designed to reduce pain, improve
                   mobility, and support strength recovery with calm, personalized
                   care at every stage.
@@ -62,7 +62,7 @@ export default function Principles() {
 
                 <a
                   href="#appointment"
-                  className="mt-10 inline-flex h-[82px] w-full max-w-[560px] items-center justify-between rounded-[20px] bg-white px-7 text-left shadow-[0_20px_45px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_rgba(15,23,42,0.1)] dark:bg-[#111827] dark:shadow-[0_20px_45px_-20px_rgba(2,6,23,0.82)]"
+                  className="mt-10 inline-flex h-[82px] w-full max-w-[600px] items-center justify-between rounded-[20px] bg-white px-7 text-left shadow-[0_20px_45px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_rgba(15,23,42,0.1)] dark:bg-[#111827] dark:shadow-[0_20px_45px_-20px_rgba(2,6,23,0.82)]"
                 >
                   <span className="flex items-center gap-4">
                     <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[rgba(20,184,166,0.1)] text-[#14B8A6] dark:bg-[rgba(52,211,153,0.12)] dark:text-[#34D399]">
@@ -78,7 +78,7 @@ export default function Principles() {
 
               <div className="relative z-10 flex justify-center xl:justify-end">
                 <div className="absolute -left-10 top-1/2 hidden h-[290px] w-[260px] -translate-y-1/2 rounded-full bg-[rgba(20,184,166,0.08)] blur-2xl xl:block dark:bg-[rgba(52,211,153,0.08)]" />
-                <div className="relative w-full max-w-[480px] overflow-hidden rounded-[28px] shadow-[0_22px_48px_rgba(15,23,42,0.12)] dark:shadow-[0_22px_48px_-20px_rgba(2,6,23,0.82)] xl:ml-auto">
+                <div className="relative w-full max-w-[520px] overflow-hidden rounded-[28px] shadow-[0_22px_48px_rgba(15,23,42,0.12)] dark:shadow-[0_22px_48px_-20px_rgba(2,6,23,0.82)] xl:ml-auto">
                   <Image
                     src="/images/female.jpg"
                     alt="Doctor smiling during a patient consultation"

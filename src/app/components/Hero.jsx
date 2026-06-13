@@ -61,19 +61,29 @@ export default function Hero() {
 
   useEffect(() => {
     const updateActiveSection = () => {
-      const scrollPosition = window.scrollY + 180;
+      const viewportAnchor = window.innerHeight * 0.32;
       let currentSection = "#top";
+      let closestSection = "#top";
+      let closestDistance = Number.POSITIVE_INFINITY;
 
       for (const sectionId of sectionIds) {
         const section = document.getElementById(sectionId);
         if (!section) continue;
 
-        if (section.offsetTop <= scrollPosition) {
+        const rect = section.getBoundingClientRect();
+        const distance = Math.abs(rect.top - viewportAnchor);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestSection = `#${sectionId}`;
+        }
+
+        if (rect.top <= viewportAnchor && rect.bottom >= viewportAnchor) {
           currentSection = `#${sectionId}`;
         }
       }
 
-      setActiveSection(currentSection);
+      setActiveSection(currentSection === "#top" ? closestSection : currentSection);
     };
 
     updateActiveSection();
@@ -116,7 +126,7 @@ export default function Hero() {
             <div
               className={`${
                 isMenuOpen ? "flex" : "hidden"
-              } flex-col gap-3 rounded-[1.75rem] border border-slate-200 bg-white/95 p-3 shadow-[0_24px_50px_-34px_rgba(15,23,42,0.16)] dark:border-[#1E293B] dark:bg-[#111827] lg:flex lg:flex-row lg:items-center lg:justify-center lg:gap-2 lg:border lg:px-3 lg:py-2`}
+              } flex-col gap-3 rounded-[1.75rem] border border-slate-200 bg-white/95 p-3 shadow-[0_24px_50px_-34px_rgba(15,23,42,0.16)] dark:border-[#1E293B] dark:bg-[#111827] lg:flex lg:flex-row lg:items-center lg:justify-center lg:gap-5 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none dark:lg:bg-transparent`}
             >
               {navItems.map((item) => {
                 const Icon = item.icon;
@@ -126,7 +136,10 @@ export default function Hero() {
                   <a
                     key={item.label}
                     href={item.href}
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => {
+                      setActiveSection(item.href);
+                      setIsMenuOpen(false);
+                    }}
                     className="group hidden rounded-[1.4rem] px-2 py-1.5 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563EB] dark:focus-visible:outline-[#60A5FA] lg:block"
                   >
                     <span className="flex min-w-[86px] flex-col items-center gap-2 text-center">
@@ -134,16 +147,16 @@ export default function Hero() {
                         className={`flex h-12 w-12 items-center justify-center rounded-full transition ${
                           isActive
                             ? "bg-[#2563EB] text-white shadow-[0_16px_28px_-18px_rgba(37,99,235,0.55)] dark:bg-[#60A5FA] dark:text-[#020617]"
-                            : "bg-[#F8FAFC] text-[#94A3B8] group-hover:bg-[#EFF6FF] group-hover:text-[#2563EB] dark:bg-[#0F172A] dark:text-[#64748B] dark:group-hover:bg-[#172554] dark:group-hover:text-[#60A5FA]"
+                            : "bg-transparent text-[#475569] group-hover:bg-[#EFF6FF] group-hover:text-[#2563EB] dark:bg-transparent dark:text-[#F8FAFC] dark:group-hover:bg-[#172554] dark:group-hover:text-[#60A5FA]"
                         }`}
                       >
-                        <Icon className="h-5 w-5" />
+                        <Icon className="h-5 w-5 stroke-[2.25]" />
                       </span>
                       <span
                         className={`text-[12px] font-medium leading-none transition ${
                           isActive
                             ? "text-[#2563EB] dark:text-[#60A5FA]"
-                            : "text-[#475569] group-hover:text-[#0F172A] dark:text-[#94A3B8] dark:group-hover:text-[#F8FAFC]"
+                            : "text-[#475569] group-hover:text-[#0F172A] dark:text-[#E2E8F0] dark:group-hover:text-[#F8FAFC]"
                         }`}
                       >
                         {item.label}
@@ -177,7 +190,7 @@ export default function Hero() {
       </header>
 
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 shadow-[0_-18px_36px_-28px_rgba(15,23,42,0.18)] backdrop-blur-xl dark:border-[#1E293B] dark:bg-[rgba(2,6,23,0.96)] lg:hidden">
-        <div className="mx-auto flex max-w-md items-end justify-between rounded-[1.75rem] border border-slate-200 bg-white/95 px-3 py-2 dark:border-[#1E293B] dark:bg-[#111827]">
+        <div className="mx-auto flex max-w-md items-end justify-between px-1 py-1">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeSection === item.href;
@@ -186,7 +199,10 @@ export default function Hero() {
               <a
                 key={item.label}
                 href={item.href}
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => {
+                  setActiveSection(item.href);
+                  setIsMenuOpen(false);
+                }}
                 className="group flex min-w-0 flex-1 justify-center px-1"
               >
                 <span className="flex flex-col items-center gap-1.5 text-center">
@@ -194,16 +210,16 @@ export default function Hero() {
                     className={`flex h-11 w-11 items-center justify-center rounded-full transition ${
                       isActive
                         ? "bg-[#2563EB] text-white shadow-[0_16px_28px_-18px_rgba(37,99,235,0.55)] dark:bg-[#60A5FA] dark:text-[#020617]"
-                        : "text-[#94A3B8] group-hover:bg-[#EFF6FF] group-hover:text-[#2563EB] dark:text-[#64748B] dark:group-hover:bg-[#172554] dark:group-hover:text-[#60A5FA]"
+                        : "text-[#475569] group-hover:bg-[#EFF6FF] group-hover:text-[#2563EB] dark:text-[#F8FAFC] dark:group-hover:bg-[#172554] dark:group-hover:text-[#60A5FA]"
                     }`}
                   >
-                    <Icon className="h-5 w-5" />
+                    <Icon className="h-5 w-5 stroke-[2.25]" />
                   </span>
                   <span
                     className={`text-[11px] font-medium leading-none transition ${
                       isActive
                         ? "text-[#2563EB] dark:text-[#60A5FA]"
-                        : "text-[#475569] group-hover:text-[#0F172A] dark:text-[#94A3B8] dark:group-hover:text-[#F8FAFC]"
+                        : "text-[#475569] group-hover:text-[#0F172A] dark:text-[#E2E8F0] dark:group-hover:text-[#F8FAFC]"
                     }`}
                   >
                     {item.label}

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Hero from "./components/Hero";
 import Stats from "./components/Stats";
-import Services from "./components/Services";
 import Principles from "./components/Principles";
 import Individual from "./components/Individual";
 import Logos from "./components/Logos";
@@ -17,7 +16,7 @@ const initialForm = {
 
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedService, setSelectedService] = useState("Neuromuscular re-education");
+  const [selectedService, setSelectedService] = useState("Advanced mobility therapy");
   const [selectedDoctor, setSelectedDoctor] = useState("Dr. Sarah Wilson");
   const [selectedDate, setSelectedDate] = useState("2");
   const [formValues, setFormValues] = useState(initialForm);
@@ -92,8 +91,6 @@ export default function HomePage() {
         onCategoryChange={setSelectedCategory}
         selectedService={selectedService}
         onServiceSelect={setSelectedService}
-      />
-      <Services
         selectedDoctor={selectedDoctor}
         onDoctorSelect={setSelectedDoctor}
       />

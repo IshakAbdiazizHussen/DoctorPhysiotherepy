@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, CheckCircle2, ChevronRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, ChevronRight, Play } from "lucide-react";
+import { motion } from "framer-motion";
 import Container from "./Container";
 
 const doctors = [
@@ -33,206 +34,301 @@ const doctors = [
   },
 ];
 
+function mod(value, total) {
+  return ((value % total) + total) % total;
+}
+
+function relativeOffset(index, activeIndex, total) {
+  const forward = mod(index - activeIndex, total);
+  const backward = forward - total;
+  return Math.abs(forward) < Math.abs(backward) ? forward : backward;
+}
+
 export default function Services({ selectedDoctor, onDoctorSelect, embedded = false }) {
-  const trackRef = useRef(null);
-  const scrollTimeoutRef = useRef(null);
-  const [cardsPerPage, setCardsPerPage] = useState(4);
-  const [activePage, setActivePage] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(
+    Math.max(
+      0,
+      doctors.findIndex((doctor) => doctor.name === selectedDoctor)
+    )
+  );
+  const [isMobile, setIsMobile] = useState(false);
+  const dragStartRef = useRef(null);
+  const wheelLockRef = useRef(false);
 
   useEffect(() => {
-    const updateCardsPerPage = () => {
-      if (window.innerWidth < 640) {
-        setCardsPerPage(1);
-      } else if (window.innerWidth < 1024) {
-        setCardsPerPage(2);
-      } else if (window.innerWidth < 1440) {
-        setCardsPerPage(3);
-      } else {
-        setCardsPerPage(4);
-      }
+    const syncViewport = () => {
+      setIsMobile(window.innerWidth < 768);
     };
 
-    updateCardsPerPage();
-    window.addEventListener("resize", updateCardsPerPage);
-
-    return () => window.removeEventListener("resize", updateCardsPerPage);
+    syncViewport();
+    window.addEventListener("resize", syncViewport);
+    return () => window.removeEventListener("resize", syncViewport);
   }, []);
 
-  const totalPages = Math.max(1, Math.ceil(doctors.length / cardsPerPage));
+  useEffect(() => {
+    const matchedIndex = doctors.findIndex((doctor) => doctor.name === selectedDoctor);
+    if (matchedIndex >= 0 && matchedIndex !== activeIndex) {
+      setActiveIndex(matchedIndex);
+    }
+  }, [activeIndex, selectedDoctor]);
 
-  const getStepSize = () => {
-    const track = trackRef.current;
-    if (!track) return 0;
+  const positionedDoctors = useMemo(
+    () =>
+      doctors.map((doctor, index) => ({
+        ...doctor,
+        index,
+        offset: relativeOffset(index, activeIndex, doctors.length),
+      })),
+    [activeIndex]
+  );
 
-    const firstCard = track.querySelector("[data-doctor-card]");
-    if (!firstCard) return 0;
-
-    const cardWidth = firstCard.getBoundingClientRect().width;
-    const gap = 40;
-    return cardWidth + gap;
-  };
-
-  const snapToNearestCard = (behavior = "smooth") => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    const step = getStepSize();
-    if (!step) return;
-
-    const nearestIndex = Math.round(track.scrollLeft / step);
-    track.scrollTo({
-      left: nearestIndex * step,
-      behavior,
-    });
-
-    const nextPage = Math.round(nearestIndex / cardsPerPage);
-    setActivePage(Math.max(0, Math.min(totalPages - 1, nextPage)));
-  };
-
-  const scrollToPage = (page) => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    const nextPage = ((page % totalPages) + totalPages) % totalPages;
-    const step = getStepSize();
-    if (!step) return;
-    const offset = nextPage * step * cardsPerPage;
-
-    track.scrollTo({
-      left: offset,
-      behavior: "smooth",
-    });
-
-    setActivePage(nextPage);
+  const goToIndex = (index) => {
+    const nextIndex = mod(index, doctors.length);
+    setActiveIndex(nextIndex);
+    onDoctorSelect(doctors[nextIndex].name);
   };
 
   const handleNext = () => {
-    const track = trackRef.current;
-    if (!track) return;
-    const step = getStepSize();
-    if (!step) return;
-
-    const maxOffset = Math.max(0, track.scrollWidth - track.clientWidth);
-    const nextOffset = track.scrollLeft + step;
-
-    track.scrollTo({
-      left: nextOffset >= maxOffset ? 0 : nextOffset,
-      behavior: "smooth",
-    });
+    goToIndex(activeIndex + 1);
   };
 
   const handlePrev = () => {
-    const track = trackRef.current;
-    if (!track) return;
-    const step = getStepSize();
-    if (!step) return;
+    goToIndex(activeIndex - 1);
+  };
 
-    const maxOffset = Math.max(0, track.scrollWidth - track.clientWidth);
-    const nextOffset = track.scrollLeft - step;
+  const handlePointerDown = (event) => {
+    dragStartRef.current = event.clientX;
+  };
 
-    track.scrollTo({
-      left: nextOffset <= 0 ? maxOffset : nextOffset,
-      behavior: "smooth",
-    });
+  const handlePointerUp = (event) => {
+    if (dragStartRef.current === null) return;
+    const delta = event.clientX - dragStartRef.current;
+
+    if (delta > 45) {
+      handlePrev();
+    } else if (delta < -45) {
+      handleNext();
+    }
+
+    dragStartRef.current = null;
+  };
+
+  const handleTouchStart = (event) => {
+    dragStartRef.current = event.changedTouches[0].clientX;
+  };
+
+  const handleTouchEnd = (event) => {
+    if (dragStartRef.current === null) return;
+    const delta = event.changedTouches[0].clientX - dragStartRef.current;
+
+    if (delta > 45) {
+      handlePrev();
+    } else if (delta < -45) {
+      handleNext();
+    }
+
+    dragStartRef.current = null;
   };
 
   const handleWheel = (event) => {
-    const track = trackRef.current;
-    if (!track) return;
+    event.preventDefault();
+    if (wheelLockRef.current) return;
 
-    if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
-      event.preventDefault();
-      const step = getStepSize();
-      if (!step) return;
-
-      track.scrollBy({
-        left: event.deltaY > 0 ? step : -step,
-        behavior: "smooth",
-      });
-
-      window.clearTimeout(scrollTimeoutRef.current);
-      scrollTimeoutRef.current = window.setTimeout(() => {
-        snapToNearestCard();
-      }, 140);
+    wheelLockRef.current = true;
+    if (event.deltaY > 0 || event.deltaX > 0) {
+      handleNext();
+    } else {
+      handlePrev();
     }
+
+    window.setTimeout(() => {
+      wheelLockRef.current = false;
+    }, 420);
   };
 
-  const handleScroll = () => {
-    const track = trackRef.current;
-    if (!track) return;
+  const getCardStyle = (offset) => {
+    const configs = isMobile
+      ? {
+          0: {
+            x: 0,
+            scale: 1,
+            rotate: 0,
+            opacity: 1,
+            zIndex: 50,
+          },
+          1: {
+            x: 180,
+            scale: 0.88,
+            rotate: 8,
+            opacity: 0.72,
+            zIndex: 30,
+          },
+          "-1": {
+            x: -180,
+            scale: 0.88,
+            rotate: -8,
+            opacity: 0.72,
+            zIndex: 30,
+          },
+          2: {
+            x: 280,
+            scale: 0.76,
+            rotate: 12,
+            opacity: 0.3,
+            zIndex: 10,
+          },
+          "-2": {
+            x: -280,
+            scale: 0.76,
+            rotate: -12,
+            opacity: 0.3,
+            zIndex: 10,
+          },
+        }
+      : {
+          0: {
+            x: 0,
+            scale: 1,
+            rotate: 0,
+            opacity: 1,
+            zIndex: 50,
+          },
+          1: {
+            x: 255,
+            scale: 0.9,
+            rotate: 9,
+            opacity: 0.8,
+            zIndex: 30,
+          },
+          "-1": {
+            x: -255,
+            scale: 0.9,
+            rotate: -9,
+            opacity: 0.8,
+            zIndex: 30,
+          },
+          2: {
+            x: 420,
+            scale: 0.78,
+            rotate: 13,
+            opacity: 0.38,
+            zIndex: 10,
+          },
+          "-2": {
+            x: -420,
+            scale: 0.78,
+            rotate: -13,
+            opacity: 0.38,
+            zIndex: 10,
+          },
+        };
 
-    const step = getStepSize();
-    if (!step) return;
-
-    const pageWidth = step * cardsPerPage;
-    const page = Math.round(track.scrollLeft / pageWidth);
-    setActivePage(Math.max(0, Math.min(totalPages - 1, page)));
-
-    window.clearTimeout(scrollTimeoutRef.current);
-    scrollTimeoutRef.current = window.setTimeout(() => {
-      snapToNearestCard();
-    }, 120);
+    return (
+      configs[offset] ?? {
+        x: offset > 0 ? 520 : -520,
+        scale: 0.68,
+        rotate: offset > 0 ? 16 : -16,
+        opacity: 0,
+        zIndex: 0,
+      }
+    );
   };
 
   const content = (
     <>
-      <div
-        className="overflow-hidden px-2 sm:px-4"
-        onWheel={handleWheel}
-      >
+      <div className="overflow-hidden px-1 sm:px-3">
         <div
-          ref={trackRef}
-          onScroll={handleScroll}
-          className="flex snap-x snap-mandatory gap-10 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="relative mx-auto h-[470px] w-full max-w-[1160px] touch-pan-y select-none sm:h-[540px]"
+          onWheel={handleWheel}
+          onPointerDown={handlePointerDown}
+          onPointerUp={handlePointerUp}
+          onPointerLeave={() => {
+            dragStartRef.current = null;
+          }}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
-          {doctors.map(({ name, specialty, image }) => {
+          {positionedDoctors.map(({ name, specialty, image, offset, index }) => {
+            const cardStyle = getCardStyle(offset);
+            const isCenter = offset === 0;
             const isActive = selectedDoctor === name;
 
             return (
-              <button
+              <motion.button
                 key={name}
-                data-doctor-card
                 type="button"
-                onClick={() => onDoctorSelect(name)}
-                className={`flex min-h-[160px] w-[88vw] shrink-0 snap-start items-center gap-5 rounded-[24px] border bg-white px-5 py-5 text-left transition dark:!bg-[#111827] sm:w-[360px] lg:w-[340px] xl:w-[360px] ${
+                onClick={() => goToIndex(index)}
+                initial={false}
+                animate={{
+                  x: cardStyle.x,
+                  scale: cardStyle.scale,
+                  rotate: cardStyle.rotate,
+                  opacity: cardStyle.opacity,
+                }}
+                transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+                style={{ zIndex: cardStyle.zIndex }}
+                className={`absolute left-1/2 top-0 h-[430px] w-[255px] -translate-x-1/2 overflow-hidden rounded-[34px] border text-left shadow-[0_30px_60px_-36px_rgba(15,23,42,0.32)] transition sm:h-[500px] sm:w-[295px] ${
                   isActive
-                    ? "border-[#22C55E] shadow-[0_20px_40px_-34px_rgba(34,197,94,0.35)] dark:border-[#34D399] dark:shadow-[0_20px_40px_-34px_rgba(52,211,153,0.22)]"
-                    : "border-[#E5E7EB] shadow-[0_18px_36px_-34px_rgba(15,23,42,0.18)] hover:-translate-y-1 hover:shadow-[0_22px_40px_-34px_rgba(15,23,42,0.22)] dark:border-[#1E293B] dark:bg-[#111827] dark:shadow-[0_18px_36px_-34px_rgba(2,6,23,0.85)] dark:hover:shadow-[0_22px_40px_-34px_rgba(2,6,23,0.95)]"
-                }`}
+                    ? "border-[rgba(20,184,166,0.72)] dark:border-[rgba(52,211,153,0.5)]"
+                    : "border-white/70 dark:border-[#1E293B]"
+                } ${isCenter ? "pointer-events-auto" : "pointer-events-auto"}`}
               >
-                <div className="relative h-[72px] w-[72px] shrink-0 overflow-hidden rounded-full bg-slate-100">
+                <div className="relative h-full w-full bg-[#0F172A] dark:bg-[#111827]">
                   <Image
                     src={image}
                     alt={`${name} portrait`}
                     fill
                     className="object-cover"
                   />
+
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.2)_0%,rgba(15,23,42,0.02)_28%,rgba(15,23,42,0.58)_74%,rgba(15,23,42,0.94)_100%)] dark:bg-[linear-gradient(180deg,rgba(2,6,23,0.16)_0%,rgba(2,6,23,0.06)_28%,rgba(2,6,23,0.68)_76%,rgba(2,6,23,0.96)_100%)]" />
+
+                  <div className="absolute inset-x-0 top-0 p-5 sm:p-6">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="max-w-[170px] text-white">
+                        <h3 className="text-[24px] font-bold leading-[1.05] tracking-[-0.03em] sm:text-[28px]">
+                          {name}
+                        </h3>
+                        <p className="mt-2 text-[14px] leading-6 text-white/78 sm:text-[15px]">
+                          {specialty}
+                        </p>
+                      </div>
+
+                      <span className="inline-flex h-8 items-center gap-1.5 rounded-full bg-[rgba(220,252,231,0.88)] px-3 text-[12px] font-semibold text-[#16A34A] backdrop-blur-sm dark:bg-[rgba(52,211,153,0.18)] dark:text-[#6EE7B7]">
+                        <CheckCircle2 className="h-3.5 w-3.5 fill-current" />
+                        Available
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+                    <div className="flex items-end justify-between gap-4">
+                      <div className="max-w-[130px]">
+                        <p className="text-[13px] uppercase tracking-[0.24em] text-white/58">
+                          Specialist
+                        </p>
+                        <p className="mt-2 text-[14px] leading-6 text-white/82">
+                          Personalized rehabilitation support and focused care.
+                        </p>
+                      </div>
+
+                      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-[#0F172A] shadow-[0_18px_34px_-20px_rgba(255,255,255,0.55)] dark:bg-[#F8FAFC]">
+                        {isCenter ? (
+                          <Play className="ml-0.5 h-5 w-5 fill-current" />
+                        ) : (
+                          <ChevronRight className="h-5 w-5" />
+                        )}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-
-                <div className="min-w-0 flex-1">
-                  <h3 className="text-[22px] font-bold leading-[1.1] text-[#0F172A] dark:text-[#F8FAFC]">
-                    {name}
-                  </h3>
-                  <p className="mt-2 text-[16px] leading-[1.35] text-[#64748B] dark:text-[#94A3B8]">
-                    {specialty}
-                  </p>
-
-                  <span className="mt-5 inline-flex h-8 items-center gap-2 rounded-full bg-[#DCFCE7] px-4 text-[16px] font-medium text-[#16A34A] dark:bg-[rgba(52,211,153,0.16)] dark:text-[#34D399]">
-                    <CheckCircle2 className="h-4 w-4 fill-current" />
-                    Available
-                  </span>
-                </div>
-
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#E5E7EB] bg-white text-[#0F172A] transition hover:border-[#2563EB] hover:text-[#2563EB] dark:border-[#1E293B] dark:!bg-[#0F172A] dark:text-[#F8FAFC] dark:hover:border-[#60A5FA] dark:hover:text-[#60A5FA]">
-                  <ChevronRight className="h-5 w-5" />
-                </span>
-              </button>
+              </motion.button>
             );
           })}
         </div>
       </div>
 
-      <div className="mt-12 flex items-center justify-center gap-16">
+      <div className="mt-12 flex items-center justify-center gap-10 sm:gap-16">
         <button
           type="button"
           onClick={handlePrev}
@@ -243,14 +339,14 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
         </button>
 
         <div className="flex items-center gap-3">
-          {Array.from({ length: totalPages }).map((_, dotIndex) => (
+          {doctors.map((doctor, index) => (
             <button
-              key={dotIndex}
+              key={doctor.name}
               type="button"
-              onClick={() => scrollToPage(dotIndex)}
-              aria-label={`Go to specialists page ${dotIndex + 1}`}
+              onClick={() => goToIndex(index)}
+              aria-label={`Show ${doctor.name}`}
               className={`h-3 w-3 rounded-full transition ${
-                activePage === dotIndex
+                activeIndex === index
                   ? "bg-[#2563EB] dark:bg-[#60A5FA]"
                   : "bg-[#D1D5DB] dark:bg-[#334155]"
               }`}

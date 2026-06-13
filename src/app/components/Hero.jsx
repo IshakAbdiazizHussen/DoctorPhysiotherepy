@@ -207,7 +207,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <section className="bg-[linear-gradient(135deg,#f8fbfc_0%,#f4faf9_50%,#f7fbff_100%)] py-16 sm:py-20 lg:py-24 dark:bg-[linear-gradient(180deg,#020617_0%,#0F172A_100%)]">
+      <section className="bg-transparent py-16 sm:py-20 lg:py-24">
         <Container className="!max-w-[1480px] !px-6 lg:!px-10">
           <div className="grid min-h-[760px] items-center gap-16 lg:grid-cols-[52%_48%] xl:gap-20">
             <div className="w-full max-w-[720px]">

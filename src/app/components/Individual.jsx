@@ -53,7 +53,7 @@ export default function Individual({
   successMessage,
 }) {
   return (
-    <section id="appointment" className="bg-[#F8FAFC] py-16 sm:py-20 lg:py-24 dark:bg-[#020617]">
+    <section id="appointment" className="bg-transparent py-16 sm:py-20 lg:py-24">
       <Container className="max-w-[1600px] px-6 lg:px-10 xl:px-12">
         <div className="grid gap-8 xl:gap-10 lg:grid-cols-[48%_52%]">
           <article className="relative overflow-hidden rounded-[32px] border border-[rgba(37,99,235,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.92)_0%,rgba(248,250,252,0.88)_100%)] p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur-sm dark:border-[rgba(255,255,255,0.08)] dark:bg-[linear-gradient(180deg,rgba(15,23,42,0.94)_0%,rgba(17,24,39,0.94)_100%)] dark:shadow-[0_24px_60px_-24px_rgba(2,6,23,0.82)] sm:p-10 xl:p-12 2xl:p-14">

@@ -19,7 +19,7 @@ const features = [
 
 export default function Principles() {
   return (
-    <section id="rehabilitation" className="bg-white py-16 sm:py-20 lg:py-24 dark:bg-[#020617]">
+    <section id="rehabilitation" className="bg-transparent py-16 sm:py-20 lg:py-24">
       <Container className="max-w-[1780px] px-6 sm:px-8 xl:px-10">
         <div className="grid gap-8 lg:grid-cols-[52%_48%]">
           <article className="group relative overflow-hidden rounded-[32px] border border-[#EEF2F7] bg-[linear-gradient(180deg,#FBFEFE_0%,#F2FAF8_100%)] p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 dark:border-[#1E293B] dark:bg-[linear-gradient(180deg,#0F172A_0%,#111827_100%)] dark:shadow-[0_24px_60px_-24px_rgba(2,6,23,0.82)] sm:p-10 xl:p-14">

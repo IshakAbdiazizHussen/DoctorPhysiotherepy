@@ -104,9 +104,9 @@ export default function Logos() {
   return (
     <section
       id="trust"
-      className="relative overflow-hidden bg-[linear-gradient(180deg,#F8FBFF_0%,#EEF6FF_100%)] py-20 text-[#0F172A] sm:py-24 dark:bg-[#030B23] dark:text-white"
+      className="relative overflow-hidden bg-transparent py-20 text-[#0F172A] sm:py-24 dark:text-white"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.92)_0%,rgba(238,246,255,0.94)_100%)] dark:bg-[linear-gradient(180deg,rgba(3,11,35,0.96)_0%,rgba(6,18,46,1)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-transparent" />
 
       <Container className="relative max-w-[1400px] px-6 sm:px-8 xl:px-10">
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">

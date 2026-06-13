@@ -52,7 +52,7 @@ export default function Stats({
   const ActiveIcon = activeService.icon;
 
   return (
-    <section id="services" className="bg-white py-16 sm:py-20 lg:py-24 dark:bg-[#020617]">
+    <section id="services" className="bg-transparent py-16 sm:py-20 lg:py-24">
       <Container className="max-w-[1500px] px-6 sm:px-8 xl:px-10">
         <div className="grid items-start gap-14 xl:grid-cols-[48%_52%] xl:gap-16">
           <div className="max-w-[690px]">

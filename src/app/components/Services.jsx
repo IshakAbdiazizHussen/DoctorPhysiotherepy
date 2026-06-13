@@ -371,7 +371,7 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
   }
 
   return (
-    <section id="doctor-row" className="bg-white pb-16 pt-10 dark:bg-[#020617] sm:pb-20 sm:pt-14">
+    <section id="doctor-row" className="bg-transparent pb-16 pt-10 sm:pb-20 sm:pt-14">
       <Container className="max-w-[1880px] px-6 sm:px-8 xl:px-12">
         {content}
       </Container>

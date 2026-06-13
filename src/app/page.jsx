@@ -84,7 +84,7 @@ export default function HomePage() {
   };
 
   return (
-    <main id="top" className="min-h-screen bg-white text-slate-900 dark:bg-[#020617] dark:text-[#F8FAFC]">
+    <main id="top" className="min-h-screen bg-[#F8FAFC] text-slate-900 dark:bg-[#030B23] dark:text-[#F8FAFC]">
       <Hero />
       <Stats
         selectedCategory={selectedCategory}

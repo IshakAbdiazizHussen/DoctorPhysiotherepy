@@ -7,7 +7,26 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (() => {
+                const storageKey = "doctorphysio-theme";
+                const root = document.documentElement;
+                const body = document.body;
+                const stored = localStorage.getItem(storageKey);
+                const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                const theme = stored || (prefersDark ? "dark" : "light");
+                root.classList.toggle("dark", theme === "dark");
+                if (body) body.classList.toggle("dark", theme === "dark");
+                root.style.colorScheme = theme;
+              })();
+            `,
+          }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

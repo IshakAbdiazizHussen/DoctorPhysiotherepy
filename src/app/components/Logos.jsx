@@ -62,27 +62,27 @@ export default function Logos() {
   );
 
   return (
-    <section id="trust" className="bg-[#F8FAFC] py-16 sm:py-20">
+    <section id="trust" className="bg-[#F8FAFC] py-16 sm:py-20 dark:bg-[#0F172A]">
       <Container>
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {items.map(({ icon: Icon, title, text }) => (
             <article
               key={title}
-              className="rounded-[1.5rem] border border-slate-200 bg-white px-5 py-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+              className="rounded-[1.5rem] border border-slate-200 bg-white px-5 py-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md dark:border-[#1E293B] dark:bg-[#111827] dark:shadow-[0_24px_44px_-34px_rgba(2,6,23,0.85)]"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#DCFCE7] text-[#16A34A]">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#DCFCE7] text-[#16A34A] dark:bg-[rgba(52,211,153,0.16)] dark:text-[#34D399]">
                 <Icon className="h-5 w-5" />
               </div>
-              <h3 className="mt-4 text-lg font-semibold text-[#0F172A]">{title}</h3>
-              <p className="mt-2 text-sm leading-7 text-[#64748B]">{text}</p>
+              <h3 className="mt-4 text-lg font-semibold text-[#0F172A] dark:text-[#F8FAFC]">{title}</h3>
+              <p className="mt-2 text-sm leading-7 text-[#64748B] dark:text-[#94A3B8]">{text}</p>
             </article>
           ))}
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-          <article className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+          <article className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm dark:border-[#1E293B] dark:bg-[#111827] dark:shadow-[0_24px_44px_-34px_rgba(2,6,23,0.85)] sm:p-8">
             <div className="flex items-center justify-between gap-4">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#2563EB]">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#2563EB] dark:text-[#60A5FA]">
                 Patient Testimonials
               </p>
               <div className="flex gap-2">
@@ -93,7 +93,7 @@ export default function Logos() {
                       current === 0 ? testimonials.length - 1 : current - 1
                     )
                   }
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition hover:border-[#2563EB] hover:text-[#2563EB]"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition hover:border-[#2563EB] hover:text-[#2563EB] dark:border-[#1E293B] dark:bg-[#0F172A] dark:text-[#94A3B8] dark:hover:border-[#60A5FA] dark:hover:text-[#60A5FA]"
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </button>
@@ -104,17 +104,17 @@ export default function Logos() {
                       current === testimonials.length - 1 ? 0 : current + 1
                     )
                   }
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition hover:border-[#2563EB] hover:text-[#2563EB]"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition hover:border-[#2563EB] hover:text-[#2563EB] dark:border-[#1E293B] dark:bg-[#0F172A] dark:text-[#94A3B8] dark:hover:border-[#60A5FA] dark:hover:text-[#60A5FA]"
                 >
                   <ChevronRight className="h-4 w-4" />
                 </button>
               </div>
             </div>
-            <div className="mt-5 rounded-[1.5rem] bg-[#F8FAFC] p-5">
-              <p className="text-sm leading-7 text-[#64748B]">
+            <div className="mt-5 rounded-[1.5rem] bg-[#F8FAFC] p-5 dark:bg-[#0F172A]">
+              <p className="text-sm leading-7 text-[#64748B] dark:text-[#94A3B8]">
                 “{visibleTestimonial.text}”
               </p>
-              <p className="mt-3 text-sm font-semibold text-[#0F172A]">
+              <p className="mt-3 text-sm font-semibold text-[#0F172A] dark:text-[#F8FAFC]">
                 {visibleTestimonial.name}
               </p>
               <div className="mt-4 flex gap-2">
@@ -123,8 +123,8 @@ export default function Logos() {
                     key={item.name}
                     className={`h-2.5 rounded-full transition ${
                       index === testimonialIndex
-                        ? "w-6 bg-[#2563EB]"
-                        : "w-2.5 bg-slate-300"
+                        ? "w-6 bg-[#2563EB] dark:bg-[#60A5FA]"
+                        : "w-2.5 bg-slate-300 dark:bg-[#334155]"
                     }`}
                   />
                 ))}
@@ -132,8 +132,8 @@ export default function Logos() {
             </div>
           </article>
 
-          <article className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#2563EB]">
+          <article className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm dark:border-[#1E293B] dark:bg-[#111827] dark:shadow-[0_24px_44px_-34px_rgba(2,6,23,0.85)] sm:p-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#2563EB] dark:text-[#60A5FA]">
               Frequently Asked Questions
             </p>
             <div className="mt-5 space-y-3">
@@ -142,14 +142,14 @@ export default function Logos() {
                   key={question}
                   type="button"
                   onClick={() => setActiveFaq((current) => (current === index ? -1 : index))}
-                  className="w-full rounded-[1.5rem] border border-slate-200 bg-[#F8FAFC] px-5 py-4 text-left"
+                  className="w-full rounded-[1.5rem] border border-slate-200 bg-[#F8FAFC] px-5 py-4 text-left dark:border-[#1E293B] dark:bg-[#0F172A]"
                 >
                   <div className="flex items-center justify-between gap-4">
-                    <p className="text-sm font-medium text-[#0F172A]">
+                    <p className="text-sm font-medium text-[#0F172A] dark:text-[#F8FAFC]">
                       {question}
                     </p>
                     <ChevronDown
-                      className={`h-4 w-4 shrink-0 text-[#64748B] transition ${
+                      className={`h-4 w-4 shrink-0 text-[#64748B] transition dark:text-[#94A3B8] ${
                         activeFaq === index ? "rotate-180" : ""
                       }`}
                     />
@@ -160,7 +160,7 @@ export default function Logos() {
                     }`}
                   >
                     <div className="min-h-0">
-                      <p className="text-sm leading-7 text-[#64748B]">
+                      <p className="text-sm leading-7 text-[#64748B] dark:text-[#94A3B8]">
                       Referrals can be helpful, but many patients can book
                       directly for assessment and treatment depending on their
                       insurance and local requirements.

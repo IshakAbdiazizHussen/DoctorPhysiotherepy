@@ -10,7 +10,6 @@ import {
   Dumbbell,
   Menu,
   Phone,
-  Plus,
   ShieldCheck,
   Sparkles,
   Stethoscope,
@@ -65,7 +64,9 @@ export default function Hero() {
                   <p className="text-sm font-semibold tracking-[0.2em] text-[#0F172A] dark:text-[#F8FAFC]">
                     DOCTORPHYSIO
                   </p>
-                  <p className="text-xs text-[#64748B] dark:text-[#94A3B8]">Modern rehabilitation clinic</p>
+                  <p className="text-xs text-[#64748B] dark:text-[#94A3B8]">
+                    Modern rehabilitation clinic
+                  </p>
                 </div>
               </div>
 
@@ -119,215 +120,187 @@ export default function Hero() {
         </Container>
       </header>
 
-      <section className="relative overflow-hidden bg-[linear-gradient(180deg,#F8FCFF_0%,#EEF7FF_100%)] py-16 sm:py-20 lg:py-24 dark:bg-[linear-gradient(180deg,#020617_0%,#0F172A_50%,#020617_100%)]">
-
-        <Container className="relative !max-w-[1500px] !px-6 lg:!px-10">
+      <section className="bg-[linear-gradient(135deg,#f8fbfc_0%,#f4faf9_50%,#f7fbff_100%)] py-16 sm:py-20 lg:py-24 dark:bg-[linear-gradient(180deg,#020617_0%,#0F172A_100%)]">
+        <Container className="!max-w-[1480px] !px-6 lg:!px-10">
           <div className="grid min-h-[760px] items-center gap-16 lg:grid-cols-[52%_48%] xl:gap-20">
-            <div className="w-full !max-w-[720px] animate-fade-up">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#b7ead7] bg-white/75 px-5 py-2.5 text-sm font-semibold text-[#0F766E] shadow-sm backdrop-blur dark:border-[rgba(52,211,153,0.22)] dark:bg-[rgba(15,23,42,0.8)] dark:text-[#34D399]">
+            <div className="w-full max-w-[720px]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#BFE9DA] bg-white px-5 py-2.5 text-sm font-semibold text-[#0F766E] shadow-[0_12px_28px_-22px_rgba(15,118,110,0.26)] dark:border-[rgba(52,211,153,0.2)] dark:bg-[#0F172A] dark:text-[#34D399]">
                 <ShieldCheck className="h-4 w-4" />
                 Trusted Health Clinic
               </span>
 
-              <h1 className="mt-7 !max-w-[700px] text-5xl font-extrabold leading-[0.95] tracking-[-0.04em] text-[#0F172A] dark:text-[#F8FAFC] sm:text-6xl lg:text-[72px] xl:text-[82px]">
-                Your health is our{" "}
-                <span className="relative inline-block text-[#0F9B8E] dark:text-[#34D399]">
+              <h1 className="mt-8 max-w-[650px] text-[3.8rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-[#0F172A] dark:text-[#F8FAFC] sm:text-[4.4rem] lg:text-[72px]">
+                Your health is
+                <br />
+                our{" "}
+                <span className="bg-[linear-gradient(135deg,#10B981_0%,#14B8A6_100%)] bg-clip-text text-transparent">
                   priority
-                  <svg
-                    className="absolute -bottom-4 left-2 h-4 w-[92%] text-[#34D399]"
-                    viewBox="0 0 240 30"
-                    fill="none"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M6 22C55 12 107 10 171 17C197 20 216 23 234 20"
-                      stroke="currentColor"
-                      strokeWidth="6"
-                      strokeLinecap="round"
-                    />
-                  </svg>
                 </span>
               </h1>
 
-              <p className="mt-9 !max-w-[620px] text-lg leading-[1.95] text-[#64748B] dark:text-[#94A3B8]">
+              <p className="mt-8 max-w-[560px] text-[18px] leading-[1.95] text-[#64748B] dark:text-[#94A3B8]">
                 Expert physiotherapy, rehabilitation, and pain relief programs
                 tailored to your unique needs. Let us help you move better,
-                feel stronger, and live a pain-free life.
+                recover faster, and live pain-free.
               </p>
 
-              <div className="mt-11 grid gap-4 xl:grid-cols-4">
-                {features.map(({ icon: Icon, label }, index) => (
+              <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                {features.map(({ icon: Icon, label }) => (
                   <div
                     key={label}
-                    className="group min-h-[120px] rounded-[1.5rem] border border-white/60 bg-white/55 px-5 py-5 shadow-[0_18px_35px_-24px_rgba(15,118,110,0.32)] backdrop-blur transition hover:-translate-y-1 hover:bg-white/80 dark:border-[rgba(30,41,59,0.9)] dark:bg-[rgba(17,24,39,0.82)] dark:shadow-[0_24px_50px_-30px_rgba(2,6,23,0.8)] dark:hover:bg-[rgba(17,24,39,0.95)]"
-                    style={{ animationDelay: `${index * 120}ms` }}
+                    className="min-h-[120px] rounded-[24px] border border-[#E8EEF5] bg-white px-5 py-5 shadow-[0_22px_40px_-30px_rgba(15,23,42,0.12)] dark:border-[#1E293B] dark:bg-[#111827] dark:shadow-[0_24px_40px_-30px_rgba(2,6,23,0.8)]"
                   >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#DFF8EE] text-[#0F9B8E] transition group-hover:bg-[#C8F2E0] dark:bg-[rgba(52,211,153,0.16)] dark:text-[#34D399] dark:group-hover:bg-[rgba(52,211,153,0.22)]">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#ECFDF5] text-[#10B981] dark:bg-[rgba(52,211,153,0.16)] dark:text-[#34D399]">
                       <Icon className="h-5 w-5" />
                     </div>
-                    <p className="mt-3 text-base font-medium leading-7 text-[#0F172A] dark:text-[#F8FAFC]">
+                    <p className="mt-4 text-[17px] font-medium leading-7 text-[#0F172A] dark:text-[#F8FAFC]">
                       {label}
                     </p>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-12 flex flex-col gap-4 sm:flex-row">
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <a
                   href="#appointment"
-                  className="inline-flex min-w-[188px] items-center justify-center gap-2 rounded-full bg-[linear-gradient(135deg,#0F766E_0%,#10B981_100%)] px-8 py-4 text-sm font-semibold text-white shadow-[0_22px_40px_-18px_rgba(15,118,110,0.58)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_45px_-18px_rgba(15,118,110,0.7)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F766E]"
+                  className="inline-flex h-[58px] min-w-[210px] items-center justify-center gap-2 rounded-full bg-[linear-gradient(135deg,#14B8A6_0%,#10B981_100%)] px-8 text-sm font-semibold text-white shadow-[0_24px_44px_-20px_rgba(16,185,129,0.38)]"
                 >
                   <CalendarDays className="h-4 w-4" />
                   Book Appointment
                 </a>
                 <a
                   href="#services"
-                  className="inline-flex min-w-[176px] items-center justify-center gap-2 rounded-full border border-slate-200 bg-white/80 px-8 py-4 text-sm font-semibold text-slate-700 shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:border-[#2563EB] hover:text-[#2563EB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563EB] dark:border-[#1E293B] dark:bg-[rgba(17,24,39,0.88)] dark:text-[#F8FAFC] dark:hover:border-[#60A5FA] dark:hover:text-[#60A5FA] dark:focus-visible:outline-[#60A5FA]"
+                  className="inline-flex h-[58px] min-w-[190px] items-center justify-center gap-2 rounded-full border border-[#DDE6F2] bg-white px-8 text-sm font-semibold text-[#0F172A] shadow-[0_18px_36px_-28px_rgba(15,23,42,0.12)] dark:border-[#1E293B] dark:bg-[#111827] dark:text-[#F8FAFC]"
                 >
                   Explore Services
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </div>
 
-              <div className="mt-12 min-h-[96px] w-full !max-w-[620px] rounded-[1.8rem] border border-white/65 bg-white/55 p-4 shadow-[0_28px_55px_-26px_rgba(37,99,235,0.28)] backdrop-blur dark:border-[rgba(30,41,59,0.9)] dark:bg-[rgba(17,24,39,0.78)] dark:shadow-[0_28px_55px_-28px_rgba(2,6,23,0.85)]">
-                <div className="grid gap-3 sm:grid-cols-3">
-                  <div className="flex items-center gap-4 rounded-[1.25rem] bg-white/65 px-4 py-4 dark:bg-[rgba(15,23,42,0.82)]">
-                    <div className="flex -space-x-3">
-                      {patientAvatars.map((avatar, index) => (
-                        <div
-                          key={avatar}
-                          className="relative h-11 w-11 overflow-hidden rounded-full border-2 border-white"
-                          style={{ zIndex: patientAvatars.length - index }}
-                        >
-                          <Image
-                            src={avatar}
-                            alt=""
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                    <div>
-                      <p className="text-2xl font-semibold text-[#0F172A] dark:text-[#F8FAFC]">3,500+</p>
-                      <p className="text-sm text-[#64748B] dark:text-[#94A3B8]">Happy Patients</p>
+              <div className="mt-12 flex min-h-[110px] w-full max-w-[700px] flex-col gap-5 rounded-[28px] border border-[#E8EEF5] bg-white px-7 py-6 shadow-[0_28px_50px_-34px_rgba(15,23,42,0.14)] dark:border-[#1E293B] dark:bg-[#111827] dark:shadow-[0_28px_50px_-34px_rgba(2,6,23,0.85)] sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="flex -space-x-3">
+                    {patientAvatars.map((avatar, index) => (
+                      <div
+                        key={avatar}
+                        className="relative h-12 w-12 overflow-hidden rounded-full border-2 border-white dark:border-[#111827]"
+                        style={{ zIndex: patientAvatars.length - index }}
+                      >
+                        <Image src={avatar} alt="" fill className="object-cover" />
+                      </div>
+                    ))}
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#CCFBF1] text-sm font-semibold text-[#0F766E] dark:bg-[rgba(52,211,153,0.16)] dark:text-[#34D399]">
+                      2K+
                     </div>
                   </div>
-
-                  <div className="flex items-center gap-4 rounded-[1.25rem] bg-white/65 px-4 py-4 dark:bg-[rgba(15,23,42,0.82)]">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#E0F2FE] text-[#2563EB] dark:bg-[rgba(96,165,250,0.16)] dark:text-[#60A5FA]">
-                      <Sparkles className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <p className="text-2xl font-semibold text-[#0F172A] dark:text-[#F8FAFC]">4.9/5</p>
-                      <p className="text-sm text-[#64748B] dark:text-[#94A3B8]">Patient Rating</p>
-                    </div>
+                  <div>
+                    <p className="text-[2rem] font-bold leading-none text-[#0F172A] dark:text-[#F8FAFC]">
+                      3,500+
+                    </p>
+                    <p className="mt-1 text-[15px] text-[#64748B] dark:text-[#94A3B8]">
+                      Happy Patients
+                    </p>
                   </div>
+                </div>
 
-                  <div className="flex items-center gap-4 rounded-[1.25rem] bg-white/65 px-4 py-4 dark:bg-[rgba(15,23,42,0.82)]">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#DFF8EE] text-[#0F766E] dark:bg-[rgba(52,211,153,0.16)] dark:text-[#34D399]">
-                      <ShieldCheck className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <p className="text-2xl font-semibold text-[#0F172A] dark:text-[#F8FAFC]">27+</p>
-                      <p className="text-sm text-[#64748B] dark:text-[#94A3B8]">Years Experience</p>
-                    </div>
+                <div className="hidden h-14 w-px bg-[#E8EEF5] dark:bg-[#1E293B] sm:block" />
+
+                <div>
+                  <p className="text-[2rem] font-bold leading-none text-[#0F172A] dark:text-[#F8FAFC]">
+                    4.9/5
+                  </p>
+                  <p className="mt-1 text-[15px] text-[#64748B] dark:text-[#94A3B8]">
+                    Patient Rating
+                  </p>
+                </div>
+
+                <div className="hidden h-14 w-px bg-[#E8EEF5] dark:bg-[#1E293B] sm:block" />
+
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#ECFDF5] text-[#10B981] dark:bg-[rgba(52,211,153,0.16)] dark:text-[#34D399]">
+                    <ShieldCheck className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-[2rem] font-bold leading-none text-[#0F172A] dark:text-[#F8FAFC]">
+                      27+
+                    </p>
+                    <p className="mt-1 text-[15px] text-[#64748B] dark:text-[#94A3B8]">
+                      Years Experience
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="relative mx-auto mt-8 w-full !max-w-[650px] pb-[220px] lg:mt-0 lg:justify-self-end">
-              <div className="absolute left-[8%] top-[8%] hidden h-[78%] w-[78%] rounded-full border border-white/40 md:block" />
-              <div className="absolute left-[14%] top-[13%] hidden h-[68%] w-[68%] rounded-full border border-white/30 md:block" />
-              <div className="absolute right-4 top-4 hidden grid-cols-4 gap-3 text-[#10B981]/60 dark:hidden md:grid">
-                {Array.from({ length: 12 }).map((_, index) => (
-                  <span key={index} className="h-1.5 w-1.5 rounded-full bg-current" />
-                ))}
-              </div>
-              <div className="absolute bottom-10 right-3 hidden grid-cols-4 gap-3 text-[#93C5FD]/70 dark:hidden md:grid">
-                {Array.from({ length: 12 }).map((_, index) => (
-                  <span key={index} className="h-1.5 w-1.5 rounded-full bg-current" />
-                ))}
-              </div>
-              <div className="absolute left-[4%] top-[13%] hidden text-[#34D399] md:block">
-                <Plus className="h-12 w-12" />
-              </div>
-              <div className="absolute right-[19%] top-[16%] hidden text-[#A7F3D0] md:block">
-                <Plus className="h-5 w-5" />
-              </div>
+            <div className="mx-auto w-full max-w-[620px] lg:justify-self-end">
+              <div className="relative mx-auto h-[520px] w-[580px] overflow-visible">
+                <div className="h-[520px] w-[580px] overflow-hidden rounded-[40px] border border-white/70 bg-white p-5 shadow-[0_34px_70px_-36px_rgba(15,23,42,0.18)] dark:border-[#1E293B] dark:bg-[#111827] dark:shadow-[0_34px_70px_-36px_rgba(2,6,23,0.86)]">
+                  <div className="relative h-full overflow-hidden rounded-[30px]">
+                    <Image
+                      src="/images/therepy.png"
+                      alt="Physiotherapy treatment session focused on guided recovery and movement support"
+                      width={1160}
+                      height={1040}
+                      priority
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                </div>
 
-              <div className="absolute left-[8%] top-[7%] -z-10 h-[80%] w-[80%] rounded-[34%_66%_58%_42%/18%_18%_42%_42%] bg-[linear-gradient(180deg,#3DC9BE_0%,#0F766E_100%)] md:left-[12%] md:top-[9%] md:h-[76%] md:w-[76%] dark:bg-[linear-gradient(180deg,rgba(52,211,153,0.18)_0%,rgba(15,118,110,0.10)_100%)]" />
-              <div className="absolute left-[4%] top-[5%] -z-20 h-[88%] w-[88%] rounded-[44%_56%_60%_40%/32%_38%_62%_68%] bg-[#DCEEFF]/70 blur-2xl dark:hidden md:left-[9%] md:top-[7%] md:h-[86%] md:w-[83%]" />
-
-              <div className="relative h-[560px] w-[620px] overflow-hidden rounded-[30%_70%_52%_48%/18%_18%_38%_38%] border border-white/75 bg-white/55 p-6 shadow-[0_38px_80px_-36px_rgba(37,99,235,0.38)] backdrop-blur-xl dark:border-[rgba(30,41,59,0.9)] dark:bg-[rgba(17,24,39,0.78)] dark:shadow-[0_38px_80px_-40px_rgba(2,6,23,0.9)]">
-                <div className="relative overflow-hidden rounded-[2.6rem] bg-[#F1F8FF] dark:bg-[#0F172A]">
-                  <Image
-                    src="/images/therepy.png"
-                    alt="Physiotherapy treatment session focused on guided recovery and movement support"
-                    width={1040}
-                    height={1200}
-                    priority
-                    className="h-[560px] w-full object-cover"
-                  />
+                <div className="absolute right-[-7%] top-10 flex h-36 w-36 flex-col items-center justify-center rounded-full bg-white p-5 text-center shadow-[0_24px_50px_-28px_rgba(15,23,42,0.16)] dark:bg-[#111827] dark:shadow-[0_24px_50px_-28px_rgba(2,6,23,0.85)]">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#ECFDF5] text-[#10B981] dark:bg-[rgba(52,211,153,0.16)] dark:text-[#34D399]">
+                    <Dumbbell className="h-6 w-6" />
+                  </div>
+                  <p className="mt-4 text-[15px] font-semibold leading-6 text-[#0F766E] dark:text-[#34D399]">
+                    Move Better
+                    <br />
+                    Live Better
+                  </p>
                 </div>
               </div>
 
-              <div className="absolute right-[-2%] top-10 w-36 rounded-full bg-white/92 p-4 text-center shadow-[0_25px_40px_-24px_rgba(15,118,110,0.45)] backdrop-blur sm:w-40 sm:p-5 lg:right-[-5%] lg:top-14 lg:w-44 dark:bg-[rgba(17,24,39,0.92)] dark:shadow-[0_25px_40px_-24px_rgba(2,6,23,0.85)]">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#DFF8EE] text-[#0F766E] dark:bg-[rgba(52,211,153,0.16)] dark:text-[#34D399]">
-                  <Dumbbell className="h-7 w-7" />
+              <div className="mt-[-28px] grid gap-5 sm:grid-cols-[300px_300px] sm:items-start sm:justify-center">
+                <div className="rounded-[30px] border border-[#E8EEF5] bg-white p-8 shadow-[0_28px_50px_-34px_rgba(15,23,42,0.14)] dark:border-[#1E293B] dark:bg-[#111827] dark:shadow-[0_28px_50px_-34px_rgba(2,6,23,0.85)]">
+                  <p className="text-[18px] font-semibold uppercase tracking-[0.18em] text-[#14B8A6]">
+                    Care
+                  </p>
+                  <p className="mt-4 text-[2.15rem] font-bold leading-[1.18] tracking-[-0.03em] text-[#0F172A] dark:text-[#F8FAFC]">
+                    We help you recover, rebuild and regain your{" "}
+                    <span className="text-[#10B981]">best life.</span>
+                  </p>
                 </div>
-                <p className="mt-3 text-base font-semibold leading-5 text-[#0F766E] dark:text-[#34D399] sm:text-lg sm:leading-6">
-                  Move Better
-                </p>
-                <p className="mt-1 text-base font-semibold leading-5 text-[#0F766E] dark:text-[#34D399] sm:text-lg sm:leading-6">
-                  Live Better
-                </p>
-              </div>
 
-              <div className="absolute bottom-0 left-[3%] w-[46%] rounded-[1.75rem] bg-[linear-gradient(180deg,#0FA4A5_0%,#0F766E_100%)] p-6 text-white shadow-[0_28px_55px_-20px_rgba(15,118,110,0.56)] sm:left-[4%] sm:w-[42%] sm:p-7 lg:left-[6%] lg:w-[38%] lg:p-8 dark:bg-[linear-gradient(180deg,#0F172A_0%,#111827_100%)] dark:ring-1 dark:ring-[rgba(52,211,153,0.22)]">
-                <p className="text-[1.4rem] font-semibold leading-tight sm:text-[1.7rem] lg:text-[2rem]">
-                  We help you
-                  <br />
-                  recover, rebuild
-                  <br />
-                  and regain your
-                </p>
-                <p className="mt-2 text-[1.8rem] italic leading-none text-[#E8FFFA] dark:text-[#CCFBF1] sm:text-[2rem] lg:text-[2.25rem]">
-                  best life.
-                </p>
-              </div>
-
-              <div className="absolute bottom-8 right-[-2%] w-[320px] rounded-[1.75rem] border border-white/70 bg-white/92 p-5 shadow-[0_28px_55px_-28px_rgba(37,99,235,0.35)] backdrop-blur dark:border-[rgba(30,41,59,0.9)] dark:bg-[rgba(17,24,39,0.94)] dark:shadow-[0_28px_55px_-28px_rgba(2,6,23,0.88)]">
-                <div className="space-y-3">
-                  {serviceMiniList.map((item) => (
-                    <div
-                      key={item}
-                      className="flex items-center gap-3 rounded-[1rem] px-2 py-2.5 transition hover:bg-[#F8FAFC] dark:hover:bg-[#0F172A]"
-                    >
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#ECFDF5] text-[#0F766E] dark:bg-[rgba(52,211,153,0.16)] dark:text-[#34D399]">
-                        <CircleCheckBig className="h-4 w-4" />
+                <div className="rounded-[30px] border border-[#E8EEF5] bg-white p-6 shadow-[0_28px_50px_-34px_rgba(15,23,42,0.14)] dark:border-[#1E293B] dark:bg-[#111827] dark:shadow-[0_28px_50px_-34px_rgba(2,6,23,0.85)]">
+                  <div className="space-y-3">
+                    {serviceMiniList.map((item) => (
+                      <div
+                        key={item}
+                        className="flex items-center gap-3 rounded-[18px] px-2 py-3"
+                      >
+                        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#ECFDF5] text-[#10B981] dark:bg-[rgba(52,211,153,0.16)] dark:text-[#34D399]">
+                          <CircleCheckBig className="h-4 w-4" />
+                        </div>
+                        <span className="flex-1 text-[16px] font-medium text-[#0F172A] dark:text-[#F8FAFC]">
+                          {item}
+                        </span>
+                        <ChevronRight className="h-4 w-4 text-[#64748B] dark:text-[#94A3B8]" />
                       </div>
-                      <span className="flex-1 text-sm font-medium text-[#0F172A] dark:text-[#F8FAFC]">
-                        {item}
-                      </span>
-                      <ChevronRight className="h-4 w-4 text-[#64748B] dark:text-[#94A3B8]" />
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              <div className="absolute bottom-0 left-[3%] translate-y-[112%] rounded-[1.4rem] bg-white/92 px-5 py-4 shadow-[0_24px_45px_-24px_rgba(37,99,235,0.35)] backdrop-blur sm:left-[4%] sm:px-5 sm:py-4 sm:rounded-[1.6rem] lg:left-[6%] dark:bg-[rgba(17,24,39,0.94)] dark:shadow-[0_24px_45px_-24px_rgba(2,6,23,0.88)]">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#DFF8EE] text-[#10B981] dark:bg-[rgba(52,211,153,0.16)] dark:text-[#34D399]">
-                    <CalendarDays className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-[#64748B] dark:text-[#94A3B8]">Next Available</p>
-                    <p className="text-base font-semibold text-[#0F766E] dark:text-[#34D399]">
-                      Today, 10:30 AM
-                    </p>
-                  </div>
+              <div className="mx-auto mt-5 flex w-full max-w-[300px] items-center gap-3 rounded-[24px] border border-[#E8EEF5] bg-white px-5 py-4 shadow-[0_22px_44px_-30px_rgba(15,23,42,0.14)] dark:border-[#1E293B] dark:bg-[#111827] dark:shadow-[0_22px_44px_-30px_rgba(2,6,23,0.85)]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#ECFDF5] text-[#10B981] dark:bg-[rgba(52,211,153,0.16)] dark:text-[#34D399]">
+                  <CalendarDays className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-sm text-[#64748B] dark:text-[#94A3B8]">
+                    Next Available
+                  </p>
+                  <p className="text-[1.05rem] font-semibold text-[#0F766E] dark:text-[#34D399]">
+                    Today, 10:30 AM
+                  </p>
                 </div>
               </div>
             </div>

@@ -38,37 +38,37 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="mt-12 bg-[linear-gradient(180deg,#F8FAFC_0%,#EEF6FF_100%)] pb-16 pt-20 dark:bg-[linear-gradient(180deg,#0F172A_0%,#020617_100%)] sm:mt-16 sm:pt-24">
-      <Container className="max-w-7xl px-6 sm:px-8 xl:px-6">
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.9fr_1fr]">
-          <div className="max-w-[28rem]">
-            <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--accent-soft)] text-[var(--accent)]">
+    <footer className="mt-8 bg-[linear-gradient(180deg,#F8FAFC_0%,#EEF6FF_100%)] pb-[60px] pt-[120px] dark:bg-[linear-gradient(180deg,#0F172A_0%,#020617_100%)] sm:mt-10">
+      <Container className="max-w-[1500px] px-6 sm:px-8 xl:px-10">
+        <div className="grid gap-y-14 lg:grid-cols-[1.2fr_0.78fr_0.9fr_1fr] lg:items-start lg:gap-x-20 xl:gap-x-24">
+          <div className="max-w-[31rem]">
+            <div className="flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--accent-soft)] text-[var(--accent)]">
                 <Sparkles className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-sm font-medium tracking-[0.2em] text-[var(--text)]">
+                <p className="text-base font-semibold tracking-[0.18em] text-[var(--text)]">
                   DOCTORPHYSIO
                 </p>
-                <p className="text-xs text-[var(--text-muted)]">
+                <p className="mt-1 text-[13px] text-[var(--text-muted)]">
                   Modern rehabilitation clinic
                 </p>
               </div>
             </div>
 
-            <p className="mt-6 text-[15px] leading-8 text-[var(--text-muted)]">
+            <p className="mt-8 text-[16px] leading-[1.9] text-[var(--text-muted)]">
               Access professional physiotherapy, rehabilitation, pain relief,
               mobility recovery, injury recovery, and personalized treatment
               plans designed to support your long-term wellness.
             </p>
 
-            <p className="mt-6 text-[15px] leading-8 text-[var(--text-muted)]">
+            <p className="mt-6 text-[16px] leading-[1.9] text-[var(--text-muted)]">
               Here you can book appointments, explore treatment options, choose
               qualified specialists, and receive personalized rehabilitation
               support designed around your recovery.
             </p>
 
-            <div className="mt-6 flex items-center gap-3">
+            <div className="mt-8 flex items-center gap-4">
               {socialLinks.map(({ label, href, icon: Icon }) => (
                 <a
                   key={label}
@@ -76,7 +76,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={label}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text-muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text-muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
                 >
                   <Icon className="h-4 w-4" />
                 </a>
@@ -85,13 +85,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-medium text-[var(--text)]">Website Pages</h3>
-            <div className="mt-5 space-y-3">
+            <h3 className="text-[22px] font-semibold text-[var(--text)]">Website Pages</h3>
+            <div className="mt-7 space-y-4">
               {pageLinks.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
-                  className="block text-[15px] text-[var(--text-muted)] transition hover:text-[var(--accent)]"
+                  className="block text-[16px] font-normal text-[var(--text-muted)] transition hover:text-[var(--accent)]"
                 >
                   {item.label}
                 </a>
@@ -100,13 +100,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-medium text-[var(--text)]">Services</h3>
-            <div className="mt-5 space-y-3">
+            <h3 className="text-[22px] font-semibold text-[var(--text)]">Services</h3>
+            <div className="mt-7 space-y-4">
               {serviceLinks.map((service) => (
                 <a
                   key={service}
                   href="#services"
-                  className="block text-[15px] text-[var(--text-muted)] transition hover:text-[var(--accent)]"
+                  className="block text-[16px] font-normal text-[var(--text-muted)] transition hover:text-[var(--accent)]"
                 >
                   {service}
                 </a>
@@ -115,18 +115,18 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-medium text-[var(--text)]">Contact</h3>
-            <div className="mt-5 space-y-4">
+            <h3 className="text-[22px] font-semibold text-[var(--text)]">Contact</h3>
+            <div className="mt-7 space-y-5">
               <a
                 href="tel:+18005550147"
-                className="flex items-start gap-3 text-[15px] text-[var(--text-muted)] transition hover:text-[var(--accent)]"
+                className="flex items-start gap-3 text-[16px] font-normal text-[var(--text-muted)] transition hover:text-[var(--accent)]"
               >
                 <Phone className="mt-0.5 h-4 w-4 shrink-0 text-[var(--medical)]" />
                 <span>+1 (800) 555-0147</span>
               </a>
               <a
                 href="mailto:care@doctorphysio.com"
-                className="flex items-start gap-3 text-[15px] text-[var(--text-muted)] transition hover:text-[var(--accent)]"
+                className="flex items-start gap-3 text-[16px] font-normal text-[var(--text-muted)] transition hover:text-[var(--accent)]"
               >
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-[var(--medical)]" />
                 <span>care@doctorphysio.com</span>
@@ -135,12 +135,12 @@ export default function Footer() {
                 href="https://maps.google.com/?q=120+Wellness+Avenue+Suite+400+Minneapolis+MN"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-start gap-3 text-[15px] text-[var(--text-muted)] transition hover:text-[var(--accent)]"
+                className="flex items-start gap-3 text-[16px] font-normal text-[var(--text-muted)] transition hover:text-[var(--accent)]"
               >
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[var(--medical)]" />
                 <span>120 Wellness Avenue, Suite 400, Minneapolis, MN</span>
               </a>
-              <div className="flex items-start gap-3 text-[15px] text-[var(--text-muted)]">
+              <div className="flex items-start gap-3 text-[16px] font-normal text-[var(--text-muted)]">
                 <Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-[var(--medical)]" />
                 <span>Mon - Fri: 8:00 AM - 7:00 PM, Sat: 9:00 AM - 4:00 PM</span>
               </div>
@@ -148,9 +148,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-[var(--border)] pt-6 text-sm text-[var(--text-muted)] sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 DoctorPhysio. All rights reserved.</p>
-          <a href="#appointment" className="font-normal transition hover:text-[var(--accent)]">
+        <div className="mt-16 flex flex-col gap-4 border-t border-[var(--border)] pt-8 text-sm text-[var(--text-muted)] sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-[15px] font-normal">© 2026 DoctorPhysio. All rights reserved.</p>
+          <a href="#appointment" className="text-[16px] font-normal transition hover:text-[var(--accent)]">
             Book Appointment
           </a>
         </div>

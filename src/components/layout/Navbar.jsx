@@ -14,7 +14,7 @@ export default function Navbar() {
   return (
     <>
       <header className="sticky top-0 z-[60] border-b border-white/70 bg-white/90 backdrop-blur-xl dark:border-[#1E293B] dark:bg-[rgba(2,6,23,0.88)]">
-        <Container className="max-w-[1560px] px-5 py-4 sm:px-8 lg:px-12 xl:px-14 2xl:px-16">
+        <Container className="max-w-[1560px] px-5 py-4 sm:px-8 lg:px-10 xl:px-10 2xl:px-12">
           <nav className="flex flex-col gap-4 lg:grid lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:items-center lg:gap-x-20 xl:gap-x-24">
             <div className="flex items-center justify-between gap-4 lg:justify-self-start">
               <div className="flex items-center gap-3.5">

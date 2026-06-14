@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, CheckCircle2, ChevronRight, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import Container from "./Container";
@@ -52,8 +52,6 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
     )
   );
   const [isMobile, setIsMobile] = useState(false);
-  const dragStartRef = useRef(null);
-  const wheelLockRef = useRef(false);
 
   useEffect(() => {
     const syncViewport = () => {
@@ -94,56 +92,6 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
 
   const handlePrev = () => {
     goToIndex(activeIndex - 1);
-  };
-
-  const handlePointerDown = (event) => {
-    dragStartRef.current = event.clientX;
-  };
-
-  const handlePointerUp = (event) => {
-    if (dragStartRef.current === null) return;
-    const delta = event.clientX - dragStartRef.current;
-
-    if (delta > 45) {
-      handlePrev();
-    } else if (delta < -45) {
-      handleNext();
-    }
-
-    dragStartRef.current = null;
-  };
-
-  const handleTouchStart = (event) => {
-    dragStartRef.current = event.changedTouches[0].clientX;
-  };
-
-  const handleTouchEnd = (event) => {
-    if (dragStartRef.current === null) return;
-    const delta = event.changedTouches[0].clientX - dragStartRef.current;
-
-    if (delta > 45) {
-      handlePrev();
-    } else if (delta < -45) {
-      handleNext();
-    }
-
-    dragStartRef.current = null;
-  };
-
-  const handleWheel = (event) => {
-    event.preventDefault();
-    if (wheelLockRef.current) return;
-
-    wheelLockRef.current = true;
-    if (event.deltaY > 0 || event.deltaX > 0) {
-      handleNext();
-    } else {
-      handlePrev();
-    }
-
-    window.setTimeout(() => {
-      wheelLockRef.current = false;
-    }, 420);
   };
 
   const getCardStyle = (offset) => {
@@ -237,27 +185,15 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
   const content = (
     <>
       <div className="overflow-hidden px-1 sm:px-3">
-        <div
-          className="relative mx-auto h-[470px] w-full max-w-[1160px] touch-pan-y select-none sm:h-[540px]"
-          onWheel={handleWheel}
-          onPointerDown={handlePointerDown}
-          onPointerUp={handlePointerUp}
-          onPointerLeave={() => {
-            dragStartRef.current = null;
-          }}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-        >
-          {positionedDoctors.map(({ name, specialty, image, offset, index }) => {
+        <div className="relative z-0 mx-auto h-[470px] w-full max-w-[1160px] select-none sm:h-[540px]">
+          {positionedDoctors.map(({ name, specialty, image, offset }) => {
             const cardStyle = getCardStyle(offset);
             const isCenter = offset === 0;
             const isActive = selectedDoctor === name;
 
             return (
-              <motion.button
+              <motion.div
                 key={name}
-                type="button"
-                onClick={() => goToIndex(index)}
                 initial={false}
                 animate={{
                   x: cardStyle.x,
@@ -271,7 +207,8 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
                   isActive
                     ? "border-[rgba(20,184,166,0.72)] dark:border-[rgba(52,211,153,0.5)]"
                     : "border-white/70 dark:border-[#1E293B]"
-                } ${isCenter ? "pointer-events-auto" : "pointer-events-auto"}`}
+                } pointer-events-none`}
+                aria-hidden={!isCenter}
               >
                 <div className="relative h-full w-full bg-[#0F172A] dark:bg-[#111827]">
                   <Image
@@ -322,7 +259,7 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
                     </div>
                   </div>
                 </div>
-              </motion.button>
+              </motion.div>
             );
           })}
         </div>
@@ -367,11 +304,18 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
   );
 
   if (embedded) {
-    return <div id="doctor-row">{content}</div>;
+    return (
+      <div id="doctor-row" className="relative isolate z-10 scroll-mt-28 sm:scroll-mt-32">
+        {content}
+      </div>
+    );
   }
 
   return (
-    <section id="doctor-row" className="bg-transparent pb-16 pt-10 sm:pb-20 sm:pt-14">
+    <section
+      id="doctor-row"
+      className="relative isolate z-10 scroll-mt-28 bg-transparent pb-16 pt-16 sm:scroll-mt-32 sm:pb-20 sm:pt-20"
+    >
       <Container className="max-w-[1880px] px-6 sm:px-8 xl:px-12">
         {content}
       </Container>

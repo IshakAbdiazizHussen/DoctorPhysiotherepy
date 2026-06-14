@@ -13,7 +13,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-white/70 bg-white/90 backdrop-blur-xl dark:border-[#1E293B] dark:bg-[rgba(2,6,23,0.88)]">
+      <header className="sticky top-0 z-[60] border-b border-white/70 bg-white/90 backdrop-blur-xl dark:border-[#1E293B] dark:bg-[rgba(2,6,23,0.88)]">
         <Container className="py-4">
           <nav className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center justify-between gap-3">
@@ -108,7 +108,7 @@ export default function Navbar() {
         </Container>
       </header>
 
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 shadow-[0_-18px_36px_-28px_rgba(15,23,42,0.18)] backdrop-blur-xl dark:border-[#1E293B] dark:bg-[rgba(2,6,23,0.96)] lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-[60] border-t border-slate-200 bg-white/95 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 shadow-[0_-18px_36px_-28px_rgba(15,23,42,0.18)] backdrop-blur-xl dark:border-[#1E293B] dark:bg-[rgba(2,6,23,0.96)] lg:hidden">
         <div className="mx-auto flex max-w-md items-end justify-between px-1 py-1">
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
@@ -152,4 +152,3 @@ export default function Navbar() {
     </>
   );
 }
-

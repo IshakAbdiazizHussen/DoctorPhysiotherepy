@@ -14,8 +14,8 @@ export default function Navbar() {
   return (
     <>
       <header className="sticky top-0 z-[60] border-b border-white/70 bg-white/90 backdrop-blur-xl dark:border-[#1E293B] dark:bg-[rgba(2,6,23,0.88)]">
-        <Container className="max-w-[1520px] px-5 py-4 sm:px-8 lg:px-12 xl:px-14">
-          <nav className="flex flex-col gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-center lg:gap-x-20 xl:gap-x-28">
+        <Container className="max-w-[1560px] px-5 py-4 sm:px-8 lg:px-12 xl:px-14 2xl:px-16">
+          <nav className="flex flex-col gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-center lg:gap-x-24 xl:gap-x-32">
             <div className="flex items-center justify-between gap-4 lg:justify-self-start">
               <div className="flex items-center gap-3.5">
                 <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#E8F4FF] text-[#2563EB] dark:bg-[rgba(96,165,250,0.14)] dark:text-[#60A5FA]">
@@ -45,7 +45,7 @@ export default function Navbar() {
             <div
               className={`${
                 isMenuOpen ? "flex" : "hidden"
-              } flex-col gap-2 rounded-[1.75rem] border border-slate-200 bg-white/95 p-3 shadow-[0_24px_50px_-34px_rgba(15,23,42,0.16)] dark:border-[#1E293B] dark:bg-[#111827] lg:col-start-2 lg:flex lg:flex-row lg:items-center lg:justify-self-center lg:gap-8 lg:rounded-none lg:border-0 lg:bg-transparent lg:px-6 lg:py-0 lg:shadow-none xl:gap-10 xl:px-10 dark:lg:bg-transparent`}
+              } flex-col gap-2 rounded-[1.75rem] border border-slate-200 bg-white/95 p-3 shadow-[0_24px_50px_-34px_rgba(15,23,42,0.16)] dark:border-[#1E293B] dark:bg-[#111827] lg:col-start-2 lg:flex lg:flex-row lg:items-center lg:justify-self-center lg:gap-9 lg:rounded-none lg:border-0 lg:bg-transparent lg:px-8 lg:py-0 lg:shadow-none xl:gap-10 xl:px-12 dark:lg:bg-transparent`}
             >
               {NAV_ITEMS.map((item) => {
                 const Icon = item.icon;
@@ -59,9 +59,9 @@ export default function Navbar() {
                       setActiveSection(item.href);
                       setIsMenuOpen(false);
                     }}
-                    className="group rounded-[1.4rem] px-3 py-2 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563EB] dark:focus-visible:outline-[#60A5FA] lg:px-1 lg:py-1.5"
+                    className="group rounded-[1.4rem] px-3 py-2 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563EB] dark:focus-visible:outline-[#60A5FA] lg:px-1.5 lg:py-1.5"
                   >
-                    <span className="flex items-center gap-3 text-left lg:min-w-[90px] lg:flex-col lg:items-center lg:gap-2 lg:text-center">
+                    <span className="flex items-center gap-3 text-left lg:min-w-[96px] lg:flex-col lg:items-center lg:gap-2 lg:text-center">
                       <span
                         className={`flex h-12 w-12 items-center justify-center rounded-full transition ${
                           isActive
@@ -89,7 +89,7 @@ export default function Navbar() {
             <div
               className={`${
                 isMenuOpen ? "flex" : "hidden"
-              } flex-col gap-3 sm:flex-row sm:gap-4 lg:col-start-3 lg:flex lg:items-center lg:justify-self-end lg:gap-6 xl:gap-8`}
+              } flex-col gap-3 sm:flex-row sm:gap-4 lg:col-start-3 lg:flex lg:items-center lg:justify-self-end lg:gap-7 xl:gap-8`}
             >
               <ThemeToggle />
               <a

@@ -36,6 +36,7 @@
 html {
   scroll-behavior: smooth;
   background: var(--bg);
+  scroll-padding-top: 7rem;
 }
 
 body {
@@ -81,8 +82,9 @@ select {
 
 a,
 button,
-article,
-div {
+input,
+select,
+textarea {
   transition:
     color 180ms ease,
     background-color 180ms ease,

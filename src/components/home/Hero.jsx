@@ -35,16 +35,16 @@ const patientAvatars = [
 
 export default function Hero() {
   return (
-    <section className="bg-transparent py-16 sm:py-20 lg:py-24">
+    <section className="bg-transparent py-14 sm:py-20 lg:py-24">
       <Container className="!max-w-[1480px] !px-6 lg:!px-10">
-        <div className="grid min-h-[760px] items-center gap-16 lg:grid-cols-[52%_48%] xl:gap-20">
+        <div className="grid items-center gap-14 lg:grid-cols-[52%_48%] xl:gap-20">
           <div className="w-full max-w-[720px]">
             <span className="inline-flex items-center gap-2 rounded-full border border-[#7DD3C4] bg-[linear-gradient(135deg,#14B8A6_0%,#10B981_100%)] px-5 py-2.5 text-sm font-medium text-white shadow-[0_18px_34px_-22px_rgba(16,185,129,0.42)] dark:border-[rgba(52,211,153,0.28)] dark:text-white">
               <ShieldCheck className="h-4 w-4 stroke-[2.4]" />
               Trusted Health Clinic
             </span>
 
-            <h1 className="mb-10 max-w-[650px] text-[3.8rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-[#0F172A] dark:text-[#F8FAFC] sm:text-[4.4rem] lg:text-[72px]">
+            <h1 className="mb-10 max-w-[650px] text-[3.2rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-[#0F172A] dark:text-[#F8FAFC] sm:text-[4.1rem] lg:text-[72px]">
               Your health is
               <br />
               our{" "}
@@ -148,8 +148,8 @@ export default function Hero() {
           </div>
 
           <div className="mx-auto w-full max-w-[620px] lg:justify-self-end">
-            <div className="relative mx-auto h-[520px] w-[580px] overflow-visible">
-              <div className="h-[520px] w-[580px] overflow-hidden rounded-[40px] border border-white/70 bg-white p-5 shadow-[0_34px_70px_-36px_rgba(15,23,42,0.18)] dark:border-[#1E293B] dark:bg-[#111827] dark:shadow-[0_34px_70px_-36px_rgba(2,6,23,0.86)]">
+            <div className="relative mx-auto aspect-[29/26] w-full max-w-[580px] overflow-visible">
+              <div className="h-full w-full overflow-hidden rounded-[40px] border border-white/70 bg-white p-4 shadow-[0_34px_70px_-36px_rgba(15,23,42,0.18)] dark:border-[#1E293B] dark:bg-[#111827] dark:shadow-[0_34px_70px_-36px_rgba(2,6,23,0.86)] sm:p-5">
                 <div className="relative h-full overflow-hidden rounded-[30px]">
                   <Image
                     src="/images/therepy.png"
@@ -162,7 +162,7 @@ export default function Hero() {
                 </div>
               </div>
 
-              <div className="absolute right-[-7%] top-10 flex h-36 w-36 flex-col items-center justify-center rounded-full bg-white p-5 text-center shadow-[0_24px_50px_-28px_rgba(15,23,42,0.16)] dark:bg-[#111827] dark:shadow-[0_24px_50px_-28px_rgba(2,6,23,0.85)]">
+              <div className="absolute right-3 top-3 flex h-28 w-28 flex-col items-center justify-center rounded-full bg-white p-4 text-center shadow-[0_24px_50px_-28px_rgba(15,23,42,0.16)] dark:bg-[#111827] dark:shadow-[0_24px_50px_-28px_rgba(2,6,23,0.85)] sm:right-[-7%] sm:top-10 sm:h-36 sm:w-36 sm:p-5">
                 <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#ECFDF5] text-[#10B981] dark:bg-[rgba(52,211,153,0.16)] dark:text-[#34D399]">
                   <Dumbbell className="h-6 w-6" />
                 </div>
@@ -174,7 +174,7 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="mt-[-28px] grid gap-5 sm:grid-cols-[300px_300px] sm:items-start sm:justify-center">
+            <div className="mt-6 grid gap-5 sm:mt-[-28px] sm:grid-cols-[minmax(0,300px)_minmax(0,300px)] sm:items-start sm:justify-center">
               <div className="rounded-[30px] border border-[#E8EEF5] bg-white p-8 shadow-[0_28px_50px_-34px_rgba(15,23,42,0.14)] dark:border-[#1E293B] dark:bg-[#111827] dark:shadow-[0_28px_50px_-34px_rgba(2,6,23,0.85)]">
                 <p className="text-[18px] font-medium uppercase tracking-[0.18em] text-[#14B8A6]">
                   Care

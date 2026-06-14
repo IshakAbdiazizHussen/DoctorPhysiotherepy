@@ -60,10 +60,10 @@ export default function Stats({
               DOCTOR <span className="text-[#10B981]">+</span>
             </p>
 
-            <h2 className="mt-8 w-full max-w-[760px] text-[3.5rem] font-[800] leading-[1.02] tracking-[-0.04em] text-[#0F172A] dark:text-[#F8FAFC] sm:text-[4.1rem] lg:text-[62px] xl:text-[68px]">
+            <h2 className="mt-8 w-full max-w-[760px] text-[3rem] font-[800] leading-[1.02] tracking-[-0.04em] text-[#0F172A] dark:text-[#F8FAFC] sm:text-[4.1rem] lg:text-[62px] xl:text-[68px]">
               Personalized physiotherapy and rehabilitation care built around
             
-              <span className="relative inline-block whitespace-nowrap text-[#0F766E] dark:text-[#34D399] ml-5">
+              <span className="relative mt-3 inline-block text-[#0F766E] dark:text-[#34D399] md:ml-5 md:mt-0 md:whitespace-nowrap">
                  your recovery.
                 <svg
                   className="absolute -bottom-3 left-1/2 h-[18px] w-[97%] -translate-x-1/2 text-[#22C59E]"
@@ -189,8 +189,8 @@ export default function Stats({
             </div>
           </div>
 
-          <div className="flex min-h-[184px] items-center justify-between gap-6 rounded-[28px] border border-[#CDEFE3] bg-[linear-gradient(180deg,#F2FFFA_0%,#FBFFFD_100%)] px-8 py-8 dark:border-[#134E4A] dark:bg-[linear-gradient(180deg,rgba(16,185,129,0.12)_0%,rgba(15,23,42,0.92)_100%)]">
-            <div className="flex items-center gap-5">
+          <div className="flex min-h-[184px] flex-col items-start justify-between gap-6 rounded-[28px] border border-[#CDEFE3] bg-[linear-gradient(180deg,#F2FFFA_0%,#FBFFFD_100%)] px-8 py-8 dark:border-[#134E4A] dark:bg-[linear-gradient(180deg,rgba(16,185,129,0.12)_0%,rgba(15,23,42,0.92)_100%)] lg:flex-row lg:items-center">
+            <div className="flex items-start gap-5 sm:items-center">
               <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[rgba(16,185,129,0.12)] text-[#10B981] dark:bg-[rgba(52,211,153,0.16)] dark:text-[#34D399]">
                 <CalendarDays className="h-7 w-7" />
               </span>
@@ -208,7 +208,7 @@ export default function Stats({
 
             <a
               href="#appointment"
-              className="inline-flex h-14 shrink-0 items-center gap-3 rounded-full bg-[linear-gradient(135deg,#14B8A6_0%,#10B981_100%)] px-8 text-[18px] font-medium text-white shadow-[0_18px_34px_-22px_rgba(16,185,129,0.55)] transition hover:translate-y-[-1px] dark:text-[#052e2b]"
+              className="inline-flex h-14 w-full items-center justify-center gap-3 rounded-full bg-[linear-gradient(135deg,#14B8A6_0%,#10B981_100%)] px-8 text-[18px] font-medium text-white shadow-[0_18px_34px_-22px_rgba(16,185,129,0.55)] transition hover:translate-y-[-1px] dark:text-[#052e2b] sm:w-auto"
             >
               <MessageCircleMore className="h-5 w-5" />
               Talk to Expert

@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Clock3,
   Facebook,
@@ -10,6 +12,7 @@ import {
   Phone,
   Sparkles,
 } from "lucide-react";
+import { resolveSectionHref } from "@/lib/utils";
 import Container from "./Container";
 
 const pageLinks = [
@@ -37,6 +40,8 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
+
   return (
     <footer className="mt-8 bg-[linear-gradient(180deg,#F8FAFC_0%,#EEF6FF_100%)] pb-[60px] pt-[120px] dark:bg-[linear-gradient(180deg,#0F172A_0%,#020617_100%)] sm:mt-10">
       <Container className="max-w-[1500px] px-6 sm:px-8 xl:px-10">
@@ -88,13 +93,13 @@ export default function Footer() {
             <h3 className="text-[22px] font-semibold text-[var(--text)]">Website Pages</h3>
             <div className="mt-7 space-y-4">
               {pageLinks.map((item) => (
-                <a
+                <Link
                   key={item.label}
-                  href={item.href}
+                  href={resolveSectionHref(pathname, item.href)}
                   className="block text-[16px] font-normal text-[var(--text-muted)] transition hover:text-[var(--accent)]"
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -103,13 +108,13 @@ export default function Footer() {
             <h3 className="text-[22px] font-semibold text-[var(--text)]">Services</h3>
             <div className="mt-7 space-y-4">
               {serviceLinks.map((service) => (
-                <a
+                <Link
                   key={service}
-                  href="#services"
+                  href={resolveSectionHref(pathname, "#services")}
                   className="block text-[16px] font-normal text-[var(--text-muted)] transition hover:text-[var(--accent)]"
                 >
                   {service}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -150,9 +155,9 @@ export default function Footer() {
 
         <div className="mt-16 flex flex-col gap-4 border-t border-[var(--border)] pt-8 text-sm text-[var(--text-muted)] sm:flex-row sm:items-center sm:justify-between">
           <p className="text-[15px] font-normal">© 2026 DoctorPhysio. All rights reserved.</p>
-          <a href="#appointment" className="text-[16px] font-normal transition hover:text-[var(--accent)]">
+          <Link href={resolveSectionHref(pathname, "#appointment")} className="text-[16px] font-normal transition hover:text-[var(--accent)]">
             Book Appointment
-          </a>
+          </Link>
         </div>
       </Container>
     </footer>

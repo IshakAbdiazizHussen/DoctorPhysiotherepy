@@ -14,7 +14,6 @@ import {
   Stethoscope,
   Waves,
 } from "lucide-react";
-import { motion } from "framer-motion";
 import Container from "./Container";
 
 const items = [
@@ -111,10 +110,8 @@ export default function Logos() {
       <Container className="relative max-w-[1400px] px-6 sm:px-8 xl:px-10">
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {items.map(({ icon: Icon, title, text, color, bg }) => (
-            <motion.article
+            <article
               key={title}
-              whileHover={{ y: -4 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
               className="rounded-[30px] border border-[rgba(226,232,240,0.92)] bg-[linear-gradient(180deg,rgba(255,255,255,0.9)_0%,rgba(248,250,252,0.96)_100%)] px-7 py-7 shadow-[0_28px_56px_-34px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-[rgba(148,163,184,0.14)] dark:bg-[linear-gradient(180deg,rgba(15,23,42,0.82)_0%,rgba(15,23,42,0.72)_100%)] dark:shadow-[0_28px_56px_-34px_rgba(2,6,23,0.82)]"
             >
               <div className={`flex h-16 w-16 items-center justify-center rounded-full ${bg} ${color}`}>
@@ -126,14 +123,12 @@ export default function Logos() {
               <p className="mt-4 text-[15px] leading-[1.85] text-[#64748B] dark:text-[#94A3B8]">
                 {text}
               </p>
-            </motion.article>
+            </article>
           ))}
         </div>
 
         <div className="mt-8 grid gap-8 lg:grid-cols-[0.96fr_1.04fr] lg:items-stretch">
-          <motion.article
-            whileHover={{ y: -4 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+          <article
             className="flex h-full flex-col rounded-[32px] border border-[rgba(226,232,240,0.9)] bg-[linear-gradient(180deg,rgba(255,255,255,0.9)_0%,rgba(248,250,252,0.96)_100%)] p-8 shadow-[0_34px_70px_-40px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-[rgba(96,165,250,0.12)] dark:bg-[linear-gradient(180deg,rgba(15,23,42,0.82)_0%,rgba(15,23,42,0.72)_100%)] dark:shadow-[0_34px_70px_-40px_rgba(2,6,23,0.86)] sm:p-10"
           >
             <div className="flex items-start justify-between gap-4">
@@ -218,11 +213,9 @@ export default function Logos() {
                 </div>
               </div>
             </div>
-          </motion.article>
+          </article>
 
-          <motion.article
-            whileHover={{ y: -4 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+          <article
             className="flex h-full flex-col rounded-[32px] border border-[rgba(226,232,240,0.9)] bg-[linear-gradient(180deg,rgba(255,255,255,0.9)_0%,rgba(248,250,252,0.96)_100%)] p-8 shadow-[0_34px_70px_-40px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-[rgba(96,165,250,0.12)] dark:bg-[linear-gradient(180deg,rgba(15,23,42,0.82)_0%,rgba(15,23,42,0.72)_100%)] dark:shadow-[0_34px_70px_-40px_rgba(2,6,23,0.86)] sm:p-10"
           >
             <p className="text-[14px] font-normal uppercase tracking-[0.24em] text-[#60A5FA]">
@@ -270,7 +263,7 @@ export default function Logos() {
                 );
               })}
             </div>
-          </motion.article>
+          </article>
         </div>
       </Container>
     </section>

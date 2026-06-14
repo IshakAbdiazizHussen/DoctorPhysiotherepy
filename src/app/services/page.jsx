@@ -13,7 +13,7 @@ export default function ServicesPage() {
   const [selectedDoctor, setSelectedDoctor] = useState("Dr. Sarah Wilson");
 
   return (
-    <main className="min-h-screen bg-[#F8FAFC] text-slate-900 dark:bg-[#030B23] dark:text-[#F8FAFC]">
+    <main id="top" className="min-h-screen bg-[#F8FAFC] text-slate-900 dark:bg-[#030B23] dark:text-[#F8FAFC]">
       <Navbar />
       <Services
         selectedCategory={selectedCategory}

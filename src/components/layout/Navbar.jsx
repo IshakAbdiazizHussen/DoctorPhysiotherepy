@@ -1,21 +1,25 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, Phone, Sparkles, X } from "lucide-react";
 import { useState } from "react";
 import ThemeToggle from "@/components/shared/ThemeToggle";
 import { NAV_ITEMS } from "@/lib/constants";
 import useScrollSpy from "@/hooks/useScrollSpy";
+import { resolveSectionHref } from "@/lib/utils";
 import Container from "./Container";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useScrollSpy(NAV_ITEMS, "#top");
+  const pathname = usePathname();
 
   return (
     <>
       <header className="sticky top-0 z-[60] border-b border-white/70 bg-white/90 backdrop-blur-xl dark:border-[#1E293B] dark:bg-[rgba(2,6,23,0.88)]">
-        <Container className="max-w-[1800px] px-5 py-4 sm:px-8 lg:px-6 xl:px-6 2xl:px-8">
-          <nav className="flex flex-col gap-4 lg:grid lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:items-center lg:gap-x-20 xl:gap-x-24">
+        <Container className="max-w-[1720px] px-5 py-4 sm:px-8 lg:px-8 xl:px-10 2xl:px-12">
+          <nav className="flex flex-col gap-4 lg:grid lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:items-center lg:gap-x-16 xl:gap-x-20">
             <div className="flex items-center justify-between gap-4 lg:justify-self-start">
               <div className="flex items-center gap-3.5">
                 <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#E8F4FF] text-[#2563EB] dark:bg-[rgba(96,165,250,0.14)] dark:text-[#60A5FA]">
@@ -52,9 +56,9 @@ export default function Navbar() {
                 const isActive = activeSection === item.href;
 
                 return (
-                  <a
+                  <Link
                     key={item.label}
-                    href={item.href}
+                    href={resolveSectionHref(pathname, item.href)}
                     onClick={() => {
                       setActiveSection(item.href);
                       setIsMenuOpen(false);
@@ -81,7 +85,7 @@ export default function Navbar() {
                         {item.label}
                       </span>
                     </span>
-                  </a>
+                  </Link>
                 );
               })}
             </div>
@@ -89,18 +93,18 @@ export default function Navbar() {
             <div
               className={`${
                 isMenuOpen ? "flex" : "hidden"
-              } flex-col gap-3 sm:flex-row sm:gap-4 lg:col-start-3 lg:flex lg:items-center lg:justify-self-end lg:ml-12 lg:gap-7 xl:ml-16 xl:gap-8`}
+              } flex-col gap-3 sm:flex-row sm:gap-4 lg:col-start-3 lg:flex lg:items-center lg:justify-self-end lg:ml-10 lg:gap-6 xl:ml-14 xl:gap-7`}
             >
               <ThemeToggle />
-              <a
-                href="#appointment"
+              <Link
+                href={resolveSectionHref(pathname, "#appointment")}
                 className="inline-flex items-center justify-center rounded-full bg-[#0F172A] px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-800 dark:bg-[#F8FAFC] dark:text-[#0F172A] dark:hover:bg-[#E2E8F0]"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Appointment
-              </a>
+              </Link>
               <a
-                href="#services"
+                href={resolveSectionHref(pathname, "#services")}
                 className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-slate-200 px-5 py-3 text-sm font-medium text-slate-700 transition hover:border-[#2563EB] hover:text-[#2563EB] dark:border-[#1E293B] dark:bg-[#111827] dark:text-[#F8FAFC] dark:hover:border-[#60A5FA] dark:hover:text-[#60A5FA]"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -119,9 +123,9 @@ export default function Navbar() {
             const isActive = activeSection === item.href;
 
             return (
-              <a
+              <Link
                 key={item.label}
-                href={item.href}
+                href={resolveSectionHref(pathname, item.href)}
                 onClick={() => {
                   setActiveSection(item.href);
                   setIsMenuOpen(false);
@@ -148,7 +152,7 @@ export default function Navbar() {
                     {item.label}
                   </span>
                 </span>
-              </a>
+              </Link>
             );
           })}
         </div>

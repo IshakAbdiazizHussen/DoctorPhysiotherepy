@@ -22,7 +22,7 @@ export default function Principles() {
     <section id="rehabilitation" className="bg-transparent py-16 sm:py-20 lg:py-24">
       <Container className="max-w-[1780px] px-6 sm:px-8 xl:px-10">
         <div className="grid gap-8 lg:grid-cols-[52%_48%]">
-          <article className="group relative overflow-hidden rounded-[32px] border border-[#EEF2F7] bg-[linear-gradient(180deg,#FBFEFE_0%,#F2FAF8_100%)] p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 dark:border-[#1E293B] dark:bg-[linear-gradient(180deg,#0F172A_0%,#111827_100%)] dark:shadow-[0_24px_60px_-24px_rgba(2,6,23,0.82)] sm:p-10 xl:p-14">
+          <article className="group relative overflow-hidden rounded-[32px] border border-[#EEF2F7] bg-[linear-gradient(180deg,#FBFEFE_0%,#F2FAF8_100%)] p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-[#1E293B] dark:bg-[linear-gradient(180deg,#0F172A_0%,#111827_100%)] dark:shadow-[0_24px_60px_-24px_rgba(2,6,23,0.82)] sm:p-10 xl:p-14">
             <div className="pointer-events-none absolute right-14 top-20 h-24 w-24 rounded-full bg-[rgba(20,184,166,0.07)] blur-2xl dark:bg-[rgba(52,211,153,0.08)]" />
             <div className="pointer-events-none absolute bottom-14 left-[44%] h-52 w-52 rounded-full bg-[rgba(20,184,166,0.07)] blur-3xl dark:bg-[rgba(52,211,153,0.08)]" />
             <div className="pointer-events-none absolute right-6 top-16 hidden grid-cols-4 gap-3 lg:grid">
@@ -62,7 +62,7 @@ export default function Principles() {
 
                 <a
                   href="#appointment"
-                  className="mt-10 inline-flex h-[82px] w-full max-w-[600px] items-center justify-between rounded-[20px] bg-white px-7 text-left shadow-[0_20px_45px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_rgba(15,23,42,0.1)] dark:bg-[#111827] dark:shadow-[0_20px_45px_-20px_rgba(2,6,23,0.82)]"
+                  className="mt-10 inline-flex h-[82px] w-full max-w-[600px] items-center justify-between rounded-[20px] bg-white px-7 text-left shadow-[0_20px_45px_rgba(15,23,42,0.08)] transition-shadow duration-300 hover:shadow-[0_24px_50px_rgba(15,23,42,0.1)] dark:bg-[#111827] dark:shadow-[0_20px_45px_-20px_rgba(2,6,23,0.82)]"
                 >
                   <span className="flex items-center gap-4">
                     <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[rgba(20,184,166,0.1)] text-[#14B8A6] dark:bg-[rgba(52,211,153,0.12)] dark:text-[#34D399]">
@@ -91,7 +91,7 @@ export default function Principles() {
             </div>
           </article>
 
-          <article className="group relative overflow-hidden rounded-[32px] border border-[#EEF2F7] bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 dark:border-[#1E293B] dark:bg-[#111827] dark:shadow-[0_24px_60px_-24px_rgba(2,6,23,0.82)] sm:p-10 xl:p-10">
+          <article className="group relative overflow-hidden rounded-[32px] border border-[#EEF2F7] bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-[#1E293B] dark:bg-[#111827] dark:shadow-[0_24px_60px_-24px_rgba(2,6,23,0.82)] sm:p-10 xl:p-10">
             <div className="pointer-events-none absolute right-0 top-0 h-44 w-44 rounded-full bg-[rgba(96,165,250,0.05)] blur-3xl dark:bg-[rgba(96,165,250,0.08)]" />
 
             <span className="inline-flex items-center gap-3 rounded-full bg-[#F8FBFF] px-5 py-3 text-[13px] font-normal uppercase tracking-[0.16em] text-[#2563EB] shadow-[0_18px_38px_-28px_rgba(37,99,235,0.14)] dark:bg-[#0F172A] dark:text-[#60A5FA]">

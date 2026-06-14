@@ -15,7 +15,7 @@ export default function Navbar() {
     <>
       <header className="sticky top-0 z-[60] border-b border-white/70 bg-white/90 backdrop-blur-xl dark:border-[#1E293B] dark:bg-[rgba(2,6,23,0.88)]">
         <Container className="max-w-[1560px] px-5 py-4 sm:px-8 lg:px-12 xl:px-14 2xl:px-16">
-          <nav className="flex flex-col gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-center lg:gap-x-24 xl:gap-x-32">
+          <nav className="flex flex-col gap-4 lg:grid lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:items-center lg:gap-x-20 xl:gap-x-24">
             <div className="flex items-center justify-between gap-4 lg:justify-self-start">
               <div className="flex items-center gap-3.5">
                 <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#E8F4FF] text-[#2563EB] dark:bg-[rgba(96,165,250,0.14)] dark:text-[#60A5FA]">
@@ -89,7 +89,7 @@ export default function Navbar() {
             <div
               className={`${
                 isMenuOpen ? "flex" : "hidden"
-              } flex-col gap-3 sm:flex-row sm:gap-4 lg:col-start-3 lg:flex lg:items-center lg:justify-self-end lg:gap-7 xl:gap-8`}
+              } flex-col gap-3 sm:flex-row sm:gap-4 lg:col-start-3 lg:flex lg:items-center lg:justify-self-end lg:ml-12 lg:gap-7 xl:ml-16 xl:gap-8`}
             >
               <ThemeToggle />
               <a
@@ -101,7 +101,7 @@ export default function Navbar() {
               </a>
               <a
                 href="#services"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 px-5 py-3 text-sm font-medium text-slate-700 transition hover:border-[#2563EB] hover:text-[#2563EB] dark:border-[#1E293B] dark:bg-[#111827] dark:text-[#F8FAFC] dark:hover:border-[#60A5FA] dark:hover:text-[#60A5FA]"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-slate-200 px-5 py-3 text-sm font-medium text-slate-700 transition hover:border-[#2563EB] hover:text-[#2563EB] dark:border-[#1E293B] dark:bg-[#111827] dark:text-[#F8FAFC] dark:hover:border-[#60A5FA] dark:hover:text-[#60A5FA]"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <Phone className="h-4 w-4" />

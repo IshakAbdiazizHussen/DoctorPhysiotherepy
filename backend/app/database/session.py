@@ -4,7 +4,13 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from app.database.connection import engine
 
-SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False, future=True)
+SessionLocal = sessionmaker(
+    bind=engine,
+    autoflush=False,
+    autocommit=False,
+    expire_on_commit=False,
+    future=True,
+)
 
 
 def get_db() -> Generator[Session, None, None]:

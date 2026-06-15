@@ -12,4 +12,5 @@ engine = create_engine(
     settings.DATABASE_URL,
     future=True,
     pool_pre_ping=True,
+    echo=settings.ENVIRONMENT == "development",
 )

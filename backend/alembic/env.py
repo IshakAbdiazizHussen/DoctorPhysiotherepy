@@ -5,6 +5,7 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import engine_from_config, pool
 
+import app.models  # noqa: F401  # Ensure model metadata is imported for autogenerate.
 from app.core.config import settings
 from app.database.connection import Base
 

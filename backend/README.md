@@ -24,6 +24,8 @@ The API runs at [http://localhost:8000](http://localhost:8000).
 
 ```bash
 cd backend
-alembic revision --autogenerate -m "init"
+alembic revision --autogenerate -m "message"
 alembic upgrade head
 ```
+
+Alembic reads `DATABASE_URL` from `backend/.env` through the backend settings module, and it inspects `Base.metadata` after importing `app.models` so future SQLAlchemy models can be picked up automatically by `--autogenerate`.

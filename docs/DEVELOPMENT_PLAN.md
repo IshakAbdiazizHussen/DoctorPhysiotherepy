@@ -17,6 +17,33 @@ This roadmap is written for the DoctorPhysio stack:
 
 This plan does not use Prisma, Supabase, TypeScript backend patterns, or Next.js API routes.
 
+## Governance Rules For All Features
+
+Every feature in this document must begin by reviewing:
+
+* docs/ARCHITECTURE.md
+* docs/CONSTRAINTS.md
+* docs/PROJECT_DEFINITION.md
+* docs/PROJECT_SETUP.md
+* docs/DEVELOPMENT_PLAN.md
+
+No implementation may begin until those documents have been reviewed.
+
+All implementation work must follow:
+
+* Architecture rules
+* Constraints
+* Security requirements
+* Testing requirements
+* Development workflow
+* Documentation standards
+* Naming conventions
+* Folder structure requirements
+
+The project documents are the source of truth.
+
+Every feature must include its own Checking And Testing Workflow. A feature is not complete until its required backend, frontend, database, Redis, Docker, automated test, and manual QA checks are completed or a clear reason is given for why a check could not be run.
+
 ## Feature Todo Roadmap
 
 Build in this order:
@@ -67,7 +94,23 @@ Each feature is done only when:
 
 Every feature prompt must start with:
 
-`Read docs/ARCHITECTURE.md, docs/CONSTRAINTS.md, docs/PROJECT_DEFINITION.md, docs/PROJECT_SETUP.md, and docs/DEVELOPMENT_PLAN.md before making changes.`
+```text
+Before making any changes:
+
+1. Read docs/ARCHITECTURE.md completely.
+2. Read docs/CONSTRAINTS.md completely.
+3. Read docs/PROJECT_DEFINITION.md completely.
+4. Read docs/PROJECT_SETUP.md completely.
+5. Read docs/DEVELOPMENT_PLAN.md completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+```
 
 Codex must always:
 
@@ -76,8 +119,18 @@ Codex must always:
 - Implement incrementally.
 - Avoid unrelated refactors.
 - Add or update tests when required.
+- Run the feature-specific Checking And Testing Workflow.
 - Run verification commands.
 - Report manual test steps.
+- Treat testing and checking as mandatory for every feature.
+- Do not mark a feature complete until required checks pass.
+- If any check cannot be run, explain why and provide the exact manual command the user should run.
+- If frontend files are changed, run the frontend checking workflow:
+  `cd frontend`
+  `npm install`
+  `npm run lint`
+  `npm run build`
+  `npm run test`, if tests exist
 - Explain exactly what changed.
 
 ## Feature 1: Project Foundation And Backend Verification
@@ -112,6 +165,44 @@ Confirm that the existing FastAPI backend foundation is structurally correct, ru
 - Run `pytest`
 - Verify health route coverage exists and passes
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Backend runtime checks:
+
+```bash
+python -m uvicorn app.main:app --reload
+```
+
+Manual QA checks:
+
+- Check the FastAPI docs
+- Test `GET /health` and `GET /api/v1/health` in Swagger or a browser
+- Confirm versioned routes load without startup or import errors
+
 ### Manual Checklist
 
 - Start the backend locally
@@ -121,7 +212,33 @@ Confirm that the existing FastAPI backend foundation is structurally correct, ru
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Review the current FastAPI backend foundation and verify it matches the documented architecture. Focus only on backend foundation verification, package structure, health routes, and router organization. If changes are needed, keep them small and limited to backend structure, health checks, or startup wiring. List affected files before implementation, explain the plan, implement incrementally, run `python -m compileall app tests` and `pytest`, and report manual verification steps.
 
@@ -161,6 +278,46 @@ Ensure configuration is environment-driven and the backend can connect to Postgr
 - Run `pytest`
 - Add targeted config or connection tests only if logic is introduced
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Backend runtime checks:
+
+```bash
+python -m uvicorn app.main:app --reload
+```
+
+Manual QA checks:
+
+- Copy `.env.example` to `.env`
+- Confirm the backend loads environment settings successfully
+- Confirm PostgreSQL connection values match the intended local setup
+- Confirm CORS origins are loaded from configuration
+- Confirm documented container-based setup values still align with the backend configuration
+
 ### Manual Checklist
 
 - Copy `.env.example` to `.env`
@@ -170,7 +327,33 @@ Ensure configuration is environment-driven and the backend can connect to Postgr
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Validate and improve the backend environment configuration and database setup. Keep all secrets in environment variables, confirm `pydantic-settings` usage is correct, and ensure PostgreSQL connectivity is configured through SQLAlchemy only. Do not introduce new infrastructure patterns. List affected files first, explain the plan, implement incrementally, run `python -m compileall app tests` and `pytest`, and report manual setup checks.
 
@@ -208,6 +391,49 @@ Make sure Alembic is the only schema-change workflow and that migrations correct
 - Run `pytest`
 - Run Alembic commands manually when schema changes are introduced
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Database checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+alembic revision --autogenerate -m "migration message"
+alembic upgrade head
+alembic current
+```
+
+Manual QA checks:
+
+- Review the generated migration before applying it
+- Refresh pgAdmin
+- Confirm Alembic discovers SQLAlchemy metadata correctly
+- Confirm the database version matches the expected migration state
+
 ### Manual Checklist
 
 - Generate a migration in a safe development context when needed
@@ -217,7 +443,33 @@ Make sure Alembic is the only schema-change workflow and that migrations correct
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Review and harden the Alembic migration setup so all schema changes flow through Alembic and SQLAlchemy metadata discovery works reliably. Keep the solution simple and beginner-readable. List affected files first, explain the plan, implement incrementally, run `python -m compileall app tests` and `pytest`, and report the manual migration commands used for verification.
 
@@ -255,6 +507,38 @@ Define the `users` domain model and Pydantic schemas that support registration, 
 - Run `pytest`
 - Add tests for schema validation if new validation rules are introduced
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Manual QA checks:
+
+- Confirm create and read schemas expose only intended fields
+- Confirm `hashed_password` is excluded from output schemas
+- Confirm email validation, UUID handling, defaults, and boolean flags behave as expected
+
 ### Manual Checklist
 
 - Confirm create and read schemas represent only intended fields
@@ -263,7 +547,33 @@ Define the `users` domain model and Pydantic schemas that support registration, 
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Implement or refine the `users` SQLAlchemy model and related Pydantic schemas for create, login, read, and update flows. Keep the model beginner-readable, keep schemas separate from ORM models, and do not expose internal secrets. List affected files first, explain the plan, implement incrementally, run `python -m compileall app tests` and `pytest`, and report manual schema checks.
 
@@ -299,6 +609,50 @@ Create or validate the Alembic migration for the `users` table.
 - Run `pytest`
 - Apply migrations in development and confirm the schema upgrades cleanly
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Database checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+alembic revision --autogenerate -m "migration message"
+alembic upgrade head
+alembic current
+```
+
+Manual QA checks:
+
+- Review the migration before applying it
+- Refresh pgAdmin
+- Confirm the `users` table exists
+- Confirm indexes, uniqueness, defaults, and nullability match the model
+- Confirm no plaintext credential columns exist
+
 ### Manual Checklist
 
 - Review the migration file before applying
@@ -308,7 +662,33 @@ Create or validate the Alembic migration for the `users` table.
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Create or validate the Alembic migration for the `users` table so it matches the documented user model. Use Alembic only, keep naming and defaults clear, and make sure the migration is safe and reviewable. List affected files first, explain the plan, implement incrementally, run `python -m compileall app tests` and `pytest`, and report the manual migration verification steps.
 
@@ -346,6 +726,39 @@ Provide reusable password hashing, password verification, JWT creation, and JWT 
 - Run `pytest`
 - Add tests for token creation, token decoding, and password verification behavior
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Manual QA checks:
+
+- Confirm password hashing changes the stored value
+- Confirm a valid JWT decodes successfully
+- Confirm an invalid JWT is rejected
+- Confirm expiration behavior follows configuration
+
 ### Manual Checklist
 
 - Confirm password hashing changes the stored value
@@ -355,7 +768,33 @@ Provide reusable password hashing, password verification, JWT creation, and JWT 
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Implement or harden the backend password security and JWT utility layer. Keep hashing and token logic reusable, configuration-driven, and separate from route code. Do not hardcode secrets or expiration values. List affected files first, explain the plan, implement incrementally, run `python -m compileall app tests` and `pytest`, and report manual verification steps for hashing and JWT behavior.
 
@@ -395,6 +834,44 @@ Implement reusable authentication dependencies for bearer token parsing, current
 - Run `pytest`
 - Add dependency-level or route-level auth tests for missing, invalid, and inactive users
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Backend runtime checks:
+
+```bash
+python -m uvicorn app.main:app --reload
+```
+
+Manual QA checks:
+
+- Check the FastAPI docs
+- Test a protected endpoint in Swagger with no token, an invalid token, and a valid token
+- Confirm authentication behavior is consistent for inactive or unauthorized users
+
 ### Manual Checklist
 
 - Call a protected route without a token
@@ -404,7 +881,33 @@ Implement reusable authentication dependencies for bearer token parsing, current
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Implement or refine reusable authentication dependencies for current-user lookup and active-user enforcement. Keep authentication out of route handlers and make the dependency behavior consistent across future protected routes. List affected files first, explain the plan, implement incrementally, run `python -m compileall app tests` and `pytest`, and report manual protected-route checks.
 
@@ -445,6 +948,45 @@ Implement secure registration, login, and current-user routes under `/api/v1/aut
 - Run `pytest`
 - Add tests for register, login, duplicate email, bad credentials, and `/me`
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Backend runtime checks:
+
+```bash
+python -m uvicorn app.main:app --reload
+```
+
+Manual QA checks:
+
+- Check the FastAPI docs
+- Test register, login, and `/api/v1/auth/me` in Swagger
+- Confirm duplicate email and bad credentials return the expected error shape
+- Confirm authentication responses never expose `hashed_password`
+
 ### Manual Checklist
 
 - Register a new user
@@ -454,7 +996,33 @@ Implement secure registration, login, and current-user routes under `/api/v1/aut
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Implement or refine the authentication routes and supporting service and repository logic for register, login, and current-user behavior. Keep routes thin, keep business logic in services, validate requests and responses with Pydantic schemas, and keep all routes under `/api/v1/auth`. List affected files first, explain the plan, implement incrementally, run `python -m compileall app tests` and `pytest`, and report manual auth flow checks.
 
@@ -492,6 +1060,45 @@ Introduce only the middleware that is needed for stable request handling and fut
 - Run `pytest`
 - Add focused middleware tests only if new behavior is introduced
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Backend runtime checks:
+
+```bash
+python -m uvicorn app.main:app --reload
+```
+
+Manual QA checks:
+
+- Check the FastAPI docs
+- Confirm allowed origins work as expected
+- Confirm health and auth routes behave the same after middleware changes
+- Confirm no sensitive request details are exposed by middleware behavior
+
 ### Manual Checklist
 
 - Confirm allowed frontend origins work
@@ -500,7 +1107,33 @@ Introduce only the middleware that is needed for stable request handling and fut
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Review and improve backend middleware only where necessary. Preserve working behavior, keep CORS configuration environment-driven, and avoid introducing unnecessary infrastructure. List affected files first, explain the plan, implement incrementally, run `python -m compileall app tests` and `pytest`, and report manual route checks after the middleware work.
 
@@ -538,6 +1171,51 @@ Verify Redis integration, startup behavior, and health visibility without treati
 - Run `pytest`
 - Add tests for Redis-related behavior only if logic changes are introduced
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Backend runtime checks:
+
+```bash
+python -m uvicorn app.main:app --reload
+```
+
+Redis checks:
+
+```bash
+redis-cli ping
+```
+
+Manual QA checks:
+
+- Check the FastAPI docs
+- Test health endpoints with Redis available
+- Confirm expected backend behavior when Redis is temporarily unavailable
+- Confirm Redis connection details are not exposed publicly
+
 ### Manual Checklist
 
 - Start Redis and confirm backend boots
@@ -546,7 +1224,33 @@ Verify Redis integration, startup behavior, and health visibility without treati
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Review and harden Redis integration and health-check behavior. Redis should support caching and short-lived state only, and the backend should remain predictable when Redis is temporarily unavailable if that is the intended design. List affected files first, explain the plan, implement incrementally, run `python -m compileall app tests` and `pytest`, and report manual Redis verification steps.
 
@@ -582,6 +1286,38 @@ Establish a strong backend testing baseline before major domain modules are adde
 - Run `pytest`
 - Ensure new tests pass consistently in local development
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Manual QA checks:
+
+- Review test names for readability
+- Confirm test failures are easy to understand
+- Confirm unauthorized-access and sensitive-field coverage is present where expected
+
 ### Manual Checklist
 
 - Review test names for readability
@@ -590,7 +1326,33 @@ Establish a strong backend testing baseline before major domain modules are adde
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Strengthen the backend test suite around the current foundation, authentication flows, and security-sensitive behavior. Keep tests readable, focused, and aligned with the FastAPI backend architecture. List affected files first, explain the plan, implement incrementally, run `python -m compileall app tests` and `pytest`, and report any manual checks that still remain.
 
@@ -625,6 +1387,50 @@ Document the backend contracts and development workflow well enough that future 
 - None required beyond normal compile/test checks unless code changes are included
 - If backend code changes are made during doc alignment, run `python -m compileall app tests` and `pytest`
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Documentation and code-alignment checks:
+
+- If this feature changes backend code to resolve a documentation mismatch, run the backend checks below.
+- If this feature updates documentation only, record that backend command checks were not run because no backend files changed.
+
+Backend checks when backend files change:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Backend runtime checks when startup or route documentation is verified against the running app:
+
+```bash
+python -m uvicorn app.main:app --reload
+```
+
+Manual QA checks:
+
+- Confirm documented commands match the repository structure
+- Check the FastAPI docs when documenting backend routes
+- Confirm migration, auth, and test instructions match the actual workflow
+- Confirm no real secrets appear in documentation examples
+
 ### Manual Checklist
 
 - Confirm documented commands work
@@ -633,7 +1439,33 @@ Document the backend contracts and development workflow well enough that future 
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Improve backend-facing documentation so it accurately describes backend setup, migrations, testing, and API entry points. Keep the documentation aligned with the current FastAPI backend and avoid changing application code unless documentation reveals a small structural mismatch that must be corrected. List affected files first, explain the plan, implement incrementally, run verification commands if code changes are made, and report manual doc checks.
 
@@ -670,6 +1502,56 @@ Implement the doctor domain so patients can browse clinic doctor and specialist 
 - Run `pytest`
 - Add tests for list, detail, create, update, and permission checks
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Backend runtime checks:
+
+```bash
+python -m uvicorn app.main:app --reload
+```
+
+Database checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+alembic revision --autogenerate -m "migration message"
+alembic upgrade head
+alembic current
+```
+
+Manual QA checks:
+
+- Check the FastAPI docs
+- Test doctor list, detail, create, and update endpoints in Swagger
+- Refresh pgAdmin
+- Confirm the doctors table exists and matches the model
+- Confirm unauthorized users cannot manage doctor records
+
 ### Manual Checklist
 
 - Create a doctor record through an admin flow
@@ -679,7 +1561,33 @@ Implement the doctor domain so patients can browse clinic doctor and specialist 
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Implement the Doctor module in the FastAPI backend using SQLAlchemy models, Pydantic schemas, Alembic migrations, service-layer business logic, and versioned REST routes under `/api/v1`. Support public doctor discovery and admin-restricted management operations. List affected files first, explain the plan, implement incrementally, run `python -m compileall app tests` and `pytest`, and report manual doctor-module checks.
 
@@ -716,6 +1624,56 @@ Implement patient-specific records and link them safely to platform user account
 - Run `pytest`
 - Add tests for ownership, admin access, and patient record validation
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Backend runtime checks:
+
+```bash
+python -m uvicorn app.main:app --reload
+```
+
+Database checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+alembic revision --autogenerate -m "migration message"
+alembic upgrade head
+alembic current
+```
+
+Manual QA checks:
+
+- Check the FastAPI docs
+- Test patient endpoints in Swagger with the correct user and a different user
+- Refresh pgAdmin
+- Confirm the patients table exists and is linked correctly to users
+- Confirm unauthorized patient data access is blocked
+
 ### Manual Checklist
 
 - Create a patient record linked to a user
@@ -725,7 +1683,33 @@ Implement patient-specific records and link them safely to platform user account
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Implement the Patient module in the FastAPI backend using SQLAlchemy, Alembic, Pydantic schemas, services, repositories where appropriate, and protected REST endpoints under `/api/v1`. Ensure access rules prevent unauthorized patient data access. List affected files first, explain the plan, implement incrementally, run `python -m compileall app tests` and `pytest`, and report manual patient-access checks.
 
@@ -762,6 +1746,56 @@ Implement the clinic service catalog so users can browse rehabilitation and trea
 - Run `pytest`
 - Add tests for public reads, admin writes, and validation errors
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Backend runtime checks:
+
+```bash
+python -m uvicorn app.main:app --reload
+```
+
+Database checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+alembic revision --autogenerate -m "migration message"
+alembic upgrade head
+alembic current
+```
+
+Manual QA checks:
+
+- Check the FastAPI docs
+- Test public service list and detail endpoints in Swagger
+- Test admin service create, update, and delete behavior
+- Refresh pgAdmin
+- Confirm the services table exists and matches the expected schema
+
 ### Manual Checklist
 
 - Create service records as an admin
@@ -770,7 +1804,33 @@ Implement the clinic service catalog so users can browse rehabilitation and trea
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Implement the Services module in the FastAPI backend using PostgreSQL, SQLAlchemy, Alembic, Pydantic schemas, service-layer business logic, and `/api/v1` REST routes. Support public service browsing and admin-restricted service management. List affected files first, explain the plan, implement incrementally, run `python -m compileall app tests` and `pytest`, and report manual service-module checks.
 
@@ -808,6 +1868,56 @@ Implement appointment scheduling and lifecycle tracking between patients, doctor
 - Run `pytest`
 - Add tests for create, list, detail, permission checks, and status transition rules
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Backend runtime checks:
+
+```bash
+python -m uvicorn app.main:app --reload
+```
+
+Database checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+alembic revision --autogenerate -m "migration message"
+alembic upgrade head
+alembic current
+```
+
+Manual QA checks:
+
+- Check the FastAPI docs
+- Test appointment create, list, detail, and status change endpoints in Swagger
+- Refresh pgAdmin
+- Confirm the appointments table exists and links correctly to patient, doctor, and service records
+- Confirm invalid status transitions and unauthorized access are rejected
+
 ### Manual Checklist
 
 - Create appointments for valid patient, doctor, and service combinations
@@ -817,7 +1927,33 @@ Implement appointment scheduling and lifecycle tracking between patients, doctor
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Implement the Appointment module in the FastAPI backend with SQLAlchemy models, Alembic migrations, Pydantic schemas, service-layer lifecycle logic, and protected REST endpoints under `/api/v1`. Link appointments to the core business entities and enforce clear permission and status-transition rules. List affected files first, explain the plan, implement incrementally, run `python -m compileall app tests` and `pytest`, and report manual appointment-flow checks.
 
@@ -855,6 +1991,56 @@ Implement the payment record foundation for clinic billing workflows.
 - Run `pytest`
 - Add tests for payment creation, retrieval, authorization, and status changes
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Backend runtime checks:
+
+```bash
+python -m uvicorn app.main:app --reload
+```
+
+Database checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+alembic revision --autogenerate -m "migration message"
+alembic upgrade head
+alembic current
+```
+
+Manual QA checks:
+
+- Check the FastAPI docs
+- Test payment create, read, and status update endpoints in Swagger
+- Refresh pgAdmin
+- Confirm the payments table exists and stores durable records only
+- Confirm sensitive fields are not exposed and unauthorized access is blocked
+
 ### Manual Checklist
 
 - Create payment records linked to valid appointments or services
@@ -864,7 +2050,33 @@ Implement the payment record foundation for clinic billing workflows.
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Implement the Payment module in the FastAPI backend using SQLAlchemy, Alembic, Pydantic schemas, services, and `/api/v1` REST routes. Focus on durable payment records, status handling, and security-safe foundations for later gateway integration. List affected files first, explain the plan, implement incrementally, run `python -m compileall app tests` and `pytest`, and report manual payment-module checks.
 
@@ -901,6 +2113,56 @@ Implement patient-submitted reviews and ratings for doctors or services.
 - Run `pytest`
 - Add tests for eligibility, validation, duplicate prevention rules if any, and public read behavior
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Backend runtime checks:
+
+```bash
+python -m uvicorn app.main:app --reload
+```
+
+Database checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+alembic revision --autogenerate -m "migration message"
+alembic upgrade head
+alembic current
+```
+
+Manual QA checks:
+
+- Check the FastAPI docs
+- Test review create and read endpoints in Swagger
+- Refresh pgAdmin
+- Confirm the reviews table exists and is linked correctly
+- Confirm invalid rating values and unauthorized review actions are rejected
+
 ### Manual Checklist
 
 - Submit a review as an eligible patient
@@ -910,7 +2172,33 @@ Implement patient-submitted reviews and ratings for doctors or services.
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until all required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Implement the Review module in the FastAPI backend using SQLAlchemy models, Alembic migrations, Pydantic schemas, service-layer rules, and `/api/v1` routes. Support patient-submitted reviews for doctors or services with careful validation and authorization. List affected files first, explain the plan, implement incrementally, run `python -m compileall app tests` and `pytest`, and report manual review-module checks.
 
@@ -947,6 +2235,45 @@ Prepare the backend and frontend contract needed for a future admin dashboard wi
 - Run `pytest`
 - Add tests for admin access, non-admin rejection, and summary endpoint correctness
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Backend runtime checks:
+
+```bash
+python -m uvicorn app.main:app --reload
+```
+
+Manual QA checks:
+
+- Check the FastAPI docs
+- Test admin endpoints in Swagger with admin and non-admin users
+- Confirm admin responses expose only intended operational data
+- Confirm non-admin access is rejected consistently
+
 ### Manual Checklist
 
 - Confirm admin users can access admin endpoints
@@ -955,7 +2282,33 @@ Prepare the backend and frontend contract needed for a future admin dashboard wi
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until all required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Implement the backend foundation for the Admin Dashboard using admin-restricted REST endpoints under `/api/v1`. Reuse JWT authentication and role-based dependencies, keep route handlers thin, and keep operational logic in services. List affected files first, explain the plan, implement incrementally, run `python -m compileall app tests` and `pytest`, and report manual admin-access checks.
 
@@ -994,6 +2347,46 @@ Connect the existing Next.js frontend to the FastAPI backend through documented 
 - Run frontend verification commands appropriate to the repository when frontend work is requested
 - Add or update integration-oriented tests where practical
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks when backend contracts change:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Backend runtime checks when end-to-end integration is verified against a running API:
+
+```bash
+python -m uvicorn app.main:app --reload
+```
+
+Manual QA checks:
+
+- Confirm the frontend reads `NEXT_PUBLIC_API_BASE_URL` correctly
+- Confirm public pages load backend data correctly
+- Confirm auth flows work end-to-end
+- Confirm appointment-related UI behavior matches backend responses
+- Confirm frontend page behavior remains stable after integration changes
+
 ### Manual Checklist
 
 - Confirm the frontend reads the backend base URL from environment config
@@ -1003,7 +2396,33 @@ Connect the existing Next.js frontend to the FastAPI backend through documented 
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until all required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Integrate the existing Next.js frontend with the FastAPI backend using the documented REST API. Use `NEXT_PUBLIC_API_BASE_URL`, keep the architecture separated, and do not move backend logic into Next.js API routes. List affected files first, explain the plan, implement incrementally, run the appropriate verification commands, and report manual end-to-end UI checks.
 
@@ -1044,6 +2463,62 @@ Prepare the project for reliable deployment and safe production operation.
 - Run `pytest`
 - Run deployment-related validation commands as appropriate
 
+### Checking And Testing Workflow
+
+### Frontend checks, if frontend files are changed
+
+```bash
+cd frontend
+npm install
+npm run lint
+npm run build
+```
+
+If frontend tests exist, also run:
+
+```bash
+npm run test
+```
+
+Backend checks:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m compileall app tests
+pytest
+```
+
+Database checks when migration or schema changes are part of release readiness:
+
+```bash
+cd backend
+source .venv/bin/activate
+alembic revision --autogenerate -m "migration message"
+alembic upgrade head
+alembic current
+```
+
+Redis checks:
+
+```bash
+redis-cli ping
+```
+
+Deployment or Docker checks:
+
+```bash
+docker compose up --build
+```
+
+Manual QA checks:
+
+- Confirm health routes and critical auth flows work in a production-like environment
+- Confirm documented environment variables are complete
+- Confirm Docker startup matches deployment expectations
+- Confirm PostgreSQL and Redis are externalized appropriately per environment
+- Confirm frontend page behavior and backend API behavior remain stable in the deployment setup
+
 ### Manual Checklist
 
 - Review Docker Compose usage versus production deployment needs
@@ -1053,7 +2528,33 @@ Prepare the project for reliable deployment and safe production operation.
 
 ### Agent Prompt
 
-Read `docs/ARCHITECTURE.md`, `docs/CONSTRAINTS.md`, `docs/PROJECT_DEFINITION.md`, `docs/PROJECT_SETUP.md`, and `docs/DEVELOPMENT_PLAN.md` before making changes.
+Before making any changes:
+
+1. Read `docs/ARCHITECTURE.md` completely.
+2. Read `docs/CONSTRAINTS.md` completely.
+3. Read `docs/PROJECT_DEFINITION.md` completely.
+4. Read `docs/PROJECT_SETUP.md` completely.
+5. Read `docs/DEVELOPMENT_PLAN.md` completely.
+
+These five documents are the source of truth for the project.
+
+Follow all architecture decisions, constraints, project requirements, setup standards, development workflows, testing requirements, security requirements, and implementation order defined in those documents.
+
+If any instruction in this feature conflicts with those documents, explain the conflict before making changes.
+
+Do not proceed until all documents have been reviewed.
+
+Testing and checking are mandatory for this feature.
+Run this feature's Checking And Testing Workflow before reporting completion.
+Do not mark the feature complete until all required checks pass.
+If any check cannot be run, explain why and provide the exact manual command I should run.
+
+If frontend files are changed, run the frontend checking workflow:
+`cd frontend`
+`npm install`
+`npm run lint`
+`npm run build`
+`npm run test`, if tests exist
 
 Harden the DoctorPhysio project for deployment readiness. Focus on configuration safety, production-oriented backend behavior, migration readiness, Docker alignment, and operational documentation. Keep the frontend and backend independently deployable. List affected files first, explain the plan, implement incrementally, run `python -m compileall app tests` and `pytest` where backend changes are involved, and report manual production-readiness checks.
 

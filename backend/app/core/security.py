@@ -10,6 +10,7 @@ from app.core.config import settings
 
 ALGORITHM = "HS256"
 BCRYPT_PASSWORD_MAX_BYTES = 72
+TOKEN_SUBJECT_CLAIM = "sub"
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
@@ -43,15 +44,15 @@ def create_access_token(subject: str, expires_delta: timedelta | None = None, **
         expires_delta or timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     )
     payload: dict[str, Any] = {
-        "sub": subject,
+        TOKEN_SUBJECT_CLAIM: subject,
         "exp": expire,
         **extra_claims,
     }
-    return jwt.encode(payload, settings.SECRET_KEY, algorithm=ALGORITHM)
+    return jwt.encode(payload, get_secret_key(), algorithm=ALGORITHM)
 
 
 def decode_access_token(token: str) -> dict[str, Any] | None:
     try:
-        return jwt.decode(token, settings.SECRET_KEY, algorithms=[ALGORITHM])
+        return jwt.decode(token, get_secret_key(), algorithms=[ALGORITHM])
     except JWTError:
         return None

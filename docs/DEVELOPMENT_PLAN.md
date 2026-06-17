@@ -167,7 +167,7 @@ Confirm that the existing FastAPI backend foundation is structurally correct, ru
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -197,7 +197,7 @@ Backend runtime checks:
 python -m uvicorn app.main:app --reload
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Check the FastAPI docs
 - Test `GET /health` and `GET /api/v1/health` in Swagger or a browser
@@ -280,7 +280,7 @@ Ensure configuration is environment-driven and the backend can connect to Postgr
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -310,7 +310,7 @@ Backend runtime checks:
 python -m uvicorn app.main:app --reload
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Copy `.env.example` to `.env`
 - Confirm the backend loads environment settings successfully
@@ -393,7 +393,7 @@ Make sure Alembic is the only schema-change workflow and that migrations correct
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -427,7 +427,7 @@ alembic upgrade head
 alembic current
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Review the generated migration before applying it
 - Refresh pgAdmin
@@ -509,7 +509,7 @@ Define the `users` domain model and Pydantic schemas that support registration, 
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -533,7 +533,7 @@ python -m compileall app tests
 pytest
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Confirm create and read schemas expose only intended fields
 - Confirm `hashed_password` is excluded from output schemas
@@ -611,7 +611,7 @@ Create or validate the Alembic migration for the `users` table.
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -645,7 +645,7 @@ alembic upgrade head
 alembic current
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Review the migration before applying it
 - Refresh pgAdmin
@@ -728,7 +728,7 @@ Provide reusable password hashing, password verification, JWT creation, and JWT 
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -752,7 +752,7 @@ python -m compileall app tests
 pytest
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Confirm password hashing changes the stored value
 - Confirm a valid JWT decodes successfully
@@ -836,7 +836,7 @@ Implement reusable authentication dependencies for bearer token parsing, current
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -866,7 +866,7 @@ Backend runtime checks:
 python -m uvicorn app.main:app --reload
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Check the FastAPI docs
 - Test a protected endpoint in Swagger with no token, an invalid token, and a valid token
@@ -950,7 +950,7 @@ Implement secure registration, login, and current-user routes under `/api/v1/aut
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -980,7 +980,7 @@ Backend runtime checks:
 python -m uvicorn app.main:app --reload
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Check the FastAPI docs
 - Test register, login, and `/api/v1/auth/me` in Swagger
@@ -1062,7 +1062,7 @@ Introduce only the middleware that is needed for stable request handling and fut
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -1092,7 +1092,7 @@ Backend runtime checks:
 python -m uvicorn app.main:app --reload
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Check the FastAPI docs
 - Confirm allowed origins work as expected
@@ -1173,7 +1173,7 @@ Verify Redis integration, startup behavior, and health visibility without treati
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -1209,7 +1209,7 @@ Redis checks:
 redis-cli ping
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Check the FastAPI docs
 - Test health endpoints with Redis available
@@ -1288,7 +1288,7 @@ Establish a strong backend testing baseline before major domain modules are adde
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -1312,7 +1312,7 @@ python -m compileall app tests
 pytest
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Review test names for readability
 - Confirm test failures are easy to understand
@@ -1389,7 +1389,7 @@ Document the backend contracts and development workflow well enough that future 
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -1424,7 +1424,7 @@ Backend runtime checks when startup or route documentation is verified against t
 python -m uvicorn app.main:app --reload
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Confirm documented commands match the repository structure
 - Check the FastAPI docs when documenting backend routes
@@ -1504,7 +1504,7 @@ Implement the doctor domain so patients can browse clinic doctor and specialist 
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -1544,7 +1544,7 @@ alembic upgrade head
 alembic current
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Check the FastAPI docs
 - Test doctor list, detail, create, and update endpoints in Swagger
@@ -1626,7 +1626,7 @@ Implement patient-specific records and link them safely to platform user account
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -1666,7 +1666,7 @@ alembic upgrade head
 alembic current
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Check the FastAPI docs
 - Test patient endpoints in Swagger with the correct user and a different user
@@ -1748,7 +1748,7 @@ Implement the clinic service catalog so users can browse rehabilitation and trea
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -1788,7 +1788,7 @@ alembic upgrade head
 alembic current
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Check the FastAPI docs
 - Test public service list and detail endpoints in Swagger
@@ -1870,7 +1870,7 @@ Implement appointment scheduling and lifecycle tracking between patients, doctor
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -1910,7 +1910,7 @@ alembic upgrade head
 alembic current
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Check the FastAPI docs
 - Test appointment create, list, detail, and status change endpoints in Swagger
@@ -1993,7 +1993,7 @@ Implement the payment record foundation for clinic billing workflows.
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -2033,7 +2033,7 @@ alembic upgrade head
 alembic current
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Check the FastAPI docs
 - Test payment create, read, and status update endpoints in Swagger
@@ -2115,7 +2115,7 @@ Implement patient-submitted reviews and ratings for doctors or services.
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -2155,7 +2155,7 @@ alembic upgrade head
 alembic current
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Check the FastAPI docs
 - Test review create and read endpoints in Swagger
@@ -2237,7 +2237,7 @@ Prepare the backend and frontend contract needed for a future admin dashboard wi
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -2267,7 +2267,7 @@ Backend runtime checks:
 python -m uvicorn app.main:app --reload
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Check the FastAPI docs
 - Test admin endpoints in Swagger with admin and non-admin users
@@ -2349,7 +2349,7 @@ Connect the existing Next.js frontend to the FastAPI backend through documented 
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -2379,7 +2379,7 @@ Backend runtime checks when end-to-end integration is verified against a running
 python -m uvicorn app.main:app --reload
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Confirm the frontend reads `NEXT_PUBLIC_API_BASE_URL` correctly
 - Confirm public pages load backend data correctly
@@ -2465,7 +2465,7 @@ Prepare the project for reliable deployment and safe production operation.
 
 ### Checking And Testing Workflow
 
-### Frontend checks, if frontend files are changed
+Frontend checks, if frontend files are changed:
 
 ```bash
 cd frontend
@@ -2511,7 +2511,7 @@ Deployment or Docker checks:
 docker compose up --build
 ```
 
-Manual QA checks:
+How to test manually:
 
 - Confirm health routes and critical auth flows work in a production-like environment
 - Confirm documented environment variables are complete

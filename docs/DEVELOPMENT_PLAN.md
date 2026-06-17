@@ -199,16 +199,19 @@ python -m uvicorn app.main:app --reload
 
 How to test manually:
 
-- Check the FastAPI docs
-- Test `GET /health` and `GET /api/v1/health` in Swagger or a browser
-- Confirm versioned routes load without startup or import errors
+- Start the backend with the documented command and confirm application startup completes without import or settings errors.
+- Open `/docs` and confirm the FastAPI schema loads and the versioned router is present.
+- Call `GET /health` and confirm it returns the expected success JSON shape.
+- Call `GET /api/v1/health` and confirm it returns the expected success JSON shape.
+- Confirm no unexpected routes are mounted outside the intended public root and `/api/v1` structure.
 
 ### Manual Checklist
 
-- Start the backend locally
-- Visit `GET /health`
-- Visit `GET /api/v1/health`
-- Confirm the application boots without structural import errors
+- Confirm the backend process starts successfully from `app.main:app`.
+- Confirm Swagger UI loads without client-side errors.
+- Confirm `GET /health` responds with the documented health payload.
+- Confirm `GET /api/v1/health` responds with the documented health payload.
+- Confirm router registration works without structural import errors.
 
 ### Agent Prompt
 
@@ -230,6 +233,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -312,18 +319,19 @@ python -m uvicorn app.main:app --reload
 
 How to test manually:
 
-- Copy `.env.example` to `.env`
-- Confirm the backend loads environment settings successfully
-- Confirm PostgreSQL connection values match the intended local setup
-- Confirm CORS origins are loaded from configuration
-- Confirm documented container-based setup values still align with the backend configuration
+- Copy `.env.example` to `.env` and confirm each documented backend variable is present with the expected name.
+- Start the backend and confirm settings load successfully from the environment without fallback or parsing errors.
+- Verify the backend is using the intended `DATABASE_URL` format for PostgreSQL and the intended `BACKEND_CORS_ORIGINS` values.
+- Confirm the documented local PostgreSQL, Redis, and backend port values still match the setup instructions.
+- Confirm the documented Docker Compose values remain consistent with the backend configuration expectations.
 
 ### Manual Checklist
 
-- Copy `.env.example` to `.env`
-- Confirm the backend loads settings successfully
-- Confirm PostgreSQL connection values match the chosen local setup
-- Confirm Docker Compose variables align with documented behavior
+- Confirm `.env.example` and the setup document list the same backend environment variables.
+- Confirm the backend starts successfully with environment-driven settings.
+- Confirm PostgreSQL connection settings match the intended local or container workflow.
+- Confirm CORS origins are sourced from configuration rather than hardcoded values.
+- Confirm Docker-related configuration notes still match the documented local setup.
 
 ### Agent Prompt
 
@@ -345,6 +353,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -429,17 +441,19 @@ alembic current
 
 How to test manually:
 
-- Review the generated migration before applying it
-- Refresh pgAdmin
-- Confirm Alembic discovers SQLAlchemy metadata correctly
-- Confirm the database version matches the expected migration state
+- Run the documented Alembic commands in a safe development database context and review the generated migration content before applying it.
+- Confirm the generated migration references the expected SQLAlchemy metadata changes instead of unrelated tables or empty diffs.
+- Apply the migration and confirm Alembic reaches the expected head revision without errors.
+- Inspect Alembic state with `alembic current` and confirm the database revision matches the applied migration.
+- Confirm the migration workflow still depends on `app.models` imports rather than manual table creation.
 
 ### Manual Checklist
 
-- Generate a migration in a safe development context when needed
-- Review the generated migration
-- Apply the migration with `alembic upgrade head`
-- Confirm Alembic reads the configured `DATABASE_URL`
+- Confirm Alembic reads `DATABASE_URL` from backend settings rather than a hardcoded value.
+- Confirm autogeneration can discover SQLAlchemy metadata through `app.models`.
+- Confirm the reviewed migration contains only the expected schema operations.
+- Confirm `alembic upgrade head` succeeds on the target development database.
+- Confirm `alembic current` reports the expected revision after upgrade.
 
 ### Agent Prompt
 
@@ -461,6 +475,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -535,15 +553,20 @@ pytest
 
 How to test manually:
 
-- Confirm create and read schemas expose only intended fields
-- Confirm `hashed_password` is excluded from output schemas
-- Confirm email validation, UUID handling, defaults, and boolean flags behave as expected
+- Confirm `UserCreate` exposes only `full_name`, `email`, and `password`.
+- Confirm `UserLogin` exposes only the login credential fields required by the auth flow.
+- Confirm `UserRead` exposes only `id`, `full_name`, `email`, `role`, `is_active`, `is_verified`, `created_at`, and `updated_at`.
+- Confirm `hashed_password` is not present in output schemas or serialized read responses.
+- Confirm email validation and normalization behave as intended.
+- Confirm the model uses a UUID-backed `id` and that boolean defaults and role defaults align with the model definition.
 
 ### Manual Checklist
 
-- Confirm create and read schemas represent only intended fields
-- Confirm UUIDs, email validation, and boolean flags behave correctly
-- Confirm output schemas do not include secret fields
+- Confirm create and login schemas contain only the intended request fields.
+- Confirm read schemas exclude secret fields, especially `hashed_password`.
+- Confirm update schemas allow only intended user-editable fields.
+- Confirm UUID-backed IDs are represented consistently between model and schema.
+- Confirm email handling, role handling, and boolean defaults align with the documented user model.
 
 ### Agent Prompt
 
@@ -565,6 +588,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -647,18 +674,19 @@ alembic current
 
 How to test manually:
 
-- Review the migration before applying it
-- Refresh pgAdmin
-- Confirm the `users` table exists
-- Confirm indexes, uniqueness, defaults, and nullability match the model
-- Confirm no plaintext credential columns exist
+- Review the `users` migration before applying it and confirm it creates only the expected table, columns, indexes, and constraints.
+- Apply the migration and inspect the resulting `users` table in PostgreSQL or pgAdmin.
+- Confirm the `id`, `email`, `hashed_password`, `role`, `is_active`, `is_verified`, `created_at`, and `updated_at` columns match the model.
+- Confirm the email uniqueness and index behavior are present in the actual database schema.
+- Confirm no plaintext password column or other secret-bearing column exists.
 
 ### Manual Checklist
 
-- Review the migration file before applying
-- Run `alembic upgrade head`
-- Inspect the resulting `users` table in PostgreSQL
-- Confirm constraints behave as expected
+- Confirm the migration file matches the intended `users` model exactly.
+- Confirm `alembic upgrade head` creates or updates the `users` table successfully.
+- Confirm the resulting table uses the expected primary key, uniqueness, nullability, and server defaults.
+- Confirm email is indexed and unique in the database.
+- Confirm only `hashed_password` exists for password storage.
 
 ### Agent Prompt
 
@@ -680,6 +708,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -754,17 +786,20 @@ pytest
 
 How to test manually:
 
-- Confirm password hashing changes the stored value
-- Confirm a valid JWT decodes successfully
-- Confirm an invalid JWT is rejected
-- Confirm expiration behavior follows configuration
+- Hash a known password and confirm the stored hash differs from the plaintext input.
+- Verify that password verification succeeds for the correct plaintext password and fails for an incorrect one.
+- Create a valid JWT and confirm it includes the expected subject and expiration behavior.
+- Decode a valid JWT and confirm the expected payload can be read successfully.
+- Try an invalid or expired JWT and confirm it is rejected consistently.
+- Confirm expiration behavior follows `ACCESS_TOKEN_EXPIRE_MINUTES` rather than a hardcoded value.
 
 ### Manual Checklist
 
-- Confirm password hashing changes the stored value
-- Confirm a valid token decodes successfully
-- Confirm an invalid token is rejected
-- Confirm expiration settings come from configuration
+- Confirm hashing never stores or returns plaintext passwords.
+- Confirm password verification succeeds only for the correct password.
+- Confirm valid tokens decode successfully and contain the expected claims.
+- Confirm invalid or expired tokens are rejected.
+- Confirm token expiration comes from backend configuration.
 
 ### Agent Prompt
 
@@ -786,6 +821,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -868,16 +907,19 @@ python -m uvicorn app.main:app --reload
 
 How to test manually:
 
-- Check the FastAPI docs
-- Test a protected endpoint in Swagger with no token, an invalid token, and a valid token
-- Confirm authentication behavior is consistent for inactive or unauthorized users
+- Open Swagger for a protected route and call it without a bearer token to confirm the expected unauthorized response.
+- Call the same protected route with an invalid or malformed token and confirm the expected unauthorized response.
+- Call the protected route with a valid token and confirm the current user is loaded successfully.
+- Test with an inactive user account, if available, and confirm active-user enforcement rejects access consistently.
+- Verify any admin-only dependency rejects non-admin users and allows admin users when present.
 
 ### Manual Checklist
 
-- Call a protected route without a token
-- Call a protected route with an invalid token
-- Call a protected route with a valid token
-- Confirm unauthorized access is rejected consistently
+- Confirm missing bearer tokens are rejected consistently.
+- Confirm invalid or expired tokens are rejected consistently.
+- Confirm valid tokens resolve the correct current user.
+- Confirm inactive users are blocked from active-user-only routes.
+- Confirm admin-only dependency behavior matches the documented access rules.
 
 ### Agent Prompt
 
@@ -899,6 +941,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -982,17 +1028,21 @@ python -m uvicorn app.main:app --reload
 
 How to test manually:
 
-- Check the FastAPI docs
-- Test register, login, and `/api/v1/auth/me` in Swagger
-- Confirm duplicate email and bad credentials return the expected error shape
-- Confirm authentication responses never expose `hashed_password`
+- Open Swagger and register a new user with valid input.
+- Confirm duplicate registration with the same email returns the expected error response and does not create a second account.
+- Log in with valid credentials and confirm an access token is returned in the expected schema shape.
+- Log in with invalid credentials and confirm the expected authentication failure response is returned.
+- Call `/api/v1/auth/me` with the valid token and confirm the correct user profile is returned.
+- Confirm register, login, and `/me` responses never expose `hashed_password`.
 
 ### Manual Checklist
 
-- Register a new user
-- Log in with that user
-- Call `/api/v1/auth/me` with the returned token
-- Confirm bad credentials return the expected error shape
+- Confirm registration succeeds for a new valid email.
+- Confirm duplicate email registration is rejected predictably.
+- Confirm login returns a usable bearer token for valid credentials.
+- Confirm bad credentials return the expected error shape.
+- Confirm `/api/v1/auth/me` returns only the intended user fields.
+- Confirm auth responses do not include secret fields.
 
 ### Agent Prompt
 
@@ -1014,6 +1064,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -1094,16 +1148,19 @@ python -m uvicorn app.main:app --reload
 
 How to test manually:
 
-- Check the FastAPI docs
-- Confirm allowed origins work as expected
-- Confirm health and auth routes behave the same after middleware changes
-- Confirm no sensitive request details are exposed by middleware behavior
+- Start the backend and confirm middleware registration does not break application startup.
+- Send requests from an allowed frontend origin and confirm the expected CORS headers are present.
+- Confirm disallowed or unexpected origins are not treated as allowed by mistake.
+- Re-test health and authentication routes after middleware changes and confirm their behavior is unchanged.
+- Confirm middleware does not log or expose sensitive request details in responses.
 
 ### Manual Checklist
 
-- Confirm allowed frontend origins work
-- Confirm requests still reach versioned routes
-- Confirm health and auth routes behave the same after middleware changes
+- Confirm allowed origins receive the expected CORS behavior.
+- Confirm versioned routes under `/api/v1` still respond normally.
+- Confirm health routes still return the expected payloads.
+- Confirm auth routes still behave the same after middleware changes.
+- Confirm middleware does not leak sensitive information.
 
 ### Agent Prompt
 
@@ -1125,6 +1182,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -1211,16 +1272,19 @@ redis-cli ping
 
 How to test manually:
 
-- Check the FastAPI docs
-- Test health endpoints with Redis available
-- Confirm expected backend behavior when Redis is temporarily unavailable
-- Confirm Redis connection details are not exposed publicly
+- Start Redis, then start the backend and confirm startup completes and Redis-dependent startup logic behaves as expected.
+- Call the health endpoints with Redis available and confirm public responses remain stable and do not expose connection secrets.
+- Temporarily stop Redis and restart or retest the backend to confirm behavior matches the intended graceful-degradation design.
+- Confirm health responses remain predictable even when Redis is unavailable.
+- Confirm Redis connection strings or internal details are not exposed in public API responses.
 
 ### Manual Checklist
 
-- Start Redis and confirm backend boots
-- Temporarily stop Redis and confirm expected startup behavior
-- Confirm health routes still return predictable responses
+- Confirm the backend boots normally when Redis is available.
+- Confirm the documented fallback behavior occurs when Redis is unavailable.
+- Confirm public health endpoints still return predictable responses.
+- Confirm Redis is treated as support infrastructure rather than the source of truth.
+- Confirm no Redis connection secrets appear in responses.
 
 ### Agent Prompt
 
@@ -1242,6 +1306,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -1314,15 +1382,17 @@ pytest
 
 How to test manually:
 
-- Review test names for readability
-- Confirm test failures are easy to understand
-- Confirm unauthorized-access and sensitive-field coverage is present where expected
+- Review the backend test files and confirm they cover current health, auth, dependency, and security-sensitive behavior introduced so far.
+- Intentionally inspect test names and structure to confirm a junior developer can understand what each test verifies.
+- Confirm the test suite includes coverage for unauthorized access paths and secret-field exclusion where those behaviors now exist.
+- If a test fails during development, confirm the failure message clearly indicates what behavior regressed.
 
 ### Manual Checklist
 
-- Review test names for readability
-- Confirm test coverage reflects expected user flows
-- Confirm failures are easy for junior developers to understand
+- Confirm test names describe behavior rather than implementation details.
+- Confirm test coverage maps to the expected user and security flows already implemented.
+- Confirm sensitive-field and unauthorized-access coverage exists where applicable.
+- Confirm failures are readable and actionable for junior developers.
 
 ### Agent Prompt
 
@@ -1344,6 +1414,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -1426,16 +1500,19 @@ python -m uvicorn app.main:app --reload
 
 How to test manually:
 
-- Confirm documented commands match the repository structure
-- Check the FastAPI docs when documenting backend routes
-- Confirm migration, auth, and test instructions match the actual workflow
-- Confirm no real secrets appear in documentation examples
+- Follow the documented backend setup, run, migration, and test commands and confirm they still match the repository structure.
+- Check the documented backend routes against the running FastAPI docs and confirm the listed entry points actually exist.
+- Confirm the documentation explains the current auth, migration, and testing workflow accurately.
+- Confirm documentation examples use placeholder secrets rather than real credentials.
+- Confirm backend documentation does not reference missing files, wrong folders, or outdated commands.
 
 ### Manual Checklist
 
-- Confirm documented commands work
-- Confirm documented routes exist
-- Confirm docs match the actual folder structure
+- Confirm the documented backend commands are executable as written.
+- Confirm the documented routes exist in the running application.
+- Confirm the docs match the actual backend folder structure.
+- Confirm migration and auth instructions reflect the real workflow.
+- Confirm no real secrets appear in documentation examples.
 
 ### Agent Prompt
 
@@ -1457,6 +1534,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -1546,18 +1627,19 @@ alembic current
 
 How to test manually:
 
-- Check the FastAPI docs
-- Test doctor list, detail, create, and update endpoints in Swagger
-- Refresh pgAdmin
-- Confirm the doctors table exists and matches the model
-- Confirm unauthorized users cannot manage doctor records
+- Create one or more doctor records through the intended admin flow and confirm valid payloads are accepted.
+- Call the public doctor list and detail endpoints and confirm the expected public-facing fields are returned.
+- Attempt doctor create or update actions as a non-admin user and confirm access is rejected.
+- Inspect the database or pgAdmin and confirm the `doctors` table exists with the expected columns and relationships.
+- Confirm doctor profile, specialty, and availability-oriented fields serialize as intended for public reads.
 
 ### Manual Checklist
 
-- Create a doctor record through an admin flow
-- Retrieve doctor list and detail endpoints
-- Confirm unauthorized users cannot change doctor records
-- Confirm public users can access intended read endpoints
+- Confirm admin users can create and update doctor records.
+- Confirm public read endpoints return doctor list and detail data.
+- Confirm non-admin users cannot manage doctor records.
+- Confirm the `doctors` table matches the implemented model and migration.
+- Confirm public doctor responses expose only intended fields.
 
 ### Agent Prompt
 
@@ -1579,6 +1661,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -1668,18 +1754,19 @@ alembic current
 
 How to test manually:
 
-- Check the FastAPI docs
-- Test patient endpoints in Swagger with the correct user and a different user
-- Refresh pgAdmin
-- Confirm the patients table exists and is linked correctly to users
-- Confirm unauthorized patient data access is blocked
+- Create a patient record linked to a valid user account and confirm the linkage is stored correctly.
+- Access patient endpoints as the linked patient user and confirm allowed reads or updates succeed.
+- Access the same patient endpoints as a different non-admin user and confirm access is denied.
+- Access the patient endpoints as an admin user and confirm admin oversight works where intended.
+- Inspect the database or pgAdmin and confirm the `patients` table and user relationship match the model.
 
 ### Manual Checklist
 
-- Create a patient record linked to a user
-- Confirm the correct user can access allowed data
-- Confirm other users cannot access that patient record
-- Confirm admin workflows operate as expected
+- Confirm patient records link to the intended user accounts.
+- Confirm the owning patient can access allowed patient data.
+- Confirm other users cannot access that patient's protected data.
+- Confirm admin access behaves as designed.
+- Confirm the `patients` table and relationships match the implemented schema.
 
 ### Agent Prompt
 
@@ -1701,6 +1788,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -1790,17 +1881,19 @@ alembic current
 
 How to test manually:
 
-- Check the FastAPI docs
-- Test public service list and detail endpoints in Swagger
-- Test admin service create, update, and delete behavior
-- Refresh pgAdmin
-- Confirm the services table exists and matches the expected schema
+- Create service records through the intended admin flow and confirm valid service data is accepted.
+- Call the public service list and detail endpoints and confirm the expected service fields are returned.
+- Attempt service create, update, or delete actions as a non-admin user and confirm access is denied.
+- Verify any pricing, duration, or descriptive fields serialize and validate as intended.
+- Inspect the database or pgAdmin and confirm the `services` table matches the implemented schema.
 
 ### Manual Checklist
 
-- Create service records as an admin
-- Retrieve public service list and detail views
-- Confirm unauthorized users cannot manage services
+- Confirm admin users can create, update, and delete service records as intended.
+- Confirm public users can retrieve service list and detail endpoints.
+- Confirm non-admin users cannot manage services.
+- Confirm service responses expose only intended public fields.
+- Confirm the `services` table matches the model and migration.
 
 ### Agent Prompt
 
@@ -1822,6 +1915,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -1912,18 +2009,21 @@ alembic current
 
 How to test manually:
 
-- Check the FastAPI docs
-- Test appointment create, list, detail, and status change endpoints in Swagger
-- Refresh pgAdmin
-- Confirm the appointments table exists and links correctly to patient, doctor, and service records
-- Confirm invalid status transitions and unauthorized access are rejected
+- Create appointments that reference valid patient, doctor, and service records and confirm creation succeeds.
+- Retrieve appointment list and detail endpoints as the owning patient and confirm only allowed records are visible.
+- Verify admin users can access the intended oversight views for appointments.
+- Attempt invalid appointment status transitions and confirm they are rejected predictably.
+- Attempt unauthorized appointment access from another non-admin user and confirm it is blocked.
+- Inspect the database or pgAdmin and confirm appointment links to patient, doctor, and service records are stored correctly.
 
 ### Manual Checklist
 
-- Create appointments for valid patient, doctor, and service combinations
-- Confirm patient-facing access rules
-- Confirm admin oversight flows
-- Confirm invalid status transitions are rejected
+- Confirm appointments can be created for valid linked entities.
+- Confirm patient-facing access rules allow only the intended user's records.
+- Confirm admin oversight endpoints or behaviors work as designed.
+- Confirm invalid status transitions are rejected consistently.
+- Confirm unauthorized users cannot access or change other users' appointments.
+- Confirm the `appointments` table and foreign-key relationships match the model.
 
 ### Agent Prompt
 
@@ -1945,6 +2045,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -2035,18 +2139,19 @@ alembic current
 
 How to test manually:
 
-- Check the FastAPI docs
-- Test payment create, read, and status update endpoints in Swagger
-- Refresh pgAdmin
-- Confirm the payments table exists and stores durable records only
-- Confirm sensitive fields are not exposed and unauthorized access is blocked
+- Create payment records for valid linked business entities and confirm required fields such as amount, method, and status behave as intended.
+- Retrieve payment records through the intended authorized flows and confirm responses exclude sensitive data.
+- Attempt payment access or status changes as an unauthorized user and confirm access is blocked.
+- Attempt invalid payment status transitions and confirm they are rejected consistently.
+- Inspect the database or pgAdmin and confirm the `payments` table stores durable payment records without raw card data.
 
 ### Manual Checklist
 
-- Create payment records linked to valid appointments or services
-- Confirm unauthorized access is blocked
-- Confirm payment states update predictably
-- Confirm sensitive fields are not exposed
+- Confirm payment records can be created for valid linked entities.
+- Confirm unauthorized users cannot read or change protected payment records.
+- Confirm payment status changes follow the intended rules.
+- Confirm payment responses do not expose sensitive fields or secrets.
+- Confirm the `payments` table stores durable records only and excludes raw card details.
 
 ### Agent Prompt
 
@@ -2068,6 +2173,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -2157,18 +2266,19 @@ alembic current
 
 How to test manually:
 
-- Check the FastAPI docs
-- Test review create and read endpoints in Swagger
-- Refresh pgAdmin
-- Confirm the reviews table exists and is linked correctly
-- Confirm invalid rating values and unauthorized review actions are rejected
+- Submit a review as an eligible authenticated patient and confirm valid review data is accepted.
+- Retrieve review read endpoints and confirm only intended public or authorized fields are exposed.
+- Attempt to submit a review with an invalid rating and confirm validation rejects it.
+- Attempt unauthorized review creation, update, or tampering actions and confirm they are blocked.
+- Inspect the database or pgAdmin and confirm the `reviews` table links correctly to the intended patient and review target.
 
 ### Manual Checklist
 
-- Submit a review as an eligible patient
-- Confirm invalid rating values are rejected
-- Confirm unauthorized users cannot submit or alter protected review content
-- Confirm read endpoints expose only intended fields
+- Confirm eligible patients can submit reviews successfully.
+- Confirm invalid rating values are rejected consistently.
+- Confirm unauthorized users cannot submit or alter protected review content.
+- Confirm review read endpoints expose only intended fields.
+- Confirm the `reviews` table and target relationships match the model and migration.
 
 ### Agent Prompt
 
@@ -2190,6 +2300,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until all required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -2269,16 +2383,19 @@ python -m uvicorn app.main:app --reload
 
 How to test manually:
 
-- Check the FastAPI docs
-- Test admin endpoints in Swagger with admin and non-admin users
-- Confirm admin responses expose only intended operational data
-- Confirm non-admin access is rejected consistently
+- Open Swagger and call each admin endpoint with an admin user token to confirm access succeeds.
+- Call the same admin endpoints with a normal user token and confirm access is rejected consistently.
+- Call the admin endpoints without a token and confirm authentication is required.
+- Inspect admin responses and confirm they expose only intended operational data and not secret fields.
+- Confirm admin routes remain under `/api/v1` and follow the documented REST structure.
 
 ### Manual Checklist
 
-- Confirm admin users can access admin endpoints
-- Confirm normal users cannot
-- Confirm admin responses contain only intended operational data
+- Confirm admin users can access the intended admin-only endpoints.
+- Confirm normal users and anonymous callers cannot access admin-only endpoints.
+- Confirm admin responses contain only intended operational data.
+- Confirm admin route protection reuses shared auth and role dependencies.
+- Confirm no cross-user sensitive data is exposed beyond the intended admin scope.
 
 ### Agent Prompt
 
@@ -2300,6 +2417,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until all required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -2381,18 +2502,21 @@ python -m uvicorn app.main:app --reload
 
 How to test manually:
 
-- Confirm the frontend reads `NEXT_PUBLIC_API_BASE_URL` correctly
-- Confirm public pages load backend data correctly
-- Confirm auth flows work end-to-end
-- Confirm appointment-related UI behavior matches backend responses
-- Confirm frontend page behavior remains stable after integration changes
+- Confirm the frontend reads `NEXT_PUBLIC_API_BASE_URL` correctly by loading data from the intended backend environment.
+- Test public pages that consume backend data and confirm loading, success, and failure states behave correctly.
+- Test the frontend registration, login, and authenticated-user flow end to end against the backend.
+- Test appointment-related or other integrated UI actions and confirm the frontend behavior matches backend responses.
+- Confirm protected backend behavior is still enforced server-side even if frontend state is manipulated.
+- Confirm frontend pages remain stable after integration changes on both desktop and mobile-sized layouts.
 
 ### Manual Checklist
 
-- Confirm the frontend reads the backend base URL from environment config
-- Confirm public pages load backend data correctly
-- Confirm auth flows work end-to-end
-- Confirm appointment-related flows behave as expected in the UI
+- Confirm the frontend uses the backend base URL from environment configuration.
+- Confirm public pages successfully render backend-driven data.
+- Confirm auth flows work end to end from the UI through the backend.
+- Confirm appointment-related or equivalent integrated flows behave correctly in the UI.
+- Confirm protected operations still rely on backend enforcement.
+- Confirm frontend page behavior remains stable after integration changes.
 
 ### Agent Prompt
 
@@ -2414,6 +2538,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until all required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 
@@ -2513,18 +2641,21 @@ docker compose up --build
 
 How to test manually:
 
-- Confirm health routes and critical auth flows work in a production-like environment
-- Confirm documented environment variables are complete
-- Confirm Docker startup matches deployment expectations
-- Confirm PostgreSQL and Redis are externalized appropriately per environment
-- Confirm frontend page behavior and backend API behavior remain stable in the deployment setup
+- Review the documented environment variables and confirm the production-facing set is complete for frontend, backend, PostgreSQL, and Redis.
+- Start the stack in a production-like local setup, such as Docker Compose when appropriate, and confirm the services boot in the expected order.
+- Confirm health routes and critical auth flows still work in that production-like setup.
+- Confirm PostgreSQL and Redis are treated as externalized services rather than embedded application state.
+- Review CORS, secret handling, migration workflow, and release notes or deployment guidance for production safety.
+- Confirm frontend pages and backend APIs remain stable in the deployment-oriented setup.
 
 ### Manual Checklist
 
-- Review Docker Compose usage versus production deployment needs
-- Confirm migrations are part of release planning
-- Confirm environment variables are documented and complete
-- Confirm health routes and critical auth flows work in a production-like environment
+- Confirm environment variables are documented and complete for deployment.
+- Confirm Docker and deployment guidance match the intended production posture.
+- Confirm migrations are explicitly part of release planning and rollback thinking.
+- Confirm health routes and critical auth flows work in a production-like environment.
+- Confirm PostgreSQL and Redis are externalized appropriately per environment.
+- Confirm no real secrets are present in committed configuration or documentation.
 
 ### Agent Prompt
 
@@ -2546,6 +2677,10 @@ Do not proceed until all documents have been reviewed.
 
 Testing and checking are mandatory for this feature.
 Run this feature's Checking And Testing Workflow before reporting completion.
+Manual QA is mandatory.
+After automated checks pass, perform this feature's Manual QA checks.
+Report every manual check as passed, failed, or not applicable.
+Do not mark the feature complete unless manual QA has been reported clearly.
 Do not mark the feature complete until all required checks pass.
 If any check cannot be run, explain why and provide the exact manual command I should run.
 

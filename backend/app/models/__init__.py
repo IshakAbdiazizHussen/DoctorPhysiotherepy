@@ -5,6 +5,6 @@ Example:
     from app.models.example import ExampleModel
 """
 
-from app.models.user import User
+from app.models.user import User, UserRole
 
-__all__ = ["User"]
+__all__ = ["User", "UserRole"]

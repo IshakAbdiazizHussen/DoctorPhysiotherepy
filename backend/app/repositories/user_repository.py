@@ -5,7 +5,7 @@ from uuid import UUID
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.models.user import User
+from app.models.user import User, UserRole
 
 
 def get_user_by_email(db: Session, email: str) -> User | None:
@@ -24,7 +24,7 @@ def create_user(
     full_name: str,
     email: str,
     hashed_password: str,
-    role: str = "user",
+    role: str = UserRole.USER.value,
 ) -> User:
     user = User(
         full_name=full_name,

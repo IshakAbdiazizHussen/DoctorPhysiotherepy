@@ -6,6 +6,12 @@ from app.schemas.patient import (
     PatientRead,
     PatientSelfUpdate,
 )
+from app.schemas.service import (
+    ServiceAdminRead,
+    ServiceCreate,
+    ServiceRead,
+    ServiceUpdate,
+)
 from app.schemas.user import (
     Token,
     TokenPayload,
@@ -25,6 +31,10 @@ __all__ = [
     "PatientAdminRead",
     "PatientSelfUpdate",
     "PatientAdminUpdate",
+    "ServiceCreate",
+    "ServiceUpdate",
+    "ServiceRead",
+    "ServiceAdminRead",
     "UserCreate",
     "UserLogin",
     "UserRead",

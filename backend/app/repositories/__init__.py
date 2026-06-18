@@ -14,6 +14,14 @@ from app.repositories.patient_repository import (
     list_patients,
     update_patient,
 )
+from app.repositories.service_repository import (
+    create_service,
+    delete_service,
+    get_public_service_by_id,
+    get_service_by_id,
+    list_public_services,
+    update_service,
+)
 from app.repositories.user_repository import create_user, get_user_by_email, get_user_by_id
 
 __all__ = [
@@ -32,4 +40,10 @@ __all__ = [
     "create_patient",
     "update_patient",
     "delete_patient",
+    "list_public_services",
+    "get_public_service_by_id",
+    "get_service_by_id",
+    "create_service",
+    "update_service",
+    "delete_service",
 ]

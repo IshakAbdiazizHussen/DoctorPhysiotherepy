@@ -15,6 +15,13 @@ from app.services.patient_service import (
     update_patient_record_for_admin,
     update_patient_record_for_current_user,
 )
+from app.services.service_service import (
+    create_service_record,
+    delete_service_record,
+    get_service_for_public,
+    get_services_for_public,
+    update_service_record,
+)
 
 __all__ = [
     "register_user",
@@ -31,4 +38,9 @@ __all__ = [
     "update_patient_record_for_current_user",
     "update_patient_record_for_admin",
     "delete_patient_record_for_admin",
+    "get_services_for_public",
+    "get_service_for_public",
+    "create_service_record",
+    "update_service_record",
+    "delete_service_record",
 ]

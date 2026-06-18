@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable react-hooks/set-state-in-effect */
 
 import { useEffect, useState } from "react";
 import { THEME_STORAGE_KEY } from "@/lib/constants";
@@ -33,4 +34,3 @@ export default function useTheme() {
 
   return { mounted, theme, toggleTheme };
 }
-

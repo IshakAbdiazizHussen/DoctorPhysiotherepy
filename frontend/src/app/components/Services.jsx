@@ -6,32 +6,12 @@ import { ArrowLeft, ArrowRight, CheckCircle2, ChevronRight, Play } from "lucide-
 import { motion } from "framer-motion";
 import Container from "./Container";
 
-const doctors = [
-  {
-    name: "Dr. Sarah Wilson",
-    specialty: "Physiotherapist",
-    image: "/images/female.jpg",
-  },
-  {
-    name: "Dr. James Carter",
-    specialty: "Rehabilitation Expert",
-    image: "/images/physio1.jpg",
-  },
-  {
-    name: "Dr. Emily Brown",
-    specialty: "Sports Therapist",
-    image: "/images/physio2.jpg",
-  },
-  {
-    name: "Dr. Michael Lee",
-    specialty: "Movement Specialist",
-    image: "/images/portM.jpg",
-  },
-  {
-    name: "Dr. Olivia Harris",
-    specialty: "Pain Management",
-    image: "/images/physio.jpg",
-  },
+const doctorImages = [
+  "/images/female.jpg",
+  "/images/physio1.jpg",
+  "/images/physio2.jpg",
+  "/images/portM.jpg",
+  "/images/physio.jpg",
 ];
 
 function mod(value, total) {
@@ -44,14 +24,26 @@ function relativeOffset(index, activeIndex, total) {
   return Math.abs(forward) < Math.abs(backward) ? forward : backward;
 }
 
-export default function Services({ selectedDoctor, onDoctorSelect, embedded = false }) {
-  const [activeIndex, setActiveIndex] = useState(
-    Math.max(
-      0,
-      doctors.findIndex((doctor) => doctor.name === selectedDoctor)
-    )
+export default function Services({
+  doctors,
+  selectedDoctorId,
+  onDoctorSelect,
+  embedded = false,
+}) {
+  const preparedDoctors = useMemo(
+    () =>
+      doctors.map((doctor, index) => ({
+        ...doctor,
+        image: doctorImages[index % doctorImages.length],
+      })),
+    [doctors]
   );
   const [isMobile, setIsMobile] = useState(false);
+  const currentDoctorId = selectedDoctorId || preparedDoctors[0]?.id || "";
+  const activeIndex = Math.max(
+    0,
+    preparedDoctors.findIndex((doctor) => doctor.id === currentDoctorId)
+  );
 
   useEffect(() => {
     const syncViewport = () => {
@@ -63,27 +55,23 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
     return () => window.removeEventListener("resize", syncViewport);
   }, []);
 
-  useEffect(() => {
-    const matchedIndex = doctors.findIndex((doctor) => doctor.name === selectedDoctor);
-    if (matchedIndex >= 0 && matchedIndex !== activeIndex) {
-      setActiveIndex(matchedIndex);
-    }
-  }, [activeIndex, selectedDoctor]);
-
   const positionedDoctors = useMemo(
     () =>
-      doctors.map((doctor, index) => ({
+      preparedDoctors.map((doctor, index) => ({
         ...doctor,
         index,
-        offset: relativeOffset(index, activeIndex, doctors.length),
+        offset: relativeOffset(index, activeIndex, preparedDoctors.length),
       })),
-    [activeIndex]
+    [activeIndex, preparedDoctors]
   );
 
   const goToIndex = (index) => {
-    const nextIndex = mod(index, doctors.length);
-    setActiveIndex(nextIndex);
-    onDoctorSelect(doctors[nextIndex].name);
+    if (preparedDoctors.length === 0) {
+      return;
+    }
+
+    const nextIndex = mod(index, preparedDoctors.length);
+    onDoctorSelect(preparedDoctors[nextIndex].id);
   };
 
   const handleNext = () => {
@@ -186,14 +174,14 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
     <>
       <div className="overflow-hidden px-1 sm:px-3">
         <div className="relative z-0 mx-auto h-[470px] w-full max-w-[1160px] select-none sm:h-[540px]">
-          {positionedDoctors.map(({ name, specialty, image, offset }) => {
+          {positionedDoctors.map(({ id, full_name, specialty, image, offset }) => {
             const cardStyle = getCardStyle(offset);
             const isCenter = offset === 0;
-            const isActive = selectedDoctor === name;
+            const isActive = currentDoctorId === id;
 
             return (
               <motion.div
-                key={name}
+                key={id}
                 initial={false}
                 animate={{
                   x: cardStyle.x,
@@ -213,7 +201,7 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
                 <div className="relative h-full w-full bg-[#0F172A] dark:bg-[#111827]">
                   <Image
                     src={image}
-                    alt={`${name} portrait`}
+                    alt={`${full_name} portrait`}
                     fill
                     className="object-cover"
                   />
@@ -224,7 +212,7 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
                     <div className="flex items-start justify-between gap-3">
                       <div className="max-w-[170px] text-white">
                         <h3 className="text-[24px] font-semibold leading-[1.05] tracking-[-0.03em] sm:text-[28px]">
-                          {name}
+                          {full_name}
                         </h3>
                         <p className="mt-2 text-[14px] leading-6 text-white/78 sm:text-[15px]">
                           {specialty}
@@ -276,12 +264,12 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
         </button>
 
         <div className="flex items-center gap-3">
-          {doctors.map((doctor, index) => (
+          {preparedDoctors.map((doctor, index) => (
             <button
-              key={doctor.name}
+              key={doctor.id}
               type="button"
               onClick={() => goToIndex(index)}
-              aria-label={`Show ${doctor.name}`}
+              aria-label={`Show ${doctor.full_name}`}
               className={`h-3 w-3 rounded-full transition ${
                 activeIndex === index
                   ? "bg-[#2563EB] dark:bg-[#60A5FA]"
@@ -306,7 +294,7 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
   if (embedded) {
     return (
       <div id="doctor-row" className="relative isolate z-10 scroll-mt-28 sm:scroll-mt-32">
-        {content}
+        {preparedDoctors.length > 0 ? content : null}
       </div>
     );
   }
@@ -317,7 +305,7 @@ export default function Services({ selectedDoctor, onDoctorSelect, embedded = fa
       className="relative isolate z-10 scroll-mt-28 bg-transparent pb-16 pt-16 sm:scroll-mt-32 sm:pb-20 sm:pt-20"
     >
       <Container className="max-w-[1880px] px-6 sm:px-8 xl:px-12">
-        {content}
+        {preparedDoctors.length > 0 ? content : null}
       </Container>
     </section>
   );

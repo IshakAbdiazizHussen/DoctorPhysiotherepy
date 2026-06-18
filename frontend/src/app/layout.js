@@ -1,4 +1,5 @@
 import "./globals.css";
+import { AuthProvider } from "@/components/providers/AuthProvider";
 
 export const metadata = {
   title: "DoctorPhysio | Modern Rehabilitation Clinic",
@@ -28,7 +29,9 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className="bg-[var(--bg)] text-[var(--text)]">{children}</body>
+      <body className="bg-[var(--bg)] text-[var(--text)]">
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }

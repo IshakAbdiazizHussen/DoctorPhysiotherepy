@@ -7,9 +7,12 @@ import Container from "@/components/layout/Container";
 import DoctorsCarousel from "@/components/home/DoctorsCarousel";
 import FloatingContact from "@/components/shared/FloatingContact";
 import ScrollToTop from "@/components/shared/ScrollToTop";
+import useClinicCatalog from "@/hooks/useClinicCatalog";
 
 export default function DoctorsPage() {
-  const [selectedDoctor, setSelectedDoctor] = useState("Dr. Sarah Wilson");
+  const { doctors, isLoading, errorMessage } = useClinicCatalog();
+  const [selectedDoctorId, setSelectedDoctorId] = useState("");
+  const activeDoctorId = selectedDoctorId || doctors[0]?.id || "";
 
   return (
     <main id="top" className="min-h-screen bg-[#F8FAFC] text-slate-900 dark:bg-[#030B23] dark:text-[#F8FAFC]">
@@ -25,12 +28,24 @@ export default function DoctorsPage() {
               Meet the rehabilitation specialists guiding every recovery plan.
             </h1>
           </div>
+
+          {errorMessage ? (
+            <p className="mt-6 text-sm text-red-600 dark:text-[#FCA5A5]">
+              {errorMessage}
+            </p>
+          ) : null}
+          {isLoading ? (
+            <p className="mt-6 text-sm text-[#64748B] dark:text-[#94A3B8]">
+              Loading doctor profiles...
+            </p>
+          ) : null}
         </Container>
       </section>
 
       <DoctorsCarousel
-        selectedDoctor={selectedDoctor}
-        onDoctorSelect={setSelectedDoctor}
+        doctors={doctors}
+        selectedDoctorId={activeDoctorId}
+        onDoctorSelect={setSelectedDoctorId}
       />
       <Footer />
       <FloatingContact />

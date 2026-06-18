@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Menu, Phone, Sparkles, X } from "lucide-react";
 import { useState } from "react";
 import ThemeToggle from "@/components/shared/ThemeToggle";
+import { useAuth } from "@/components/providers/AuthProvider";
 import { NAV_ITEMS } from "@/lib/constants";
 import useScrollSpy from "@/hooks/useScrollSpy";
 import { resolveSectionHref } from "@/lib/utils";
@@ -14,6 +15,8 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useScrollSpy(NAV_ITEMS, "#top");
   const pathname = usePathname();
+  const { currentUser, isAuthenticated, logout } = useAuth();
+  const firstName = currentUser?.full_name?.split(" ")[0] || "Account";
 
   return (
     <>
@@ -95,6 +98,31 @@ export default function Navbar() {
                 isMenuOpen ? "flex" : "hidden"
               } flex-col gap-3 sm:flex-row sm:gap-4 lg:col-start-3 lg:flex lg:items-center lg:justify-self-end lg:ml-10 lg:gap-6 xl:ml-14 xl:gap-7`}
             >
+              {isAuthenticated ? (
+                <div className="flex items-center gap-3 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 dark:border-[#1E293B] dark:bg-[#111827] dark:text-[#E2E8F0]">
+                  <span className="font-medium text-[#0F172A] dark:text-[#F8FAFC]">
+                    {firstName}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      logout();
+                      setIsMenuOpen(false);
+                    }}
+                    className="text-sm text-[#2563EB] transition hover:text-[#1D4ED8] dark:text-[#60A5FA] dark:hover:text-[#93C5FD]"
+                  >
+                    Sign out
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  href="/appointment"
+                  className="inline-flex items-center justify-center rounded-full border border-slate-200 px-5 py-3 text-sm font-medium text-slate-700 transition hover:border-[#2563EB] hover:text-[#2563EB] dark:border-[#1E293B] dark:bg-[#111827] dark:text-[#F8FAFC] dark:hover:border-[#60A5FA] dark:hover:text-[#60A5FA]"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Sign In
+                </Link>
+              )}
               <ThemeToggle />
               <Link
                 href={resolveSectionHref(pathname, "#appointment")}

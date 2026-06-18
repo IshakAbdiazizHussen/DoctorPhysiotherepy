@@ -4,52 +4,49 @@ import { Activity, ArrowRight, BrainCircuit, CalendarDays, Check, HeartPulse, Me
 import Container from "./Container";
 import Services from "./Services";
 
-const categories = ["All", "Pain Relief", "Sports Injury", "Rehabilitation", "Mobility"];
-
-const cards = [
-  {
-    icon: Activity,
-    title: "Advanced mobility therapy",
-    text: "Programs that rebuild balance, posture, and movement quality.",
-    category: "Mobility",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Injury recovery support",
-    text: "Safe rehabilitation pathways after surgery and sports injuries.",
-    category: "Sports Injury",
-  },
-  {
-    icon: HeartPulse,
-    title: "Pain relief treatment",
-    text: "Manual therapy and guided care to reduce pain and inflammation.",
-    category: "Pain Relief",
-  },
-  {
-    icon: BrainCircuit,
-    title: "Neuromuscular re-education",
-    text: "Restoring movement, stability, and muscle control effectively.",
-    category: "Rehabilitation",
-  },
-];
+const serviceIcons = [Activity, ShieldCheck, HeartPulse, BrainCircuit];
 
 export default function Stats({
+  services,
+  doctors,
   selectedCategory,
   onCategoryChange,
-  selectedService,
+  selectedServiceId,
   onServiceSelect,
-  selectedDoctor,
+  selectedDoctorId,
   onDoctorSelect,
 }) {
+  const categories = ["All", ...new Set(services.map((service) => service.category))];
+  const cards = services.map((service, index) => ({
+    ...service,
+    icon: serviceIcons[index % serviceIcons.length],
+    title: service.name,
+    text:
+      service.short_description ||
+      service.description ||
+      "Personalized rehabilitation support designed around recovery goals.",
+  }));
   const filteredCards =
     selectedCategory === "All"
       ? cards
       : cards.filter((card) => card.category === selectedCategory);
 
-  const visibleCards = filteredCards.length === 4 ? filteredCards : cards;
+  const visibleCards = filteredCards.length > 0 ? filteredCards : cards;
   const activeService =
-    cards.find((card) => card.title === selectedService) ?? cards[0];
-  const ActiveIcon = activeService.icon;
+    cards.find((card) => card.id === selectedServiceId) ?? cards[0];
+  const ActiveIcon = activeService?.icon || Activity;
+
+  if (cards.length === 0) {
+    return (
+      <section id="services" className="bg-transparent py-16 sm:py-20 lg:py-24">
+        <Container className="max-w-[1500px] px-6 sm:px-8 xl:px-10">
+          <div className="rounded-[28px] border border-[#E5E7EB] bg-white p-8 text-[#64748B] dark:border-[#1E293B] dark:bg-[#111827] dark:text-[#94A3B8]">
+            Service information is not available right now.
+          </div>
+        </Container>
+      </section>
+    );
+  }
 
   return (
     <section id="services" className="bg-transparent py-16 sm:py-20 lg:py-24">
@@ -116,14 +113,14 @@ export default function Stats({
           </div>
 
           <div className="grid w-full gap-6 sm:grid-cols-2 xl:max-w-[664px] xl:justify-self-end">
-            {visibleCards.map(({ icon: Icon, title, text }) => {
-              const isActive = selectedService === title;
+            {visibleCards.map(({ id, icon: Icon, title, text }) => {
+              const isActive = selectedServiceId === id;
 
               return (
                 <button
-                  key={title}
+                  key={id}
                   type="button"
-                  onClick={() => onServiceSelect(title)}
+                  onClick={() => onServiceSelect(id)}
                   className={`relative h-[260px] w-full max-w-[320px] rounded-[28px] bg-white px-8 py-8 text-left shadow-none dark:bg-[#111827] ${
                     isActive
                       ? "border-2 border-[#2563EB] dark:border-[#60A5FA]"
@@ -165,11 +162,12 @@ export default function Stats({
                   Selected Treatment
                 </p>
                 <h3 className="mt-3 text-[20px] font-semibold leading-[1.2] text-[#0F172A] dark:text-[#F8FAFC] sm:text-[22px]">
-                  {activeService.title}
+                  {activeService.name}
                 </h3>
                 <p className="mt-4 max-w-[460px] text-[17px] leading-[1.75] text-[#64748B] dark:text-[#94A3B8]">
-                  Ideal for posture correction, restoring stability, and strength
-                  rebuilding to improve movement and flexibility.
+                  {activeService.description ||
+                    activeService.short_description ||
+                    "Ideal for posture correction, restoring stability, and strength rebuilding to improve movement and flexibility."}
                 </p>
 
                 <button
@@ -218,7 +216,8 @@ export default function Stats({
 
         <div className="mt-24 xl:mx-[-28px] 2xl:mx-[-56px]">
           <Services
-            selectedDoctor={selectedDoctor}
+            doctors={doctors}
+            selectedDoctorId={selectedDoctorId}
             onDoctorSelect={onDoctorSelect}
             embedded
           />

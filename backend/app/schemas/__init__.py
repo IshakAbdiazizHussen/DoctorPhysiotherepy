@@ -12,6 +12,12 @@ from app.schemas.patient import (
     PatientRead,
     PatientSelfUpdate,
 )
+from app.schemas.payment import (
+    PaymentAdminRead,
+    PaymentCreate,
+    PaymentRead,
+    PaymentStatusUpdate,
+)
 from app.schemas.service import (
     ServiceAdminRead,
     ServiceCreate,
@@ -41,6 +47,10 @@ __all__ = [
     "PatientAdminRead",
     "PatientSelfUpdate",
     "PatientAdminUpdate",
+    "PaymentCreate",
+    "PaymentStatusUpdate",
+    "PaymentRead",
+    "PaymentAdminRead",
     "ServiceCreate",
     "ServiceUpdate",
     "ServiceRead",

@@ -22,6 +22,13 @@ from app.services.patient_service import (
     update_patient_record_for_admin,
     update_patient_record_for_current_user,
 )
+from app.services.payment_service import (
+    create_payment_record,
+    get_payment_for_owner_or_admin,
+    list_payments_for_admin,
+    list_payments_for_current_user,
+    update_payment_status_for_admin,
+)
 from app.services.service_service import (
     create_service_record,
     delete_service_record,
@@ -50,6 +57,11 @@ __all__ = [
     "update_patient_record_for_current_user",
     "update_patient_record_for_admin",
     "delete_patient_record_for_admin",
+    "list_payments_for_current_user",
+    "list_payments_for_admin",
+    "get_payment_for_owner_or_admin",
+    "create_payment_record",
+    "update_payment_status_for_admin",
     "get_services_for_public",
     "get_service_for_public",
     "create_service_record",

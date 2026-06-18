@@ -20,6 +20,12 @@ from app.repositories.patient_repository import (
     list_patients,
     update_patient,
 )
+from app.repositories.payment_repository import (
+    create_payment,
+    get_payment_by_id,
+    list_payments,
+    update_payment,
+)
 from app.repositories.service_repository import (
     create_service,
     delete_service,
@@ -50,6 +56,10 @@ __all__ = [
     "create_patient",
     "update_patient",
     "delete_patient",
+    "list_payments",
+    "get_payment_by_id",
+    "create_payment",
+    "update_payment",
     "list_public_services",
     "get_public_service_by_id",
     "get_service_by_id",

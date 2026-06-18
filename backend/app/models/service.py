@@ -13,6 +13,7 @@ from app.database.connection import Base
 
 if TYPE_CHECKING:
     from app.models.appointment import Appointment
+    from app.models.payment import Payment
 
 
 class Service(Base):
@@ -48,3 +49,4 @@ class Service(Base):
     )
 
     appointments: Mapped[list["Appointment"]] = relationship(back_populates="service")
+    payments: Mapped[list["Payment"]] = relationship(back_populates="service")

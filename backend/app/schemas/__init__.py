@@ -1,3 +1,4 @@
+from app.schemas.doctor import DoctorAdminRead, DoctorCreate, DoctorRead, DoctorUpdate
 from app.schemas.user import (
     Token,
     TokenPayload,
@@ -8,6 +9,10 @@ from app.schemas.user import (
 )
 
 __all__ = [
+    "DoctorCreate",
+    "DoctorUpdate",
+    "DoctorRead",
+    "DoctorAdminRead",
     "UserCreate",
     "UserLogin",
     "UserRead",

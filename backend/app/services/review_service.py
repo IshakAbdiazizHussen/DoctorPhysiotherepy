@@ -17,11 +17,14 @@ from app.repositories.patient_repository import get_patient_by_user_id
 from app.repositories.review_repository import (
     create_review,
     get_public_review_by_id,
+    get_review_by_id,
     get_review_by_patient_and_target,
+    list_reviews,
     list_public_reviews,
+    update_review,
 )
 from app.repositories.service_repository import get_service_by_id
-from app.schemas.review import ReviewCreate
+from app.schemas.review import ReviewCreate, ReviewVisibilityUpdate
 
 
 def _get_current_user_patient_or_404(db: Session, current_user: User) -> Patient:
@@ -100,6 +103,30 @@ def get_review_for_public(db: Session, review_id: UUID) -> Review:
             detail="Review not found",
         )
     return review
+
+
+def list_reviews_for_admin(db: Session) -> list[Review]:
+    return list_reviews(db)
+
+
+def get_review_for_admin(db: Session, review_id: UUID) -> Review:
+    review = get_review_by_id(db, review_id)
+    if review is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Review not found",
+        )
+    return review
+
+
+def update_review_visibility_for_admin(
+    db: Session,
+    review_id: UUID,
+    payload: ReviewVisibilityUpdate,
+) -> Review:
+    review = get_review_for_admin(db, review_id)
+    update_data = payload.model_dump(exclude_unset=True)
+    return update_review(db, review, **update_data)
 
 
 def create_review_record(

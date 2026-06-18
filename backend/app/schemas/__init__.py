@@ -1,3 +1,4 @@
+from app.schemas.admin import AdminEntityTotals, AdminStatusCount, AdminSummaryRead
 from app.schemas.appointment import (
     AppointmentAdminRead,
     AppointmentCreate,
@@ -18,7 +19,7 @@ from app.schemas.payment import (
     PaymentRead,
     PaymentStatusUpdate,
 )
-from app.schemas.review import ReviewCreate, ReviewRead
+from app.schemas.review import ReviewAdminRead, ReviewCreate, ReviewRead, ReviewVisibilityUpdate
 from app.schemas.service import (
     ServiceAdminRead,
     ServiceCreate,
@@ -35,6 +36,9 @@ from app.schemas.user import (
 )
 
 __all__ = [
+    "AdminStatusCount",
+    "AdminEntityTotals",
+    "AdminSummaryRead",
     "DoctorCreate",
     "DoctorUpdate",
     "DoctorRead",
@@ -54,6 +58,8 @@ __all__ = [
     "PaymentAdminRead",
     "ReviewCreate",
     "ReviewRead",
+    "ReviewAdminRead",
+    "ReviewVisibilityUpdate",
     "ServiceCreate",
     "ServiceUpdate",
     "ServiceRead",

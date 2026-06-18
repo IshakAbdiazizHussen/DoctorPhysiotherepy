@@ -41,3 +41,28 @@ class ReviewRead(BaseModel):
     comment: str | None
     created_at: datetime
     updated_at: datetime
+
+
+class ReviewAdminRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: UUID
+    patient_id: UUID
+    doctor_id: UUID | None
+    service_id: UUID | None
+    rating: int
+    comment: str | None
+    is_visible: bool
+    admin_notes: str | None
+    created_at: datetime
+    updated_at: datetime
+
+
+class ReviewVisibilityUpdate(BaseModel):
+    is_visible: bool
+    admin_notes: str | None = Field(default=None, max_length=5000)
+
+    @field_validator("admin_notes")
+    @classmethod
+    def validate_admin_notes(cls, value: str | None) -> str | None:
+        return _normalize_optional_text(value)

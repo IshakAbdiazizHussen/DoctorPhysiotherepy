@@ -1,3 +1,8 @@
+from app.repositories.admin_repository import (
+    get_admin_totals,
+    list_appointment_status_counts,
+    list_payment_status_counts,
+)
 from app.repositories.appointment_repository import (
     create_appointment,
     get_appointment_by_id,
@@ -31,7 +36,9 @@ from app.repositories.review_repository import (
     get_public_review_by_id,
     get_review_by_id,
     get_review_by_patient_and_target,
+    list_reviews,
     list_public_reviews,
+    update_review,
 )
 from app.repositories.service_repository import (
     create_service,
@@ -44,6 +51,9 @@ from app.repositories.service_repository import (
 from app.repositories.user_repository import create_user, get_user_by_email, get_user_by_id
 
 __all__ = [
+    "get_admin_totals",
+    "list_appointment_status_counts",
+    "list_payment_status_counts",
     "get_user_by_email",
     "get_user_by_id",
     "create_user",
@@ -71,7 +81,9 @@ __all__ = [
     "get_public_review_by_id",
     "get_review_by_id",
     "get_review_by_patient_and_target",
+    "list_reviews",
     "create_review",
+    "update_review",
     "list_public_services",
     "get_public_service_by_id",
     "get_service_by_id",

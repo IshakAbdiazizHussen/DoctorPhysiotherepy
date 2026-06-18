@@ -1,3 +1,4 @@
+from app.services.admin_service import get_admin_summary
 from app.services.appointment_service import (
     create_appointment_record,
     get_appointment_for_owner_or_admin,
@@ -31,8 +32,11 @@ from app.services.payment_service import (
 )
 from app.services.review_service import (
     create_review_record,
+    get_review_for_admin,
     get_review_for_public,
+    list_reviews_for_admin,
     list_reviews_for_public,
+    update_review_visibility_for_admin,
 )
 from app.services.service_service import (
     create_service_record,
@@ -43,6 +47,7 @@ from app.services.service_service import (
 )
 
 __all__ = [
+    "get_admin_summary",
     "register_user",
     "authenticate_user",
     "list_appointments_for_current_user",
@@ -69,7 +74,10 @@ __all__ = [
     "update_payment_status_for_admin",
     "list_reviews_for_public",
     "get_review_for_public",
+    "list_reviews_for_admin",
+    "get_review_for_admin",
     "create_review_record",
+    "update_review_visibility_for_admin",
     "get_services_for_public",
     "get_service_for_public",
     "create_service_record",

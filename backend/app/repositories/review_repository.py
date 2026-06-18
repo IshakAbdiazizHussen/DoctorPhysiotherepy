@@ -53,6 +53,11 @@ def get_review_by_id(db: Session, review_id: UUID) -> Review | None:
     return db.scalar(statement)
 
 
+def list_reviews(db: Session) -> list[Review]:
+    statement = select(Review).order_by(Review.created_at.desc())
+    return list(db.scalars(statement))
+
+
 def get_review_by_patient_and_target(
     db: Session,
     *,
@@ -71,6 +76,16 @@ def get_review_by_patient_and_target(
 
 def create_review(db: Session, **review_data: object) -> Review:
     review = Review(**review_data)
+    db.add(review)
+    db.commit()
+    db.refresh(review)
+    return review
+
+
+def update_review(db: Session, review: Review, **review_data: object) -> Review:
+    for field_name, value in review_data.items():
+        setattr(review, field_name, value)
+
     db.add(review)
     db.commit()
     db.refresh(review)

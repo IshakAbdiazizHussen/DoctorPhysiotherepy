@@ -6,11 +6,8 @@ from uuid import UUID, uuid4
 
 import pytest
 from fastapi import HTTPException, status
-from fastapi.testclient import TestClient
-
 from app.api.v1.routes import auth as auth_routes
 from app.database.session import get_db
-from app.main import app
 from app.schemas.user import Token
 
 
@@ -25,9 +22,6 @@ class DummyUser:
     is_verified: bool
     created_at: datetime
     updated_at: datetime
-
-
-client = TestClient(app)
 
 
 def make_user() -> DummyUser:
@@ -45,14 +39,9 @@ def make_user() -> DummyUser:
     )
 
 
-@pytest.fixture(autouse=True)
-def clear_dependency_overrides() -> None:
-    app.dependency_overrides.clear()
-    yield
-    app.dependency_overrides.clear()
+def test_register_returns_user_read_schema(client, monkeypatch: pytest.MonkeyPatch) -> None:
+    from app.main import app
 
-
-def test_register_returns_user_read_schema(monkeypatch: pytest.MonkeyPatch) -> None:
     created_user = make_user()
     app.dependency_overrides[get_db] = lambda: object()
 
@@ -87,7 +76,9 @@ def test_register_returns_user_read_schema(monkeypatch: pytest.MonkeyPatch) -> N
     assert "hashed_password" not in response.json()
 
 
-def test_register_returns_duplicate_email_error(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_register_returns_duplicate_email_error(client, monkeypatch: pytest.MonkeyPatch) -> None:
+    from app.main import app
+
     app.dependency_overrides[get_db] = lambda: object()
 
     def fake_register_user(db: object, payload: object) -> DummyUser:
@@ -111,7 +102,9 @@ def test_register_returns_duplicate_email_error(monkeypatch: pytest.MonkeyPatch)
     assert response.json() == {"detail": "Email is already registered"}
 
 
-def test_login_returns_token_schema(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_login_returns_token_schema(client, monkeypatch: pytest.MonkeyPatch) -> None:
+    from app.main import app
+
     app.dependency_overrides[get_db] = lambda: object()
 
     def fake_authenticate_user(db: object, payload: object) -> Token:
@@ -136,7 +129,9 @@ def test_login_returns_token_schema(monkeypatch: pytest.MonkeyPatch) -> None:
     }
 
 
-def test_login_returns_bad_credentials_error(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_login_returns_bad_credentials_error(client, monkeypatch: pytest.MonkeyPatch) -> None:
+    from app.main import app
+
     app.dependency_overrides[get_db] = lambda: object()
 
     def fake_authenticate_user(db: object, payload: object) -> Token:
@@ -159,3 +154,54 @@ def test_login_returns_bad_credentials_error(monkeypatch: pytest.MonkeyPatch) ->
     assert response.status_code == 401
     assert response.json() == {"detail": "Invalid email or password"}
     assert response.headers["www-authenticate"] == "Bearer"
+
+
+def test_register_rejects_invalid_payload_before_service_call(
+    client,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    service_called = False
+
+    def fake_register_user(db: object, payload: object) -> DummyUser:
+        nonlocal service_called
+        service_called = True
+        return make_user()
+
+    monkeypatch.setattr(auth_routes, "register_user", fake_register_user)
+
+    response = client.post(
+        "/api/v1/auth/register",
+        json={
+            "full_name": "   ",
+            "email": "not-an-email",
+            "password": "short",
+        },
+    )
+
+    assert response.status_code == 422
+    assert service_called is False
+
+
+def test_login_rejects_invalid_payload_before_service_call(
+    client,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    service_called = False
+
+    def fake_authenticate_user(db: object, payload: object) -> Token:
+        nonlocal service_called
+        service_called = True
+        return Token(access_token="token-123", token_type="bearer")
+
+    monkeypatch.setattr(auth_routes, "authenticate_user", fake_authenticate_user)
+
+    response = client.post(
+        "/api/v1/auth/login",
+        json={
+            "email": "not-an-email",
+            "password": "",
+        },
+    )
+
+    assert response.status_code == 422
+    assert service_called is False

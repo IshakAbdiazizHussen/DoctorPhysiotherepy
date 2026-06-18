@@ -6,12 +6,10 @@ from uuid import UUID, uuid4
 
 import pytest
 from fastapi import HTTPException
-from fastapi.testclient import TestClient
 
 from app.api import deps as auth_deps
 from app.core.security import create_access_token
 from app.database.session import get_db
-from app.main import app
 from app.models.user import UserRole
 
 
@@ -25,9 +23,6 @@ class DummyUser:
     is_verified: bool
     created_at: datetime
     updated_at: datetime
-
-
-client = TestClient(app)
 
 
 def make_user(*, role: str = UserRole.USER.value, is_active: bool = True) -> DummyUser:
@@ -44,14 +39,7 @@ def make_user(*, role: str = UserRole.USER.value, is_active: bool = True) -> Dum
     )
 
 
-@pytest.fixture(autouse=True)
-def clear_dependency_overrides() -> None:
-    app.dependency_overrides.clear()
-    yield
-    app.dependency_overrides.clear()
-
-
-def test_me_rejects_missing_bearer_token() -> None:
+def test_me_rejects_missing_bearer_token(client) -> None:
     response = client.get("/api/v1/auth/me")
 
     assert response.status_code == 401
@@ -59,7 +47,7 @@ def test_me_rejects_missing_bearer_token() -> None:
     assert response.headers["www-authenticate"] == "Bearer"
 
 
-def test_me_rejects_invalid_bearer_token() -> None:
+def test_me_rejects_invalid_bearer_token(client) -> None:
     response = client.get(
         "/api/v1/auth/me",
         headers={"Authorization": "Bearer not-a-valid-token"},
@@ -70,7 +58,9 @@ def test_me_rejects_invalid_bearer_token() -> None:
     assert response.headers["www-authenticate"] == "Bearer"
 
 
-def test_me_rejects_unknown_user(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_me_rejects_unknown_user(client, monkeypatch: pytest.MonkeyPatch) -> None:
+    from app.main import app
+
     app.dependency_overrides[get_db] = lambda: object()
     monkeypatch.setattr(auth_deps, "_resolve_subject_to_user", lambda db, subject: None)
 
@@ -85,7 +75,9 @@ def test_me_rejects_unknown_user(monkeypatch: pytest.MonkeyPatch) -> None:
     assert response.headers["www-authenticate"] == "Bearer"
 
 
-def test_me_rejects_inactive_user(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_me_rejects_inactive_user(client, monkeypatch: pytest.MonkeyPatch) -> None:
+    from app.main import app
+
     inactive_user = make_user(is_active=False)
 
     app.dependency_overrides[get_db] = lambda: object()
@@ -105,7 +97,22 @@ def test_me_rejects_inactive_user(monkeypatch: pytest.MonkeyPatch) -> None:
     assert response.json() == {"detail": "Inactive user"}
 
 
-def test_me_returns_current_active_user(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_me_rejects_token_without_subject(client, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(auth_deps, "decode_access_token", lambda token: {"exp": 9999999999})
+
+    response = client.get(
+        "/api/v1/auth/me",
+        headers={"Authorization": "Bearer valid-structure-but-no-subject"},
+    )
+
+    assert response.status_code == 401
+    assert response.json() == {"detail": "Token subject is missing"}
+    assert response.headers["www-authenticate"] == "Bearer"
+
+
+def test_me_returns_current_active_user(client, monkeypatch: pytest.MonkeyPatch) -> None:
+    from app.main import app
+
     current_user = make_user()
 
     app.dependency_overrides[get_db] = lambda: object()
@@ -151,3 +158,10 @@ def test_require_admin_accepts_admin_user() -> None:
     admin_user = make_user(role=UserRole.ADMIN.value)
 
     assert auth_deps.require_admin(admin_user) is admin_user
+
+
+def test_require_roles_rejects_empty_role_configuration() -> None:
+    with pytest.raises(ValueError) as exc_info:
+        auth_deps.require_roles()
+
+    assert str(exc_info.value) == "At least one allowed role must be provided"

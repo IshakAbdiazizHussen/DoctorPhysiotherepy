@@ -1,13 +1,7 @@
-from fastapi.testclient import TestClient
-
 from app.core.config import settings
-from app.main import app
 
 
-client = TestClient(app)
-
-
-def test_cors_allows_configured_origin_on_health_route() -> None:
+def test_cors_allows_configured_origin_on_health_route(client) -> None:
     allowed_origin = settings.BACKEND_CORS_ORIGINS[0]
 
     response = client.get(
@@ -20,7 +14,7 @@ def test_cors_allows_configured_origin_on_health_route() -> None:
     assert response.headers["access-control-allow-credentials"] == "true"
 
 
-def test_cors_handles_preflight_for_versioned_auth_route() -> None:
+def test_cors_handles_preflight_for_versioned_auth_route(client) -> None:
     allowed_origin = settings.BACKEND_CORS_ORIGINS[0]
 
     response = client.options(
@@ -39,7 +33,7 @@ def test_cors_handles_preflight_for_versioned_auth_route() -> None:
     assert "content-type" in response.headers["access-control-allow-headers"].lower()
 
 
-def test_cors_does_not_allow_unknown_origin() -> None:
+def test_cors_does_not_allow_unknown_origin(client) -> None:
     response = client.get(
         "/api/v1/health",
         headers={"Origin": "https://not-allowed.example.com"},

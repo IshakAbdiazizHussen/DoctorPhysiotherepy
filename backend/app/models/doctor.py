@@ -1,13 +1,17 @@
 from __future__ import annotations
 
 from datetime import datetime
+from typing import TYPE_CHECKING
 from uuid import UUID, uuid4
 
 from sqlalchemy import Boolean, DateTime, Integer, String, Text, func
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.types import Uuid
 
 from app.database.connection import Base
+
+if TYPE_CHECKING:
+    from app.models.appointment import Appointment
 
 
 class Doctor(Base):
@@ -48,3 +52,5 @@ class Doctor(Base):
         server_default=func.now(),
         onupdate=func.now(),
     )
+
+    appointments: Mapped[list["Appointment"]] = relationship(back_populates="doctor")

@@ -1,3 +1,9 @@
+from app.repositories.appointment_repository import (
+    create_appointment,
+    get_appointment_by_id,
+    list_appointments,
+    update_appointment,
+)
 from app.repositories.doctor_repository import (
     create_doctor,
     delete_doctor,
@@ -28,6 +34,10 @@ __all__ = [
     "get_user_by_email",
     "get_user_by_id",
     "create_user",
+    "list_appointments",
+    "get_appointment_by_id",
+    "create_appointment",
+    "update_appointment",
     "list_public_doctors",
     "get_public_doctor_by_id",
     "get_doctor_by_id",

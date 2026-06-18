@@ -9,5 +9,14 @@ from app.models.doctor import Doctor
 from app.models.patient import Patient
 from app.models.service import Service
 from app.models.user import User, UserRole
+from app.models.appointment import Appointment, AppointmentStatus
 
-__all__ = ["User", "UserRole", "Doctor", "Patient", "Service"]
+__all__ = [
+    "User",
+    "UserRole",
+    "Doctor",
+    "Patient",
+    "Service",
+    "Appointment",
+    "AppointmentStatus",
+]

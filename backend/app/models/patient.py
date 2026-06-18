@@ -11,6 +11,7 @@ from sqlalchemy.types import Uuid
 from app.database.connection import Base
 
 if TYPE_CHECKING:
+    from app.models.appointment import Appointment
     from app.models.user import User
 
 
@@ -54,3 +55,4 @@ class Patient(Base):
     )
 
     user: Mapped["User"] = relationship(back_populates="patient")
+    appointments: Mapped[list["Appointment"]] = relationship(back_populates="patient")

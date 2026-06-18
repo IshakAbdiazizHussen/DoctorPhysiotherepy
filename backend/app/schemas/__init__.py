@@ -1,3 +1,9 @@
+from app.schemas.appointment import (
+    AppointmentAdminRead,
+    AppointmentCreate,
+    AppointmentRead,
+    AppointmentStatusUpdate,
+)
 from app.schemas.doctor import DoctorAdminRead, DoctorCreate, DoctorRead, DoctorUpdate
 from app.schemas.patient import (
     PatientAdminRead,
@@ -26,6 +32,10 @@ __all__ = [
     "DoctorUpdate",
     "DoctorRead",
     "DoctorAdminRead",
+    "AppointmentCreate",
+    "AppointmentStatusUpdate",
+    "AppointmentRead",
+    "AppointmentAdminRead",
     "PatientCreate",
     "PatientRead",
     "PatientAdminRead",

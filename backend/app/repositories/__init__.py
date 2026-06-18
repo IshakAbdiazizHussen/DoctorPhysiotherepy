@@ -6,6 +6,14 @@ from app.repositories.doctor_repository import (
     list_public_doctors,
     update_doctor,
 )
+from app.repositories.patient_repository import (
+    create_patient,
+    delete_patient,
+    get_patient_by_id,
+    get_patient_by_user_id,
+    list_patients,
+    update_patient,
+)
 from app.repositories.user_repository import create_user, get_user_by_email, get_user_by_id
 
 __all__ = [
@@ -18,4 +26,10 @@ __all__ = [
     "create_doctor",
     "update_doctor",
     "delete_doctor",
+    "list_patients",
+    "get_patient_by_id",
+    "get_patient_by_user_id",
+    "create_patient",
+    "update_patient",
+    "delete_patient",
 ]

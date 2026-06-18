@@ -73,8 +73,24 @@ def get_current_active_user(current_user: User = Depends(get_current_user)) -> U
     return current_user
 
 
-def require_admin(current_user: User = Depends(get_current_active_user)) -> User:
-    if current_user.role != UserRole.ADMIN.value:
-        raise _forbidden_exception("Admin access required")
+def require_roles(
+    *allowed_roles: UserRole | str,
+    detail: str = "Not enough permissions",
+):
+    normalized_roles = tuple(
+        role.value if isinstance(role, UserRole) else str(role)
+        for role in allowed_roles
+    )
 
-    return current_user
+    if not normalized_roles:
+        raise ValueError("At least one allowed role must be provided")
+
+    def role_dependency(current_user: User = Depends(get_current_active_user)) -> User:
+        if current_user.role not in normalized_roles:
+            raise _forbidden_exception(detail)
+        return current_user
+
+    return role_dependency
+
+
+require_admin = require_roles(UserRole.ADMIN, detail="Admin access required")

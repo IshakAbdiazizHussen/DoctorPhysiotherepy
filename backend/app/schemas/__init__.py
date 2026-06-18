@@ -18,6 +18,7 @@ from app.schemas.payment import (
     PaymentRead,
     PaymentStatusUpdate,
 )
+from app.schemas.review import ReviewCreate, ReviewRead
 from app.schemas.service import (
     ServiceAdminRead,
     ServiceCreate,
@@ -51,6 +52,8 @@ __all__ = [
     "PaymentStatusUpdate",
     "PaymentRead",
     "PaymentAdminRead",
+    "ReviewCreate",
+    "ReviewRead",
     "ServiceCreate",
     "ServiceUpdate",
     "ServiceRead",

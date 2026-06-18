@@ -29,6 +29,11 @@ from app.services.payment_service import (
     list_payments_for_current_user,
     update_payment_status_for_admin,
 )
+from app.services.review_service import (
+    create_review_record,
+    get_review_for_public,
+    list_reviews_for_public,
+)
 from app.services.service_service import (
     create_service_record,
     delete_service_record,
@@ -62,6 +67,9 @@ __all__ = [
     "get_payment_for_owner_or_admin",
     "create_payment_record",
     "update_payment_status_for_admin",
+    "list_reviews_for_public",
+    "get_review_for_public",
+    "create_review_record",
     "get_services_for_public",
     "get_service_for_public",
     "create_service_record",

@@ -13,6 +13,7 @@ from app.database.connection import Base
 if TYPE_CHECKING:
     from app.models.appointment import Appointment
     from app.models.payment import Payment
+    from app.models.review import Review
     from app.models.user import User
 
 
@@ -58,3 +59,4 @@ class Patient(Base):
     user: Mapped["User"] = relationship(back_populates="patient")
     appointments: Mapped[list["Appointment"]] = relationship(back_populates="patient")
     payments: Mapped[list["Payment"]] = relationship(back_populates="patient")
+    reviews: Mapped[list["Review"]] = relationship(back_populates="patient")

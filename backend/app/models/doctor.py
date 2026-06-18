@@ -12,6 +12,7 @@ from app.database.connection import Base
 
 if TYPE_CHECKING:
     from app.models.appointment import Appointment
+    from app.models.review import Review
 
 
 class Doctor(Base):
@@ -54,3 +55,4 @@ class Doctor(Base):
     )
 
     appointments: Mapped[list["Appointment"]] = relationship(back_populates="doctor")
+    reviews: Mapped[list["Review"]] = relationship(back_populates="doctor")

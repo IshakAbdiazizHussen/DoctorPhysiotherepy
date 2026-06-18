@@ -26,6 +26,13 @@ from app.repositories.payment_repository import (
     list_payments,
     update_payment,
 )
+from app.repositories.review_repository import (
+    create_review,
+    get_public_review_by_id,
+    get_review_by_id,
+    get_review_by_patient_and_target,
+    list_public_reviews,
+)
 from app.repositories.service_repository import (
     create_service,
     delete_service,
@@ -60,6 +67,11 @@ __all__ = [
     "get_payment_by_id",
     "create_payment",
     "update_payment",
+    "list_public_reviews",
+    "get_public_review_by_id",
+    "get_review_by_id",
+    "get_review_by_patient_and_target",
+    "create_review",
     "list_public_services",
     "get_public_service_by_id",
     "get_service_by_id",

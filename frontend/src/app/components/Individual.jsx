@@ -55,7 +55,7 @@ export default function Individual({
           className={
             isEmbedded
               ? "grid gap-8 xl:h-full xl:items-stretch xl:gap-10 xl:grid-cols-[minmax(0,560px)_minmax(0,460px)] xl:justify-start"
-              : "grid gap-8 lg:items-stretch lg:grid-cols-[48%_52%] xl:gap-10"
+              : "grid gap-8 lg:items-stretch lg:grid-cols-[minmax(0,48fr)_minmax(0,52fr)] xl:gap-10"
           }
         >
           <article

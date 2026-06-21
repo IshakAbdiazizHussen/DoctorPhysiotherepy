@@ -256,8 +256,8 @@ export default function AppointmentPage() {
       <Navbar />
 
       <section className="px-6 py-10 sm:px-8 lg:px-10">
-        <div className="mx-auto grid max-w-[1560px] items-start gap-8 xl:items-stretch xl:grid-cols-[450px_minmax(0,1fr)]">
-          <article className="flex w-full max-w-[450px] flex-col self-start rounded-[32px] border border-slate-200 bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-[#1E293B] dark:bg-[#111827] sm:p-7 xl:h-full">
+        <div className="mx-auto grid max-w-[1560px] items-start gap-8 xl:items-stretch xl:grid-cols-[minmax(0,45fr)_minmax(0,55fr)]">
+          <article className="flex w-full flex-col self-start rounded-[32px] border border-slate-200 bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-[#1E293B] dark:bg-[#111827] sm:p-7 xl:h-full">
             <div className="flex items-center justify-between gap-4">
               <div>
                 <p className="text-[13px] font-medium uppercase tracking-[0.28em] text-[#2563EB] dark:text-[#60A5FA]">

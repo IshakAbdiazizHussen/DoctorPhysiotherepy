@@ -15,7 +15,7 @@ export default function DoctorsPage() {
   const activeDoctorId = selectedDoctorId || doctors[0]?.id || "";
 
   return (
-    <main id="top" className="min-h-screen bg-[#F8FAFC] text-slate-900 dark:bg-[#030B23] dark:text-[#F8FAFC]">
+    <main id="top" className="min-h-screen bg-[#F8FAFC] text-slate-900 dark:bg-[#020617] dark:text-[#F8FAFC]">
       <Navbar />
 
       <section className="py-16 sm:py-20 lg:py-24">

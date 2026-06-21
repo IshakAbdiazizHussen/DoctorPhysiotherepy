@@ -1,14 +1,25 @@
 "use client";
 
-const DEFAULT_API_BASE_URL = "http://localhost:8000";
+function getApiBaseUrl() {
+  const configuredBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL?.trim();
 
-export const API_BASE_URL = (
-  process.env.NEXT_PUBLIC_API_BASE_URL || DEFAULT_API_BASE_URL
-).replace(/\/$/, "");
+  if (!configuredBaseUrl) {
+    throw new Error(
+      "NEXT_PUBLIC_API_BASE_URL is not set. Start the frontend with NEXT_PUBLIC_API_BASE_URL=http://127.0.0.1:8012."
+    );
+  }
+
+  return configuredBaseUrl.replace(/\/$/, "");
+}
+
+export function getApiUrl(path) {
+  const apiBaseUrl = getApiBaseUrl();
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  return `${apiBaseUrl}${normalizedPath}`;
+}
 
 function buildApiUrl(path) {
-  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-  return `${API_BASE_URL}${normalizedPath}`;
+  return getApiUrl(path);
 }
 
 async function parseResponse(response) {
@@ -39,6 +50,7 @@ function buildRequestError(response, payload) {
 async function apiRequest(path, options = {}) {
   const { method = "GET", body, token, headers = {}, cache = "no-store" } = options;
   const requestHeaders = new Headers(headers);
+  const requestUrl = buildApiUrl(path);
 
   if (body !== undefined) {
     requestHeaders.set("Content-Type", "application/json");
@@ -48,12 +60,23 @@ async function apiRequest(path, options = {}) {
     requestHeaders.set("Authorization", `Bearer ${token}`);
   }
 
-  const response = await fetch(buildApiUrl(path), {
-    method,
-    headers: requestHeaders,
-    body: body !== undefined ? JSON.stringify(body) : undefined,
-    cache,
-  });
+  let response;
+
+  try {
+    response = await fetch(requestUrl, {
+      method,
+      headers: requestHeaders,
+      body: body !== undefined ? JSON.stringify(body) : undefined,
+      cache,
+    });
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Unknown network error";
+
+    throw new Error(
+      `Failed to reach ${requestUrl}. Confirm the backend is running and NEXT_PUBLIC_API_BASE_URL is correct. Original error: ${message}`
+    );
+  }
 
   const payload = await parseResponse(response);
 

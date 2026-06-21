@@ -1,18 +1,6 @@
 "use client";
 
-import {
-  CalendarClock,
-  CalendarDays,
-  ChevronDown,
-  Clock3,
-  CreditCard,
-  HeartHandshake,
-  Mail,
-  ShieldCheck,
-  Stethoscope,
-  User,
-  UserRoundCheck,
-} from "lucide-react";
+import { CalendarClock, CalendarDays, ChevronDown, Clock3, CreditCard, HeartHandshake, Mail, ShieldCheck, Stethoscope, User, UserRoundCheck } from "lucide-react";
 import Container from "./Container";
 
 const highlights = [

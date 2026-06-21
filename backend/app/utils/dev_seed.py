@@ -24,7 +24,7 @@ class SeedUserDefinition:
 SEED_USERS: tuple[SeedUserDefinition, ...] = (
     SeedUserDefinition(
         full_name="Local Admin",
-        email="local.admin@doctorphysio.test",
+        email="local.admin@example.com",
         password="Admin123",
         role=UserRole.ADMIN,
         is_active=True,
@@ -32,7 +32,7 @@ SEED_USERS: tuple[SeedUserDefinition, ...] = (
     ),
     SeedUserDefinition(
         full_name="Sample Patient One",
-        email="patient.one@doctorphysio.test",
+        email="patient.one@example.com",
         password="Patient123",
         role=UserRole.USER,
         is_active=True,
@@ -40,7 +40,7 @@ SEED_USERS: tuple[SeedUserDefinition, ...] = (
     ),
     SeedUserDefinition(
         full_name="Sample Patient Two",
-        email="patient.two@doctorphysio.test",
+        email="patient.two@example.com",
         password="Patient456",
         role=UserRole.USER,
         is_active=True,

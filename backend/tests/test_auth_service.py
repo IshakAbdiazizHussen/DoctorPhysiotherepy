@@ -51,24 +51,31 @@ def test_register_user_hashes_password_before_creating_user(
         password="Secure123",
     )
     captured_create_args: dict[str, str] = {}
+    created_patient_args: dict[str, object] = {}
+    created_user = make_user(email=payload.email)
 
     monkeypatch.setattr(auth_service, "get_user_by_email", lambda db, email: None)
     monkeypatch.setattr(auth_service, "hash_password", lambda password: "hashed-secure-123")
 
     def fake_create_user(db: object, **kwargs: str) -> DummyUser:
         captured_create_args.update(kwargs)
-        return make_user(email=kwargs["email"])
+        return created_user
+
+    def fake_create_patient(db: object, **kwargs: object) -> None:
+        created_patient_args.update(kwargs)
 
     monkeypatch.setattr(auth_service, "create_user", fake_create_user)
+    monkeypatch.setattr(auth_service, "create_patient", fake_create_patient)
 
-    created_user = auth_service.register_user(object(), payload)
+    returned_user = auth_service.register_user(object(), payload)
 
-    assert created_user.email == payload.email
+    assert returned_user.email == payload.email
     assert captured_create_args == {
         "full_name": payload.full_name,
         "email": payload.email,
         "hashed_password": "hashed-secure-123",
     }
+    assert created_patient_args == {"user_id": created_user.id}
 
 
 def test_authenticate_user_rejects_unknown_email(monkeypatch: pytest.MonkeyPatch) -> None:

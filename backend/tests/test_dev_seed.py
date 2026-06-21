@@ -11,11 +11,11 @@ def test_seed_users_are_fake_local_development_accounts() -> None:
     seed_emails = {user.email for user in dev_seed.SEED_USERS}
 
     assert seed_emails == {
-        "local.admin@doctorphysio.test",
-        "patient.one@doctorphysio.test",
-        "patient.two@doctorphysio.test",
+        "local.admin@example.com",
+        "patient.one@example.com",
+        "patient.two@example.com",
     }
-    assert all(user.email.endswith("@doctorphysio.test") for user in dev_seed.SEED_USERS)
+    assert all(user.email.endswith("@example.com") for user in dev_seed.SEED_USERS)
     assert all(
         len(user.password.encode("utf-8")) <= BCRYPT_PASSWORD_MAX_BYTES
         for user in dev_seed.SEED_USERS

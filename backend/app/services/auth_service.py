@@ -4,6 +4,7 @@ from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.security import create_access_token, hash_password, verify_password
+from app.repositories.patient_repository import create_patient
 from app.models.user import User
 from app.repositories.user_repository import create_user, get_user_by_email
 from app.schemas.user import Token, UserCreate, UserLogin
@@ -17,12 +18,14 @@ def register_user(db: Session, payload: UserCreate) -> User:
             detail="Email is already registered",
         )
 
-    return create_user(
+    user = create_user(
         db,
         full_name=payload.full_name,
         email=payload.email,
         hashed_password=hash_password(payload.password),
     )
+    create_patient(db, user_id=user.id)
+    return user
 
 
 def authenticate_user(db: Session, payload: UserLogin) -> Token:

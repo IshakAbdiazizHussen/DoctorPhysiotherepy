@@ -43,7 +43,7 @@ export default function Footer() {
   const pathname = usePathname();
 
   return (
-    <footer className="mt-8 bg-[linear-gradient(180deg,#F8FAFC_0%,#EEF6FF_100%)] pb-[60px] pt-[120px] dark:bg-[linear-gradient(180deg,#0F172A_0%,#020617_100%)] sm:mt-10">
+    <footer className="mt-auto bg-[linear-gradient(180deg,#F8FAFC_0%,#EEF6FF_100%)] pb-[60px] pt-[120px] dark:bg-[linear-gradient(180deg,#0F172A_0%,#020617_100%)]">
       <Container className="max-w-[1500px] px-6 sm:px-8 xl:px-10">
         <div className="grid gap-y-14 lg:grid-cols-[1.2fr_0.78fr_0.9fr_1fr] lg:items-start lg:gap-x-20 xl:gap-x-24">
           <div className="max-w-[31rem]">

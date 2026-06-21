@@ -252,7 +252,7 @@ export default function AppointmentPage() {
   };
 
   return (
-    <main id="top" className="min-h-screen bg-white text-slate-900 dark:bg-[#020617] dark:text-[#F8FAFC]">
+    <main id="top" className="flex flex-1 flex-col bg-white text-slate-900 dark:bg-[#020617] dark:text-[#F8FAFC]">
       <Navbar />
 
       <section className="px-6 py-10 sm:px-8 lg:px-10">

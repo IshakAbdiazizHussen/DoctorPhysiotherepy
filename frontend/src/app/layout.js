@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className="bg-[var(--bg)] text-[var(--text)]">
+      <body className="flex min-h-screen flex-col bg-[var(--bg)] text-[var(--text)]">
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

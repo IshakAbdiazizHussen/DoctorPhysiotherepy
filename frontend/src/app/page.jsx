@@ -117,7 +117,7 @@ export default function HomePage() {
   };
 
   return (
-    <main id="top" className="min-h-screen bg-white text-slate-900 dark:bg-[#020617] dark:text-[#F8FAFC]">
+    <main id="top" className="flex flex-1 flex-col bg-white text-slate-900 dark:bg-[#020617] dark:text-[#F8FAFC]">
       <Navbar />
       <Hero />
 

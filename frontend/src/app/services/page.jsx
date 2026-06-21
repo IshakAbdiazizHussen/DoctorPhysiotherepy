@@ -17,7 +17,7 @@ export default function ServicesPage() {
   const activeDoctorId = selectedDoctorId || doctors[0]?.id || "";
 
   return (
-    <main id="top" className="min-h-screen bg-white text-slate-900 dark:bg-[#020617] dark:text-[#F8FAFC]">
+    <main id="top" className="flex flex-1 flex-col bg-white text-slate-900 dark:bg-[#020617] dark:text-[#F8FAFC]">
       <Navbar />
       {errorMessage ? (
         <section className="px-6 py-6 text-center text-sm text-red-600 dark:text-[#FCA5A5]">

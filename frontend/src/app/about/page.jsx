@@ -10,7 +10,7 @@ import ScrollToTop from "@/components/shared/ScrollToTop";
 
 export default function AboutPage() {
   return (
-    <main id="top" className="min-h-screen bg-white text-slate-900 dark:bg-[#020617] dark:text-[#F8FAFC]">
+    <main id="top" className="flex flex-1 flex-col bg-white text-slate-900 dark:bg-[#020617] dark:text-[#F8FAFC]">
       <Navbar />
 
       <section className="py-16 sm:py-20 lg:py-24">

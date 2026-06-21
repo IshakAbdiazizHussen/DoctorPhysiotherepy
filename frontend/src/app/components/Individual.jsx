@@ -67,12 +67,12 @@ export default function Individual({
           className={
             isEmbedded
               ? "grid gap-8 xl:h-full xl:items-stretch xl:gap-10 xl:grid-cols-[minmax(0,560px)_minmax(0,460px)] xl:justify-start"
-              : "grid gap-8 xl:gap-10 lg:grid-cols-[48%_52%]"
+              : "grid gap-8 lg:items-stretch lg:grid-cols-[48%_52%] xl:gap-10"
           }
         >
           <article
             className={`relative overflow-hidden rounded-[32px] border border-[rgba(37,99,235,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.92)_0%,rgba(248,250,252,0.88)_100%)] p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur-sm dark:border-[rgba(255,255,255,0.08)] dark:bg-[linear-gradient(180deg,rgba(15,23,42,0.94)_0%,rgba(17,24,39,0.94)_100%)] dark:shadow-[0_24px_60px_-24px_rgba(2,6,23,0.82)] sm:p-10 xl:p-12 2xl:p-14 ${
-              isEmbedded ? "xl:flex xl:h-full xl:flex-col" : "self-start"
+              isEmbedded ? "xl:flex xl:h-full xl:flex-col" : "lg:flex lg:h-full lg:flex-col"
             }`}
           >
             <div className="pointer-events-none absolute right-6 top-10 h-28 w-28 rounded-full bg-[rgba(37,99,235,0.06)] blur-3xl dark:bg-[rgba(96,165,250,0.08)]" />
@@ -138,7 +138,7 @@ export default function Individual({
 
           <article
             className={`rounded-[32px] border border-[rgba(37,99,235,0.08)] bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.08)] dark:bg-[#0F172A] dark:shadow-[0_24px_60px_-24px_rgba(2,6,23,0.82)] sm:p-10 xl:p-12 2xl:p-14 ${
-              isEmbedded ? "xl:flex xl:h-full xl:flex-col" : "self-start"
+              isEmbedded ? "xl:flex xl:h-full xl:flex-col" : "lg:flex lg:h-full lg:flex-col"
             }`}
           >
             <span className="inline-flex items-center gap-3 rounded-full bg-[#F8FBFF] px-5 py-3 text-[13px] font-normal uppercase tracking-[0.16em] text-[#2563EB] shadow-[0_18px_38px_-28px_rgba(37,99,235,0.16)] dark:bg-[#111827] dark:text-[#60A5FA]">

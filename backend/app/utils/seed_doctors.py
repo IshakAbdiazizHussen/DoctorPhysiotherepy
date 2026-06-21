@@ -115,6 +115,24 @@ SEED_DOCTORS: tuple[SeedDoctorDefinition, ...] = (
         consultation_location="DoctorPhysio Mobility Studio, Mogadishu",
         availability_summary="Sat-Wed, 8:30 AM - 4:30 PM",
     ),
+    SeedDoctorDefinition(
+        full_name="Dr Nasteho Jama",
+        specialty="Manual Therapy",
+        bio="Manual therapy clinician focused on joint stiffness, soft tissue recovery, and restoring comfortable movement.",
+        credentials="DPT, Manual Therapy Specialist",
+        years_of_experience=8,
+        consultation_location="DoctorPhysio Manual Care Unit, Mogadishu",
+        availability_summary="Mon-Fri, 9:00 AM - 5:00 PM",
+    ),
+    SeedDoctorDefinition(
+        full_name="Dr Bashir Suleiman",
+        specialty="Geriatric Physiotherapy",
+        bio="Geriatric physiotherapist helping older adults improve balance, mobility, and daily independence safely.",
+        credentials="MPT, Geriatric Rehab Practitioner",
+        years_of_experience=14,
+        consultation_location="DoctorPhysio Senior Wellness Center, Mogadishu",
+        availability_summary="Sun-Thu, 8:00 AM - 2:00 PM",
+    ),
 )
 
 

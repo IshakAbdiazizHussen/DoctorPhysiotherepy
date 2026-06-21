@@ -107,7 +107,7 @@ export default function Logos() {
     >
       <div className="pointer-events-none absolute inset-0 bg-transparent" />
 
-      <Container className="relative max-w-[1600px] px-6 lg:px-10 xl:px-12">
+      <Container className="relative !max-w-[1600px] !px-6 lg:!px-10 xl:!px-12">
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {items.map(({ icon: Icon, title, text, color, bg }) => (
             <article

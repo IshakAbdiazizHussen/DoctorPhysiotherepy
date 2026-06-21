@@ -50,12 +50,12 @@ export default function Individual({
       id="appointment"
       className={isEmbedded ? "bg-transparent" : "bg-transparent py-16 sm:py-20 lg:py-24"}
     >
-      <Container className={isEmbedded ? "h-full max-w-full px-0" : "max-w-[1600px] px-6 lg:px-10 xl:px-12"}>
+      <Container className={isEmbedded ? "h-full !max-w-full !px-0" : "!max-w-[1600px] !px-6 lg:!px-10 xl:!px-12"}>
         <div
           className={
             isEmbedded
               ? "grid gap-8 xl:h-full xl:items-stretch xl:gap-10 xl:grid-cols-[minmax(0,560px)_minmax(0,460px)] xl:justify-start"
-              : "grid gap-8 lg:items-stretch lg:grid-cols-[minmax(0,48fr)_minmax(0,52fr)] xl:gap-10"
+              : "grid gap-8 lg:grid-cols-2 lg:items-stretch xl:gap-10"
           }
         >
           <article
